@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2000
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zamagon.WPF", "Zamagon.UI\Zamagon.WPF\Zamagon.WPF.csproj", "{66723D55-0336-47AD-9460-D45661D5BB02}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zamagon.Web", "Zamagon.UI\Zamagon.Web\Zamagon.Web.csproj", "{D089D7F1-7E4E-410A-83AF-A2DAC8CD7724}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{66723D55-0336-47AD-9460-D45661D5BB02}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{66723D55-0336-47AD-9460-D45661D5BB02}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{66723D55-0336-47AD-9460-D45661D5BB02}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{66723D55-0336-47AD-9460-D45661D5BB02}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D089D7F1-7E4E-410A-83AF-A2DAC8CD7724}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D089D7F1-7E4E-410A-83AF-A2DAC8CD7724}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D089D7F1-7E4E-410A-83AF-A2DAC8CD7724}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D089D7F1-7E4E-410A-83AF-A2DAC8CD7724}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C0D59D3F-1CF6-41F5-89A5-B2C20B66843A}
+	EndGlobalSection
+EndGlobal

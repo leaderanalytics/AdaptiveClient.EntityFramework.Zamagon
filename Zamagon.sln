@@ -1,0 +1,61 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2000
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zamagon.Model", "Zamagon\Zamagon.Model\Zamagon.Model.csproj", "{10F0F31D-AFCE-49DA-A813-4072A4B99591}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zamagon.Domain", "Zamagon\Zamagon.Domain\Zamagon.Domain.csproj", "{2BBB5999-B995-431C-9DE4-7E3BF95E93D7}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zamagon.MigrationContexts", "Zamagon\Zamagon.MigrationContexts\Zamagon.MigrationContexts.csproj", "{8A85EDBE-40B3-48BC-8070-166F211A5789}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zamagon.Tests", "Zamagon\Zamagon.Tests\Zamagon.Tests.csproj", "{C5BE8001-03F0-4BA3-B256-F4F5E181BF79}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zamagon.Services.BackOffice", "Zamagon\Zamagon.Services.BackOffice\Zamagon.Services.BackOffice.csproj", "{C1028E61-73FC-4BE8-9B06-EBA3C8E5775B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zamagon.Services.StoreFront", "Zamagon\Zamagon.Services.StoreFront\Zamagon.Services.StoreFront.csproj", "{548F869A-1293-4F4E-8508-3A493916E98A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zamagon.Services.Common", "Zamagon\Zamagon.Services.Common\Zamagon.Services.Common.csproj", "{418F7440-2436-460F-BFD6-4AD4E91DAE45}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{10F0F31D-AFCE-49DA-A813-4072A4B99591}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{10F0F31D-AFCE-49DA-A813-4072A4B99591}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{10F0F31D-AFCE-49DA-A813-4072A4B99591}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{10F0F31D-AFCE-49DA-A813-4072A4B99591}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2BBB5999-B995-431C-9DE4-7E3BF95E93D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2BBB5999-B995-431C-9DE4-7E3BF95E93D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2BBB5999-B995-431C-9DE4-7E3BF95E93D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2BBB5999-B995-431C-9DE4-7E3BF95E93D7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8A85EDBE-40B3-48BC-8070-166F211A5789}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A85EDBE-40B3-48BC-8070-166F211A5789}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A85EDBE-40B3-48BC-8070-166F211A5789}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A85EDBE-40B3-48BC-8070-166F211A5789}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C5BE8001-03F0-4BA3-B256-F4F5E181BF79}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C5BE8001-03F0-4BA3-B256-F4F5E181BF79}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C5BE8001-03F0-4BA3-B256-F4F5E181BF79}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C5BE8001-03F0-4BA3-B256-F4F5E181BF79}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C1028E61-73FC-4BE8-9B06-EBA3C8E5775B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C1028E61-73FC-4BE8-9B06-EBA3C8E5775B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C1028E61-73FC-4BE8-9B06-EBA3C8E5775B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C1028E61-73FC-4BE8-9B06-EBA3C8E5775B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{548F869A-1293-4F4E-8508-3A493916E98A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{548F869A-1293-4F4E-8508-3A493916E98A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{548F869A-1293-4F4E-8508-3A493916E98A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{548F869A-1293-4F4E-8508-3A493916E98A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{418F7440-2436-460F-BFD6-4AD4E91DAE45}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{418F7440-2436-460F-BFD6-4AD4E91DAE45}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{418F7440-2436-460F-BFD6-4AD4E91DAE45}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{418F7440-2436-460F-BFD6-4AD4E91DAE45}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CAF961AE-FC1F-405B-A401-1F5D9A9DE4A3}
+	EndGlobalSection
+EndGlobal

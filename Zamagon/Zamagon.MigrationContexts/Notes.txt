@@ -1,0 +1,33 @@
+﻿To add Migrations:
+	Delete files and folders under Services.BackOffice/Migrations
+	Delete files and folders under Services.StoreFront/Migrations
+	Open SQL Server Management Studio and/or MySQL Workbench. Delete Zamagon_StoreFront database and Zamagon_BackOffice database.
+	
+	Modify path in --startup-project parameter for each command if necessary.
+	Copy/paste each command into command window:
+
+
+--- BackOffice ---
+	
+Open a command window and change directory to C:\Git\AdaptiveClient.EntityFramework.Zamagon\Zamagon\Zamagon.Services.BackOffice OR dir where .Zamagon.Services.BackOffice project lives.
+
+MSSQL:
+	dotnet ef migrations add CreateDatabase --context Zamagon.Services.BackOffice.Database.Db_MSSQL  --startup-project ../Zamagon.MigrationContexts --output-dir Database/Migrations/MSSQL
+	dotnet ef database update --startup-project ../Zamagon.MigrationContexts --context Zamagon.Services.BackOffice.Database.Db_MSSQL
+
+MySQL:
+	dotnet ef migrations add CreateDatabase --context Zamagon.Services.BackOffice.Database.Db_MySQL  --startup-project ../Zamagon.MigrationContexts --output-dir Database/Migrations/MySQL
+	dotnet ef database update --startup-project ../Zamagon.MigrationContexts --context Zamagon.Services.BackOffice.Database.Db_MySQL
+
+
+--- StoreFront ---
+
+Open a command window and change directory to C:\Git\AdaptiveClient.EntityFramework.Zamagon\Zamagon\Zamagon.Services.StoreFront OR dir where .Zamagon.Services.StoreFront project lives.
+
+MSSQL:
+	dotnet ef migrations add CreateDatabase --context Zamagon.Services.StoreFront.Database.Db_MSSQL  --startup-project ../Zamagon.MigrationContexts --output-dir Database/Migrations/MSSQL
+	dotnet ef database update --startup-project ../Zamagon.MigrationContexts --context Zamagon.Services.StoreFront.Database.Db_MSSQL
+
+MySQL:
+	dotnet ef migrations add CreateDatabase --context Zamagon.Services.StoreFront.Database.Db_MySQL  --startup-project ../Zamagon.MigrationContexts --output-dir Database/Migrations/MySQL
+	dotnet ef database update --startup-project ../Zamagon.MigrationContexts --context Zamagon.Services.StoreFront.Database.Db_MySQL
