@@ -7,7 +7,7 @@
       "Preference": "10",
       "EndPointType": "DBMS",
       "ProviderName": "MSSQL",
-      "ConnectionString": "Data Source=.\\SQLSERVER;Initial Catalog=AdaptiveClientEF_StoreFront;Integrated Security=True;MultipleActiveResultSets=True;"
+      "ConnectionString": "Data Source=.\\SQLEXPRESS;Initial Catalog=ZamagonStoreFront;Integrated Security=True;MultipleActiveResultSets=True;"
     },
 
     {
@@ -17,7 +17,7 @@
       "Preference": "10",
       "EndPointType": "DBMS",
       "ProviderName": "MSSQL",
-      "ConnectionString": "Data Source=.\\SQLSERVER;Initial Catalog=AdaptiveClientEF_BackOffice;Integrated Security=True;MultipleActiveResultSets=True;"
+      "ConnectionString": "Data Source=.\\SQLEXPRESS;Initial Catalog=ZamagonBackOffice;Integrated Security=True;MultipleActiveResultSets=True;"
     },
 
     {
@@ -27,7 +27,7 @@
       "Preference": "20",
       "EndPointType": "DBMS",
       "ProviderName": "MySQL",
-      "ConnectionString": "Server=localhost;Database=AdaptiveClientEF_StoreFront;Uid={MySQL_UserName};Pwd={MySQL_Password};SslMode=none;"
+      "ConnectionString": "Server=localhost;Database=ZamagonStoreFront;Uid={MySQL_UserName};Pwd={MySQL_Password};SslMode=none;"
     },
 
     {
@@ -37,7 +37,7 @@
       "Preference": "20",
       "EndPointType": "DBMS",
       "ProviderName": "MySQL",
-      "ConnectionString": "Server=localhost;Database=AdaptiveClientEF_BackOffice;Uid={MySQL_UserName};Pwd={MySQL_Password};SslMode=none"
+      "ConnectionString": "Server=localhost;Database=ZamagonBackOffice;Uid={MySQL_UserName};Pwd={MySQL_Password};SslMode=none"
     }
   ]
 }

@@ -6,7 +6,7 @@ using Zamagon.Model;
 
 namespace Zamagon.Domain.BackOffice
 {
-    public interface IEmployeesService
+    public interface IEmployeesService : IDisposable
     {
         Task<List<Employee>> GetEmployees();
     }

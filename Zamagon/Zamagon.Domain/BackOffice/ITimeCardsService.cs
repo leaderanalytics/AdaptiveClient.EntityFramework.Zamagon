@@ -6,7 +6,7 @@ using Zamagon.Model;
 
 namespace Zamagon.Domain.BackOffice
 {
-    public interface ITimeCardsService
+    public interface ITimeCardsService : IDisposable
     {
         Task<List<TimeCard>> GetTimeCards();
     }

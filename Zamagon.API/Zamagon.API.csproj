@@ -9,11 +9,29 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="AdaptiveClient" Version="0.30.1" />
+    <PackageReference Include="Autofac" Version="4.8.1" />
+    <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="4.2.2" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.8" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.3" />
   </ItemGroup>
 
   <ItemGroup>
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Zamagon\Zamagon.Domain\Zamagon.Domain.csproj" />
+    <ProjectReference Include="..\Zamagon\Zamagon.Model\Zamagon.Model.csproj" />
+    <ProjectReference Include="..\Zamagon\Zamagon.Services.BackOffice\Zamagon.Services.BackOffice.csproj" />
+    <ProjectReference Include="..\Zamagon\Zamagon.Services.Common\Zamagon.Services.Common.csproj" />
+    <ProjectReference Include="..\Zamagon\Zamagon.Services.StoreFront\Zamagon.Services.StoreFront.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="EndPoints.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
 </Project>

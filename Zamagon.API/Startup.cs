@@ -8,6 +8,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Autofac;
+using Autofac.Extensions.DependencyInjection;
+using LeaderAnalytics.AdaptiveClient;
+using Zamagon.Domain;
 
 namespace Zamagon.API
 {
@@ -21,9 +25,28 @@ namespace Zamagon.API
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
+        public IServiceProvider ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+
+            // Autofac
+            IEnumerable<IEndPointConfiguration> EndPoints = EndPointUtilities.LoadEndPoints("EndPoints.json");
+            EndPoints.First(x => x.API_Name == API_Name.BackOffice && x.ProviderName == DataBaseProviderName.MySQL).ConnectionString = ConnectionstringUtility.BuildConnectionString(EndPoints.First(x => x.API_Name == API_Name.BackOffice && x.ProviderName == DataBaseProviderName.MySQL).ConnectionString);
+            EndPoints.First(x => x.API_Name == API_Name.StoreFront && x.ProviderName == DataBaseProviderName.MySQL).ConnectionString = ConnectionstringUtility.BuildConnectionString(EndPoints.First(x => x.API_Name == API_Name.StoreFront && x.ProviderName == DataBaseProviderName.MySQL).ConnectionString);
+
+            ContainerBuilder builder = new ContainerBuilder();
+            builder.Populate(services);
+            builder.RegisterModule(new LeaderAnalytics.AdaptiveClient.EntityFramework.AutofacModule());
+            RegistrationHelper registrationHelper = new RegistrationHelper(builder);
+
+            registrationHelper
+                .RegisterEndPoints(EndPoints)
+                .RegisterModule(new Zamagon.Services.Common.AdaptiveClientModule())
+                .RegisterModule(new Zamagon.Services.BackOffice.AdaptiveClientModule())
+                .RegisterModule(new Zamagon.Services.StoreFront.AdaptiveClientModule());
+
+            var container = builder.Build();
+            return container.Resolve<IServiceProvider>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

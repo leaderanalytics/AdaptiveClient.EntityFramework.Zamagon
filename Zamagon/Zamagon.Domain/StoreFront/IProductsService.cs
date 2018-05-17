@@ -6,7 +6,7 @@ using Zamagon.Model;
 
 namespace Zamagon.Domain.StoreFront
 {
-    public interface IProductsService
+    public interface IProductsService : IDisposable
     {
         Task<List<Product>> GetProducts();
     }
