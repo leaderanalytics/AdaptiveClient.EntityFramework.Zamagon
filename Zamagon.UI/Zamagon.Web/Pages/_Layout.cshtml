@@ -42,7 +42,7 @@
                         <select id="dataSources" class="form-control navbar-btn" onchange="form.submit();" name="dataSources">
                             <option value="MSSQL">MSSQL</option>
                             <option value="MySQL">MySQL</option>
-                            <option value="WebAPI">WebAPI</option>
+                            <option value="HTTP">WebAPI</option>
                         </select>
                     </form>
                 </div>
@@ -64,8 +64,7 @@
         <script src="~/js/site.js" asp-append-version="true"></script>
         <script type="text/javascript">
             $(function () {
-                var dataSource = '@Context.Session.GetString("dataSource")';
-                $('#dataSources').val(dataSource);
+                $('#dataSources').val('@Context.Session.GetString("dataSource")');
             });
         </script>
     </environment>

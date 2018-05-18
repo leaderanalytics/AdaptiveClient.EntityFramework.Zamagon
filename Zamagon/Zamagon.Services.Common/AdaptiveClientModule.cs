@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using LeaderAnalytics.AdaptiveClient;
+using LeaderAnalytics.AdaptiveClient.Utilities;
 using Zamagon.Domain;
 
 namespace Zamagon.Services.Common
@@ -14,8 +15,8 @@ namespace Zamagon.Services.Common
 
 
             // EndPoint Validator
-            .RegisterEndPointValidator<InProcessEndPointValidator>(EndPointType.DBMS, DataBaseProviderName.MSSQL)
-            .RegisterEndPointValidator<InProcessEndPointValidator>(EndPointType.DBMS, DataBaseProviderName.MySQL)
+            .RegisterEndPointValidator<MSSQL_EndPointValidator>(EndPointType.DBMS, DataBaseProviderName.MSSQL)
+            .RegisterEndPointValidator<MySQL_EndPointValidator>(EndPointType.DBMS, DataBaseProviderName.MySQL)
 
 
             // DbContextOptions

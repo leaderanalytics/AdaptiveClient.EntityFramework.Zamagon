@@ -9,6 +9,12 @@ namespace Zamagon.Web.Pages
 {
     public class IndexModel : BasePageModel
     {
+        public override async Task OnGetAsync()
+        {
+            await base.OnGetAsync();
+        }
+
+
         public override async Task OnPostAsync()
         {
             await base.OnPostAsync();

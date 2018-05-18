@@ -27,7 +27,7 @@
       "Preference": "20",
       "EndPointType": "DBMS",
       "ProviderName": "MySQL",
-      "ConnectionString": "Server=localhost;Database=ZamagonStoreFront;Uid={MySQL_UserName};Pwd={MySQL_Password};SslMode=none;"
+      "ConnectionString": "Server=localhost;Database=ZamagonStoreFront;Uid={MySQL_UserName};Pwd={MySQL_Password};SslMode=none"
     },
 
     {

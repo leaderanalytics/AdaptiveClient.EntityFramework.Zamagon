@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using LeaderAnalytics.AdaptiveClient;
+using Zamagon.Domain;
 using Zamagon.Domain.StoreFront;
 using Zamagon.Model;
 
@@ -24,7 +25,9 @@ namespace Zamagon.Web.Pages
         public override async Task OnGetAsync()
         {
             await base.OnGetAsync();
-            Orders = await serviceClient.CallAsync(async x => await x.OrdersService.GetOrders());
+            IEndPointConfiguration ep = GetEndPoints().FirstOrDefault(x => x.API_Name == API_Name.StoreFront && x.ProviderName == DataSource);
+            string epName = ep?.Name ?? null;
+            Orders = await serviceClient.CallAsync(async x => await x.OrdersService.GetOrders(), epName);
         }
 
 
