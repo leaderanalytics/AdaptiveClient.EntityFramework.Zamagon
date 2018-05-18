@@ -7,11 +7,11 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Zamagon.Web.Pages
 {
-    public class IndexModel : PageModel
+    public class IndexModel : BasePageModel
     {
-        public void OnGet()
+        public override async Task OnPostAsync()
         {
-
+            await base.OnPostAsync();
         }
     }
 }
