@@ -28,6 +28,9 @@ namespace Zamagon.Tests
 
         protected async Task DropAndRecreate(IEndPointConfiguration ep)
         {
+            if (ep.EndPointType != EndPointType.DBMS)
+                return;
+
             await DatabaseUtilities.DropDatabase(ep);
             await DatabaseUtilities.ApplyMigrations(ep);
         }

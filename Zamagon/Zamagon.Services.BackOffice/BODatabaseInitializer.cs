@@ -24,11 +24,11 @@ namespace Zamagon.Services.BackOffice
             Employee sam = new Employee { Name = "Sam", TimeCards = new List<TimeCard>() };
             Employee melinda = new Employee { Name = "Melinda", TimeCards = new List<TimeCard>() };
 
-            TimeCard t1 = new TimeCard { Employee = sam, HoursWorked = 40, WorkDate = DateTime.Now };
-            TimeCard t2 = new TimeCard { Employee = sam, HoursWorked = 40, WorkDate = DateTime.Now.AddDays(-7) };
+            TimeCard t1 = new TimeCard { Employee = sam, HoursWorked = 12, WorkDate = DateTime.Now };
+            TimeCard t2 = new TimeCard { Employee = sam, HoursWorked = 10, WorkDate = DateTime.Now.AddDays(-7) };
 
-            TimeCard t3 = new TimeCard { Employee = melinda, HoursWorked = 50, WorkDate = DateTime.Now };
-            TimeCard t4 = new TimeCard { Employee = melinda, HoursWorked = 50, WorkDate = DateTime.Now.AddDays(-7) };
+            TimeCard t3 = new TimeCard { Employee = melinda, HoursWorked = 12, WorkDate = DateTime.Now };
+            TimeCard t4 = new TimeCard { Employee = melinda, HoursWorked = 9, WorkDate = DateTime.Now.AddDays(-7) };
 
             db.Entry(sam).State = EntityState.Added;
             db.Entry(melinda).State = EntityState.Added;

@@ -17,6 +17,7 @@ namespace Zamagon.Services.Common
             // EndPoint Validator
             .RegisterEndPointValidator<MSSQL_EndPointValidator>(EndPointType.DBMS, DataBaseProviderName.MSSQL)
             .RegisterEndPointValidator<MySQL_EndPointValidator>(EndPointType.DBMS, DataBaseProviderName.MySQL)
+            .RegisterEndPointValidator<Http_EndPointValidator>(EndPointType.HTTP, DataBaseProviderName.WebAPI)
 
 
             // DbContextOptions

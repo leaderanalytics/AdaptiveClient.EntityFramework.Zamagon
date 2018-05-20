@@ -11,6 +11,10 @@ using Zamagon.Model;
 namespace Zamagon.API.Controllers
 {
     [Produces("application/json")]
+
+
+    [Route("api")]
+    [Route("api/StoreFront")]
     [Route("api/StoreFront/Orders")]
     public class OrdersController : Controller
     {

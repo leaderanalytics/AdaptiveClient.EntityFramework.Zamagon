@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -11,6 +12,7 @@ using Microsoft.Extensions.Options;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using LeaderAnalytics.AdaptiveClient;
+using LeaderAnalytics.AdaptiveClient.EntityFramework;
 using Zamagon.Domain;
 
 namespace Zamagon.API
@@ -46,6 +48,22 @@ namespace Zamagon.API
                 .RegisterModule(new Zamagon.Services.StoreFront.AdaptiveClientModule());
 
             var container = builder.Build();
+
+
+            // Create all databases or apply migrations
+            foreach (IEndPointConfiguration ep in EndPoints.Where(x => x.EndPointType == EndPointType.DBMS))
+            {
+                //
+                // Always resolve a new instance of databaseUtilties for each endPoint!
+                //
+                using (ILifetimeScope scope = container.BeginLifetimeScope())
+                {
+                    IDatabaseUtilities databaseUtilities = scope.Resolve<IDatabaseUtilities>();
+                    databaseUtilities.CreateOrUpdateDatabase(ep).Wait();
+                }
+            }
+
+
             return container.Resolve<IServiceProvider>();
         }
 
@@ -56,7 +74,7 @@ namespace Zamagon.API
             {
                 app.UseDeveloperExceptionPage();
             }
-
+            
             app.UseMvc();
         }
     }

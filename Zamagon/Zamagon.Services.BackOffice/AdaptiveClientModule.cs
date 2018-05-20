@@ -22,7 +22,10 @@ namespace Zamagon.Services.BackOffice
             .RegisterService<BackOffice.MySQL.EmployeesService, IEmployeesService>(EndPointType.DBMS, API_Name.BackOffice, DataBaseProviderName.MySQL)
             .RegisterService<BackOffice.MySQL.TimeCardsService, ITimeCardsService>(EndPointType.DBMS, API_Name.BackOffice, DataBaseProviderName.MySQL)
 
-            
+            // WebAPI
+            .RegisterService<BackOffice.WebAPI.EmployeesService, IEmployeesService>(EndPointType.HTTP, API_Name.BackOffice, DataBaseProviderName.WebAPI)
+            .RegisterService<BackOffice.WebAPI.TimeCardsService, ITimeCardsService>(EndPointType.HTTP, API_Name.BackOffice, DataBaseProviderName.WebAPI)
+
 
             // DbContexts
             .RegisterDbContext<Database.Db>(API_Name.BackOffice)
@@ -42,7 +45,8 @@ namespace Zamagon.Services.BackOffice
 
             // Service Manifests
             .RegisterServiceManifest<BOServiceManifest, IBOServiceManifest>(EndPointType.DBMS, API_Name.BackOffice, DataBaseProviderName.MSSQL)
-            .RegisterServiceManifest<BOServiceManifest, IBOServiceManifest>(EndPointType.DBMS, API_Name.BackOffice, DataBaseProviderName.MySQL);
+            .RegisterServiceManifest<BOServiceManifest, IBOServiceManifest>(EndPointType.DBMS, API_Name.BackOffice, DataBaseProviderName.MySQL)
+            .RegisterServiceManifest<BOServiceManifest, IBOServiceManifest>(EndPointType.HTTP, API_Name.BackOffice, DataBaseProviderName.WebAPI);
         }
     }
 }

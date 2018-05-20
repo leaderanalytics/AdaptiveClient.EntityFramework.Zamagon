@@ -9,5 +9,6 @@ namespace Zamagon.Domain
         public const string MSSQL = "MSSQL";
         public const string SQLite = "SQLite";
         public const string MySQL = "MySQL";
+        public const string WebAPI = "WebAPI";
     }
 }

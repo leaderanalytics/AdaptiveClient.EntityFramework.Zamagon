@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Http;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using LeaderAnalytics.AdaptiveClient;
+using LeaderAnalytics.AdaptiveClient.EntityFramework;
 using Zamagon.Domain;
 
 namespace Zamagon.Web
@@ -40,23 +41,36 @@ namespace Zamagon.Web
             });
 
             // Autofac & AdaptiveClient
-            //EndPoints = EndPointUtilities.LoadEndPoints("bin\\debug\\netcoreapp2.0\\EndPoints.json");
-            //EndPoints.First(x => x.API_Name == API_Name.BackOffice && x.ProviderName == DataBaseProviderName.MySQL).ConnectionString = ConnectionstringUtility.BuildConnectionString(EndPoints.First(x => x.API_Name == API_Name.BackOffice && x.ProviderName == DataBaseProviderName.MySQL).ConnectionString);
-            //EndPoints.First(x => x.API_Name == API_Name.StoreFront && x.ProviderName == DataBaseProviderName.MySQL).ConnectionString = ConnectionstringUtility.BuildConnectionString(EndPoints.First(x => x.API_Name == API_Name.StoreFront && x.ProviderName == DataBaseProviderName.MySQL).ConnectionString);
             
             ContainerBuilder builder = new ContainerBuilder();
             builder.Populate(services);
             builder.RegisterModule(new LeaderAnalytics.AdaptiveClient.EntityFramework.AutofacModule());
             RegistrationHelper registrationHelper = new RegistrationHelper(builder);
+            IEnumerable<IEndPointConfiguration> endPoints = ReadEndPointsFromDisk();
 
             registrationHelper
-                .RegisterEndPoints(ReadEndPointsFromDisk())
+                .RegisterEndPoints(endPoints)
                 .RegisterModule(new Zamagon.Services.Common.AdaptiveClientModule())
                 .RegisterModule(new Zamagon.Services.BackOffice.AdaptiveClientModule())
                 .RegisterModule(new Zamagon.Services.StoreFront.AdaptiveClientModule());
 
             
             var container = builder.Build();
+
+            
+
+            // Create all databases or apply migrations
+            foreach (IEndPointConfiguration ep in endPoints.Where(x => x.EndPointType == EndPointType.DBMS))
+            {
+                //
+                // Always resolve a new instance of databaseUtilties for each endPoint!
+                //
+                using (ILifetimeScope scope = container.BeginLifetimeScope())
+                {
+                    IDatabaseUtilities databaseUtilities = scope.Resolve<IDatabaseUtilities>();
+                    databaseUtilities.CreateOrUpdateDatabase(ep).Wait();
+                }
+            }
             return container.Resolve<IServiceProvider>();
         }
 

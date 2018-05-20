@@ -37,11 +37,11 @@
     <Reference Include="Autofac, Version=4.8.1.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Autofac.4.8.1\lib\net45\Autofac.dll</HintPath>
     </Reference>
-    <Reference Include="LeaderAnalytics.AdaptiveClient, Version=0.30.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\AdaptiveClient.0.30.1\lib\net461\LeaderAnalytics.AdaptiveClient.dll</HintPath>
+    <Reference Include="LeaderAnalytics.AdaptiveClient, Version=0.31.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\AdaptiveClient.0.31.0\lib\net461\LeaderAnalytics.AdaptiveClient.dll</HintPath>
     </Reference>
-    <Reference Include="LeaderAnalytics.AdaptiveClient.EntityFramework, Version=0.30.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\AdaptiveClient.EntityFramework.0.30.2\lib\netstandard2.0\LeaderAnalytics.AdaptiveClient.EntityFramework.dll</HintPath>
+    <Reference Include="LeaderAnalytics.AdaptiveClient.EntityFramework, Version=0.30.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\AdaptiveClient.EntityFramework.0.30.3\lib\netstandard2.0\LeaderAnalytics.AdaptiveClient.EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.EntityFrameworkCore, Version=2.0.3.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Microsoft.EntityFrameworkCore.2.0.3\lib\netstandard2.0\Microsoft.EntityFrameworkCore.dll</HintPath>

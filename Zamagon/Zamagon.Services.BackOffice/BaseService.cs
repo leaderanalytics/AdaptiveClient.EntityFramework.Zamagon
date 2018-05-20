@@ -6,7 +6,7 @@ using Zamagon.Services.BackOffice.Database;
 
 namespace Zamagon.Services.BackOffice
 {
-    public class BaseService : IDisposable
+    public abstract class BaseService : IDisposable
     {
         protected IBOServiceManifest ServiceManifest;
         protected Db db;

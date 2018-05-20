@@ -11,6 +11,7 @@ using Zamagon.Model;
 namespace Zamagon.API.Controllers
 {
     [Produces("application/json")]
+    [Route("api/BackOffice")]
     [Route("api/BackOffice/Employees")]
     public class EmployeesController : Controller
     {
@@ -22,7 +23,7 @@ namespace Zamagon.API.Controllers
         }
 
         [HttpGet]
-        public async Task<List<Employee>> GetOrders()
+        public async Task<List<Employee>> GetEmployees()
         {
             return await serviceClient.CallAsync(async x => await x.GetEmployees());
         }

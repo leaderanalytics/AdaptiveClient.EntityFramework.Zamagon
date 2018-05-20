@@ -32,9 +32,10 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li><a asp-page="/Index">Home</a></li>
-                    <li><a asp-page="/About">About</a></li>
-                    <li><a asp-page="/Contact">Contact</a></li>
                     <li><a asp-page="/Orders">Orders</a></li>
+                    <li><a asp-page="/Products">Products</a></li>
+                    <li><a asp-page="/Employees">Employees</a></li>
+                    <li><a asp-page="/TimeCards">TimeCards</a></li>
                 </ul>
                 <div class="navbar-header pull-right">
                     <form method="post" class="navbar-search form-inline">
@@ -42,7 +43,7 @@
                         <select id="dataSources" class="form-control navbar-btn" onchange="form.submit();" name="dataSources">
                             <option value="MSSQL">MSSQL</option>
                             <option value="MySQL">MySQL</option>
-                            <option value="HTTP">WebAPI</option>
+                            <option value="WebAPI">WebAPI</option>
                         </select>
                     </form>
                 </div>

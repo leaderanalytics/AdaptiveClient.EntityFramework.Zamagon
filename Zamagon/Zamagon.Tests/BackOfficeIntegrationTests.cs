@@ -11,6 +11,7 @@ namespace Zamagon.Tests
 {
     [TestFixture("MSSQL")]
     [TestFixture("MySQL")]
+    [TestFixture("WebAPI")]
     class BackOfficeIntegrationTests : BaseTest
     {
         public BackOfficeIntegrationTests(string databaseProviderName) : base(databaseProviderName)

@@ -6,7 +6,7 @@ using Zamagon.Services.StoreFront.Database;
 
 namespace Zamagon.Services.StoreFront
 {
-    public class BaseService : IDisposable
+    public abstract class BaseService : IDisposable
     {
         protected ISFServiceManifest ServiceManifest;
         protected Db db;

@@ -11,12 +11,12 @@ using Zamagon.Model;
 
 namespace Zamagon.Web.Pages
 {
-    public class OrdersModel : BasePageModel
+    public class ProductsModel : BasePageModel
     {
-        public List<Order> Orders { get; set; }
+        public List<Product> Products { get; set; }
         private IAdaptiveClient<ISFServiceManifest> serviceClient;
 
-        public OrdersModel(IAdaptiveClient<ISFServiceManifest> serviceClient)
+        public ProductsModel(IAdaptiveClient<ISFServiceManifest> serviceClient)
         {
             this.serviceClient = serviceClient;
         }
@@ -24,21 +24,21 @@ namespace Zamagon.Web.Pages
         public override async Task OnGetAsync()
         {
             await base.OnGetAsync();
-            await GetOrders();
+            await GetProducts();
         }
 
         public override async Task OnPostAsync()
         {
             await base.OnPostAsync();
-            await GetOrders();
+            await GetProducts();
         }
 
-        private async Task GetOrders()
+        private async Task GetProducts()
         {
             CurrentEndPoint = GetEndPoints().FirstOrDefault(x => x.API_Name == API_Name.StoreFront && x.ProviderName == DataSource);
 
             if (CurrentEndPoint != null)
-                Orders = await serviceClient.CallAsync(async x => await x.OrdersService.GetOrders(), CurrentEndPoint.Name);
+                Products = await serviceClient.CallAsync(async x => await x.ProductsService.GetProducts(), CurrentEndPoint.Name);
         }
     }
 }
