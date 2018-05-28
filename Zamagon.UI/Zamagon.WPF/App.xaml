@@ -33,12 +33,10 @@
             <Setter Property="Width" Value="110" />
             <Setter Property="Height" Value="70" />
             <Setter Property="Margin" Value="0" />
+            <Setter Property="HighlightedBackground" Value="#EEEEEE" />
+            <Setter Property="SelectedBackground" Value="#696969" />
+            <Setter Property="Background" Value="LightGray" />
             <Setter Property="BorderThickness" Value="0"/>
-            <Style.Triggers>
-                <Trigger Property="IsHighlighted" Value="True">
-                    <Setter Property="Background" Value="#EEEEEE"></Setter>
-                </Trigger>
-            </Style.Triggers>
         </Style>
         
     </Application.Resources>

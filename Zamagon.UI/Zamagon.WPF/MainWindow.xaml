@@ -59,34 +59,42 @@
                 </Style>
             </TabControl.Resources>
 
-            <TabItem Style="{StaticResource TabItemStyle}">
+            <TabItem Style="{StaticResource TabItemStyle}" x:Name="zzzzz">
                 <TabItem.Header>
-                    <local:TabHeader IconName="Home" Text="Home" IsSelected="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=TabItem}, Path=IsSelected}"></local:TabHeader>
+                    <local:TabHeader IconName="Home" Text="Home" IsSelected="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=TabItem}, Path=IsSelected, Mode=TwoWay}"></local:TabHeader>
                 </TabItem.Header>
+                <StackPanel >
+                    <TextBlock Text="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type TabItem}},  Path=IsSelected}"></TextBlock>
+                    <TextBlock Text="{Binding ElementName=zzzzz, Path=IsSelected}" />
+                </StackPanel>
             </TabItem>
 
             <TabItem  Style="{StaticResource TabItemStyle}">
                 <TabItem.Header >
-                    <local:TabHeader IconName="ShoppingCart" Text="Orders" IsSelected="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=TabItem}, Path=IsSelected}"></local:TabHeader>
+                    <local:TabHeader IconName="ShoppingCart" Text="Orders" IsSelected="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=TabItem}, Path=IsSelected, Mode=TwoWay}"></local:TabHeader>
                 </TabItem.Header>
+                <TextBlock>Orders</TextBlock>
             </TabItem>
 
             <TabItem Style="{StaticResource TabItemStyle}">
                 <TabItem.Header>
-                    <local:TabHeader IconName="Barcode" Text="Products" IsSelected="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=TabItem}, Path=IsSelected}" ></local:TabHeader>
+                    <local:TabHeader IconName="Barcode" Text="Products" IsSelected="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=TabItem}, Path=IsSelected, Mode=TwoWay}" ></local:TabHeader>
                 </TabItem.Header>
+                <TextBlock>Products</TextBlock>
             </TabItem>
 
             <TabItem Style="{StaticResource TabItemStyle}">
                 <TabItem.Header>
-                    <local:TabHeader IconName="Group" Text="Employees" IsSelected="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=TabItem}, Path=IsSelected}" ></local:TabHeader>
+                    <local:TabHeader IconName="Group" Text="Employees" IsSelected="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=TabItem}, Path=IsSelected, Mode=TwoWay}" ></local:TabHeader>
                 </TabItem.Header>
+                <TextBlock>Employees</TextBlock>
             </TabItem>
 
             <TabItem Style="{StaticResource TabItemStyle}">
                 <TabItem.Header>
-                    <local:TabHeader IconName="ClockOutline" Text="TimeCards" IsSelected="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=TabItem}, Path=IsSelected}" ></local:TabHeader>
+                    <local:TabHeader IconName="ClockOutline" Text="TimeCards" IsSelected="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=TabItem}, Path=IsSelected, Mode=TwoWay}" ></local:TabHeader>
                 </TabItem.Header>
+                <TextBlock>TimeCards</TextBlock>
             </TabItem>
         </TabControl>
     </Grid>

@@ -18,30 +18,10 @@
 
                             <StackPanel VerticalAlignment="Bottom" >
                                 <fa:ImageAwesome Icon="{Binding IconName}"/>
-                                <TextBlock HorizontalAlignment="Center" Text="{Binding Text}" ></TextBlock>
+                                <TextBlock HorizontalAlignment="Center" Margin="0,-2,0,4" Text="{Binding Text}" ></TextBlock>
                             </StackPanel>
                         </Border>
                     </Border>
-                    <ControlTemplate.Triggers>
-                        <!--<DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=local:TabHeader}, Path=IsHighlighted}"  Value="True">
-                            <Setter Property="Control.Background" Value="#EEEEEE"></Setter>
-                        </DataTrigger>
-                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=local:TabHeader}, Path=IsHighlighted}"  Value="False">
-                            <Setter Property="Control.Background" Value="Red"></Setter>
-                        </DataTrigger>-->
-                        
-                        <Trigger Property="IsHighlighted" Value="True">
-                            <Setter Property="Background" Value="#EEEEEE"></Setter>
-                        </Trigger>
-                        <Trigger Property="IsSelected" Value="True">
-                            <Setter Property="Background" Value="#696969"></Setter>
-                        </Trigger>
-                        <Trigger Property="IsSelected" Value="False">
-                            <Setter Property="Background" Value="LightGray"></Setter>
-                        </Trigger>
-                        
-                    </ControlTemplate.Triggers>
-                    
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

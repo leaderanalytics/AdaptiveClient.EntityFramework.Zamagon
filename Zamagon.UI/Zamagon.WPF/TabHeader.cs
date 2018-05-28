@@ -45,8 +45,7 @@ namespace Zamagon.WPF
         }
 
         public static readonly DependencyProperty IsSelectedProperty =
-            DependencyProperty.Register("IsSelected", typeof(bool), typeof(TabHeader), new PropertyMetadata(false, IsHighlightedCallback));
-
+        DependencyProperty.Register("IsSelected", typeof(bool), typeof(TabHeader), new FrameworkPropertyMetadata(false, IsSelectedCallback, CoerceSelectedCallback));
 
 
         public bool IsHighlighted
@@ -59,6 +58,27 @@ namespace Zamagon.WPF
             DependencyProperty.Register("IsHighlighted", typeof(bool), typeof(TabHeader), new FrameworkPropertyMetadata(false, IsHighlightedCallback, CoerceHighlightedCallback ));
 
 
+        public Brush HighlightedBackground
+        {
+            get { return (Brush)GetValue(HighlightedBackgroundProperty); }
+            set { SetValue(HighlightedBackgroundProperty, value); }
+        }
+
+        public static readonly DependencyProperty HighlightedBackgroundProperty =
+            DependencyProperty.Register("HighlightedBackground", typeof(Brush), typeof(TabHeader), new PropertyMetadata(null));
+
+
+        public Brush SelectedBackground
+        {
+            get { return (Brush)GetValue(SelectedBackgroundProperty); }
+            set { SetValue(SelectedBackgroundProperty, value); }
+        }
+
+        public static readonly DependencyProperty SelectedBackgroundProperty =
+            DependencyProperty.Register("SelectedBackground", typeof(Brush), typeof(TabHeader), new PropertyMetadata(null));
+
+        private Brush NormalBackground { get; set; }
+
         static TabHeader()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(TabHeader), new FrameworkPropertyMetadata(typeof(TabHeader)));
@@ -68,12 +88,17 @@ namespace Zamagon.WPF
         {
             this.MouseEnter += TabHeader_MouseEnter;
             this.MouseLeave += TabHeader_MouseLeave;
-            
+        }
+
+        public override void OnApplyTemplate()
+        {
+            base.OnApplyTemplate();
+            NormalBackground = Background;
         }
 
         private void TabHeader_MouseLeave(object sender, MouseEventArgs e)
         {
-            IsHighlighted = IsMouseOver && ! IsSelected;
+            IsHighlighted = IsMouseOver && !IsSelected;
         }
 
         private void TabHeader_MouseEnter(object sender, MouseEventArgs e)
@@ -85,15 +110,40 @@ namespace Zamagon.WPF
         {
             TabHeader tabHeader = sender as TabHeader;
             tabHeader.IsHighlighted = (tabHeader.IsMouseOver && !tabHeader.IsSelected);
+            SetBackground(tabHeader);
             tabHeader.RaisePropertyChanged("IsHighlighted");
             tabHeader.RaisePropertyChanged("IsSelected");
-
         }
 
         static object CoerceHighlightedCallback(DependencyObject sender, object val)
         {
             TabHeader tabHeader = sender as TabHeader;
             return (tabHeader.IsMouseOver && !tabHeader.IsSelected);
+        }
+
+        static void IsSelectedCallback(DependencyObject sender, DependencyPropertyChangedEventArgs e)
+        {
+            TabHeader tabHeader = sender as TabHeader;
+            tabHeader.IsSelected = (bool)e.NewValue;
+            SetBackground(tabHeader);
+            tabHeader.RaisePropertyChanged("IsHighlighted");
+            tabHeader.RaisePropertyChanged("IsSelected");
+        }
+
+        static object CoerceSelectedCallback(DependencyObject sender, object val)
+        {
+            TabHeader tabHeader = sender as TabHeader;
+            return ((bool)val);
+        }
+
+        private static void SetBackground(TabHeader tabHeader)
+        {
+            if (tabHeader.IsSelected)
+                tabHeader.Background = tabHeader.SelectedBackground;
+            else if (tabHeader.IsHighlighted)
+                tabHeader.Background = tabHeader.HighlightedBackground;
+            else
+                tabHeader.Background = tabHeader.NormalBackground;
         }
 
         #region ProperyChanged Implementation
