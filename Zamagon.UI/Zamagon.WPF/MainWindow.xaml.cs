@@ -20,9 +20,18 @@ namespace Zamagon.WPF
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow()
+        public Task Initalization { get; set; }
+
+        public MainWindow(MainWindowViewModel vm)
         {
             InitializeComponent();
+            Initalization = Initalize(vm);
+        }
+
+        private async Task Initalize(MainWindowViewModel vm)
+        {
+            await vm.Initalization;
+            DataContext = vm;
         }
     }
 }

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
-using MySql.Data.EntityFrameworkCore;
+using Pomelo.EntityFrameworkCore.MySql;
 using Zamagon.Domain;
 using Zamagon.Services.BackOffice.Database;
 using Zamagon.Services.StoreFront.Database;
@@ -29,7 +29,7 @@ namespace Zamagon.MigrationContexts
         {
             string connectionString = ConnectionstringUtility.BuildConnectionString(ConnectionstringUtility.GetConnectionString("bin\\debug\\netcoreapp2.0\\EndPoints.json", API_Name.BackOffice, DataBaseProviderName.MySQL));
             DbContextOptionsBuilder dbOptions = new DbContextOptionsBuilder();
-            dbOptions.UseMySQL(connectionString);
+            dbOptions.UseMySql(connectionString);
             Zamagon.Services.BackOffice.Database.Db_MySQL db = new Zamagon.Services.BackOffice.Database.Db_MySQL(dbOptions.Options);
             return db;
         }
@@ -53,7 +53,7 @@ namespace Zamagon.MigrationContexts
         {
             string connectionString = ConnectionstringUtility.BuildConnectionString(ConnectionstringUtility.GetConnectionString("bin\\debug\\netcoreapp2.0\\EndPoints.json", API_Name.StoreFront, DataBaseProviderName.MySQL));
             DbContextOptionsBuilder dbOptions = new DbContextOptionsBuilder();
-            dbOptions.UseMySQL(connectionString);
+            dbOptions.UseMySql(connectionString);
             Zamagon.Services.StoreFront.Database.Db_MySQL db = new Zamagon.Services.StoreFront.Database.Db_MySQL(dbOptions.Options);
             return db;
         }

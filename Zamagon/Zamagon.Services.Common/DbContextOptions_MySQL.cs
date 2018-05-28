@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.EntityFrameworkCore;
 using LeaderAnalytics.AdaptiveClient.EntityFramework;
+using Pomelo.EntityFrameworkCore.MySql;
 
 namespace Zamagon.Services.Common
 {
@@ -13,7 +14,7 @@ namespace Zamagon.Services.Common
         public DbContextOptions_MySQL(string connectionString)
         {
             DbContextOptionsBuilder builder = new DbContextOptionsBuilder();
-            builder.UseMySQL(connectionString);
+            builder.UseMySql(connectionString);
             Options = builder.Options;
         }
     }

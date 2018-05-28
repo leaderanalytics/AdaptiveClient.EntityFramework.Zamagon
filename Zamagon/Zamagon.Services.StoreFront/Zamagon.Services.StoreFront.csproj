@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
@@ -14,9 +14,8 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.0.3" />
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="2.0.2" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="2.0.2" />
-    <PackageReference Include="MySql.Data.EntityFrameworkCore" Version="8.0.11" />
-    <PackageReference Include="MySql.Data.EntityFrameworkCore.Design" Version="8.0.11" />
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
+    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="2.0.1" />
   </ItemGroup>
   <ItemGroup>
     <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.0.2" />
@@ -25,5 +24,8 @@
     <ProjectReference Include="..\Zamagon.Domain\Zamagon.Domain.csproj" />
     <ProjectReference Include="..\Zamagon.Model\Zamagon.Model.csproj" />
     <ProjectReference Include="..\Zamagon.Services.Common\Zamagon.Services.Common.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Database\Migrations\MySQL\" />
   </ItemGroup>
 </Project>

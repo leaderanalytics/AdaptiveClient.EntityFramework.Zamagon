@@ -4,9 +4,90 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Zamagon.WPF"
+        xmlns:fa="http://schemas.fontawesome.io/icons/"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
+    <Grid Style="{StaticResource OrangeBackground}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Style="{StaticResource Logo}" >Leader Analytics</TextBlock>
+            <StackPanel Orientation="Horizontal" Grid.Column="1" VerticalAlignment="Center">
+                <TextBlock Style="{StaticResource Header}">Data Source:</TextBlock>
+                <TextBlock Style="{StaticResource Header}" Text="{Binding SelectedDataSource}"></TextBlock>
+            </StackPanel>
+        </Grid>
+        <TabControl Grid.Row="1" SelectedIndex="{Binding SelectedTabIndex}" >
+            <TabControl.ItemContainerStyle>
+                <Style TargetType="TabItem" >
+                    <Setter Property="Margin" Value="0"></Setter>
+                    <Setter Property="Padding" Value="0"></Setter>
+                    <Setter Property="BorderThickness" Value="0"></Setter>
+                </Style>
+            </TabControl.ItemContainerStyle>
+            <TabControl.Resources>
+                <Style TargetType="{x:Type TabItem}" x:Key="TabItemStyle">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type TabItem}">
+                                
+                                <ContentPresenter x:Name="ContentSite"
+                                                          VerticalAlignment="Center"
+                                                          HorizontalAlignment="Center"
+                                                          ContentSource="Header"
+                                                          Margin="0,0,0,-1"
+                                                          RecognizesAccessKey="True"/>
+                                
+                                
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsSelected" Value="True">
+                                        <Setter Property="Panel.ZIndex" Value="100" />
+                                    </Trigger>
+                                    <Trigger Property="IsEnabled" Value="False">
+                                        
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </TabControl.Resources>
+
+            <TabItem Style="{StaticResource TabItemStyle}">
+                <TabItem.Header>
+                    <local:TabHeader IconName="Home" Text="Home" IsSelected="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=TabItem}, Path=IsSelected}"></local:TabHeader>
+                </TabItem.Header>
+            </TabItem>
+
+            <TabItem  Style="{StaticResource TabItemStyle}">
+                <TabItem.Header >
+                    <local:TabHeader IconName="ShoppingCart" Text="Orders" IsSelected="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=TabItem}, Path=IsSelected}"></local:TabHeader>
+                </TabItem.Header>
+            </TabItem>
+
+            <TabItem Style="{StaticResource TabItemStyle}">
+                <TabItem.Header>
+                    <local:TabHeader IconName="Barcode" Text="Products" IsSelected="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=TabItem}, Path=IsSelected}" ></local:TabHeader>
+                </TabItem.Header>
+            </TabItem>
+
+            <TabItem Style="{StaticResource TabItemStyle}">
+                <TabItem.Header>
+                    <local:TabHeader IconName="Group" Text="Employees" IsSelected="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=TabItem}, Path=IsSelected}" ></local:TabHeader>
+                </TabItem.Header>
+            </TabItem>
+
+            <TabItem Style="{StaticResource TabItemStyle}">
+                <TabItem.Header>
+                    <local:TabHeader IconName="ClockOutline" Text="TimeCards" IsSelected="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=TabItem}, Path=IsSelected}" ></local:TabHeader>
+                </TabItem.Header>
+            </TabItem>
+        </TabControl>
     </Grid>
 </Window>

@@ -41,12 +41,11 @@ namespace Zamagon.Web
             });
 
             // Autofac & AdaptiveClient
-            
+            IEnumerable<IEndPointConfiguration> endPoints = ReadEndPointsFromDisk();
             ContainerBuilder builder = new ContainerBuilder();
             builder.Populate(services);
             builder.RegisterModule(new LeaderAnalytics.AdaptiveClient.EntityFramework.AutofacModule());
             RegistrationHelper registrationHelper = new RegistrationHelper(builder);
-            IEnumerable<IEndPointConfiguration> endPoints = ReadEndPointsFromDisk();
 
             registrationHelper
                 .RegisterEndPoints(endPoints)
@@ -57,13 +56,11 @@ namespace Zamagon.Web
             
             var container = builder.Build();
 
-            
-
             // Create all databases or apply migrations
             foreach (IEndPointConfiguration ep in endPoints.Where(x => x.EndPointType == EndPointType.DBMS))
             {
                 //
-                // Always resolve a new instance of databaseUtilties for each endPoint!
+                // Always resolve a new instance of databaseUtilities for each endPoint!
                 //
                 using (ILifetimeScope scope = container.BeginLifetimeScope())
                 {
