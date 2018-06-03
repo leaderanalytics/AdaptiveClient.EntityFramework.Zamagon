@@ -67,7 +67,16 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="DataPresenters\BaseDataPresenter.cs" />
+    <Compile Include="DataPresenters\OrdersDataPresenter.xaml.cs">
+      <DependentUpon>OrdersDataPresenter.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DragDropListBox.cs" />
     <Compile Include="TabHeader.cs" />
+    <Page Include="DataPresenters\OrdersDataPresenter.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

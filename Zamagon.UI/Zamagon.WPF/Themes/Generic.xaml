@@ -13,7 +13,7 @@
                         <Border Background="{TemplateBinding Background}"
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness}" 
-                                CornerRadius="10,10,0,0"
+                                CornerRadius="5,5,0,0"
                                 DataContext="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:TabHeader}}" >
 
                             <StackPanel VerticalAlignment="Bottom" >

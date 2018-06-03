@@ -5,7 +5,6 @@
              xmlns:fa="http://schemas.fontawesome.io/icons/"
              Startup="Application_Startup">
     <Application.Resources>
-        <!--http://web.archive.org/web/20101125040337/http://bea.stollnitz.com/blog/?p=384-->
         <Style TargetType="Grid" x:Key="OrangeBackground">
             <Setter Property="Background" Value="#FFF8C8"></Setter>
         </Style>
@@ -38,6 +37,33 @@
             <Setter Property="Background" Value="LightGray" />
             <Setter Property="BorderThickness" Value="0"/>
         </Style>
-        
+
+        <Style TargetType="{x:Type TabItem}" x:Key="TabItemStyle">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TabItem}">
+
+                        <ContentPresenter 
+                            x:Name="ContentSite"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center"
+                            ContentSource="Header"
+                            Margin="0,0,0,-1"
+                            RecognizesAccessKey="True"/>
+
+
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="Panel.ZIndex" Value="100" />
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
     </Application.Resources>
 </Application>

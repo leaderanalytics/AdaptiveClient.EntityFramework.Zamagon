@@ -20,20 +20,7 @@ namespace Zamagon.WPF
         private void Application_Startup(object sender, StartupEventArgs e)
         {
             IEnumerable<IEndPointConfiguration> endPoints = ReadEndPointsFromDisk();
-            ContainerBuilder builder = new ContainerBuilder();
-            builder.RegisterModule(new AutofacModule());
-            builder.RegisterModule(new LeaderAnalytics.AdaptiveClient.EntityFramework.AutofacModule());
-            RegistrationHelper registrationHelper = new RegistrationHelper(builder);
-            
-
-            registrationHelper
-                .RegisterEndPoints(endPoints)
-                .RegisterModule(new Zamagon.Services.Common.AdaptiveClientModule())
-                .RegisterModule(new Zamagon.Services.BackOffice.AdaptiveClientModule())
-                .RegisterModule(new Zamagon.Services.StoreFront.AdaptiveClientModule());
-
-
-            var container = builder.Build();
+            IContainer container = App.CreateContainer(endPoints);
 
             // Create all databases or apply migrations
             foreach (IEndPointConfiguration ep in endPoints.Where(x => x.EndPointType == EndPointType.DBMS))
@@ -59,6 +46,24 @@ namespace Zamagon.WPF
             endPoints.First(x => x.API_Name == API_Name.BackOffice && x.ProviderName == DataBaseProviderName.MySQL).ConnectionString = ConnectionstringUtility.BuildConnectionString(endPoints.First(x => x.API_Name == API_Name.BackOffice && x.ProviderName == DataBaseProviderName.MySQL).ConnectionString);
             endPoints.First(x => x.API_Name == API_Name.StoreFront && x.ProviderName == DataBaseProviderName.MySQL).ConnectionString = ConnectionstringUtility.BuildConnectionString(endPoints.First(x => x.API_Name == API_Name.StoreFront && x.ProviderName == DataBaseProviderName.MySQL).ConnectionString);
             return endPoints;
+        }
+
+        public static IContainer CreateContainer(IEnumerable<IEndPointConfiguration> endPoints)
+        {
+            ContainerBuilder builder = new ContainerBuilder();
+            builder.RegisterModule(new AutofacModule());
+            builder.RegisterModule(new LeaderAnalytics.AdaptiveClient.EntityFramework.AutofacModule());
+            RegistrationHelper registrationHelper = new RegistrationHelper(builder);
+
+
+            registrationHelper
+                .RegisterEndPoints(endPoints)
+                .RegisterModule(new Zamagon.Services.Common.AdaptiveClientModule())
+                .RegisterModule(new Zamagon.Services.BackOffice.AdaptiveClientModule())
+                .RegisterModule(new Zamagon.Services.StoreFront.AdaptiveClientModule());
+
+
+            return builder.Build();
         }
     }
 }
