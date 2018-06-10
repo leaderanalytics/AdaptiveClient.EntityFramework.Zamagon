@@ -1,0 +1,19 @@
+﻿<views:BaseView x:Class="Zamagon.WPF.Views.HomeView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:views="clr-namespace:Zamagon.WPF.Views"
+             xmlns:localWPF="clr-namespace:Zamagon.WPF"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid DataContext="{Binding RelativeSource={RelativeSource AncestorType=views:HomeView}}">
+        <localWPF:DragAndDropListBox Margin="25" ItemsSource="{Binding EndPoints}">
+            <localWPF:DragAndDropListBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Name}"></TextBlock>
+                </DataTemplate>
+            </localWPF:DragAndDropListBox.ItemTemplate>
+        </localWPF:DragAndDropListBox>
+    </Grid>
+</views:BaseView>

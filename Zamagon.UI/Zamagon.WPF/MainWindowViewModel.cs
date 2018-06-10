@@ -14,7 +14,7 @@ using Zamagon.Domain.BackOffice;
 
 namespace Zamagon.WPF
 {
-    public class MainWindowViewModel : BaseViewModel
+    public class MainWindowViewModel : BaseViewModel<IEndPointConfiguration>
     {
         private int _SelectedTabIndex;
         public int SelectedTabIndex
@@ -30,19 +30,7 @@ namespace Zamagon.WPF
             }
         }
 
-        private ObservableCollection<IEndPointConfiguration> _EndPoints;
-        public ObservableCollection<IEndPointConfiguration> EndPoints
-        {
-            get  => _EndPoints; 
-            set
-            {
-                if (_EndPoints != value)
-                {
-                    _EndPoints = value;
-                    RaisePropertyChanged();
-                }
-            }
-        }
+        
 
         public Task Initalization;
 

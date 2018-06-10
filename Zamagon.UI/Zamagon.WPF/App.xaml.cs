@@ -17,17 +17,22 @@ namespace Zamagon.WPF
     /// </summary>
     public partial class App : Application
     {
+        // This container is used to resolve ViewModels since WPF does not allow them to be injected into views using normal
+        // constructor injection.  AdaptiveClient uses constructor injection and does not require access to the container to be 
+        // used properly.  Please don't write me an email about service locator anti-pattern. Thank you!! :)
+        public IContainer Container { get; private set; } 
+
         private void Application_Startup(object sender, StartupEventArgs e)
         {
             IEnumerable<IEndPointConfiguration> endPoints = ReadEndPointsFromDisk();
-            IContainer container = App.CreateContainer(endPoints);
-            IDatabaseUtilities databaseUtilities = container.Resolve<IDatabaseUtilities>();
+            Container = App.CreateContainer(endPoints);
+            IDatabaseUtilities databaseUtilities = Container.Resolve<IDatabaseUtilities>();
 
             // Create all databases or apply migrations
             foreach (IEndPointConfiguration ep in endPoints.Where(x => x.EndPointType == EndPointType.DBMS))
                 Task.Run(() => databaseUtilities.CreateOrUpdateDatabase(ep)).Wait();
 
-            MainWindow mainWindow = container.Resolve<MainWindow>();
+            MainWindow mainWindow = Container.Resolve<MainWindow>();
             this.MainWindow = mainWindow;
             mainWindow.Show();
         }

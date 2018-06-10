@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Zamagon.WPF"
-        xmlns:dataPresenters="clr-namespace:Zamagon.WPF.DataPresenters"
+        xmlns:views="clr-namespace:Zamagon.WPF.Views"
         xmlns:fa="http://schemas.fontawesome.io/icons/"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
@@ -30,14 +30,14 @@
                 <TabItem.Header>
                     <local:TabHeader IconName="Home" Text="Home" IsSelected="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=TabItem}, Path=IsSelected, Mode=TwoWay}"></local:TabHeader>
                 </TabItem.Header>
-                <dataPresenters:HomeDataPresenter IsSelected="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=TabItem}, Path=IsSelected}" EndPoints="{Binding EndPoints}" ></dataPresenters:HomeDataPresenter>
+                <views:HomeView IsSelected="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=TabItem}, Path=IsSelected}" EndPoints="{Binding EndPoints}" ></views:HomeView>
             </TabItem>
 
             <TabItem  Style="{StaticResource TabItemStyle}">
                 <TabItem.Header >
                     <local:TabHeader IconName="ShoppingCart" Text="Orders" IsSelected="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=TabItem}, Path=IsSelected, Mode=TwoWay}"></local:TabHeader>
                 </TabItem.Header>
-                <dataPresenters:OrdersDataPresenter IsSelected="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=TabItem}, Path=IsSelected}" EndPoints="{Binding EndPoints}" > </dataPresenters:OrdersDataPresenter>
+                <views:OrdersView IsSelected="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=TabItem}, Path=IsSelected}" EndPoints="{Binding EndPoints}" > </views:OrdersView>
             </TabItem>
 
             <TabItem Style="{StaticResource TabItemStyle}">

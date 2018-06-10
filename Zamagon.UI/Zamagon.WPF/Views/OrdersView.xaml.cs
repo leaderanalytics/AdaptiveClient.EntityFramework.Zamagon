@@ -13,20 +13,24 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Autofac;
 using Zamagon.Model;
 
-namespace Zamagon.WPF.DataPresenters
+namespace Zamagon.WPF.Views
 {
-    public partial class HomeDataPresenter : BaseDataPresenter
+    public partial class OrdersView : BaseView
     {
-        public HomeDataPresenter()
+        public OrdersView()
         {
             InitializeComponent();
+            DataContext = ((App)Application.Current).Container.Resolve<OrdersViewModel>();
         }
+
 
         public override void CreateUI()
         {
             base.CreateUI();
+            Dispatcher.InvokeAsync(() => ((OrdersViewModel)DataContext).CreateUI()).Wait();
         }
     }
 }

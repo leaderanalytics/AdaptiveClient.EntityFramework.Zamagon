@@ -1,12 +1,12 @@
-﻿<local:BaseDataPresenter x:Class="Zamagon.WPF.DataPresenters.OrdersDataPresenter"
+﻿<views:BaseView x:Class="Zamagon.WPF.Views.OrdersView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:Zamagon.WPF.DataPresenters"
+             xmlns:views="clr-namespace:Zamagon.WPF.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid DataContext="{Binding RelativeSource={RelativeSource AncestorType=local:OrdersDataPresenter}}">
-        <DataGrid Margin="25" ItemsSource="{Binding Orders}" AutoGenerateColumns="True"></DataGrid>
+    <Grid>
+        <DataGrid Margin="25" ItemsSource="{Binding Entities}" AutoGenerateColumns="True"></DataGrid>
     </Grid>
-</local:BaseDataPresenter>
+</views:BaseView>
