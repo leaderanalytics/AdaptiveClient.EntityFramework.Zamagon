@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Http;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using LeaderAnalytics.AdaptiveClient;
-using LeaderAnalytics.AdaptiveClient.EntityFramework;
+using LeaderAnalytics.AdaptiveClient.EntityFrameworkCore;
 using Zamagon.Domain;
 
 namespace Zamagon.Web
@@ -44,7 +44,7 @@ namespace Zamagon.Web
             IEnumerable<IEndPointConfiguration> endPoints = ReadEndPointsFromDisk();
             ContainerBuilder builder = new ContainerBuilder();
             builder.Populate(services);
-            builder.RegisterModule(new LeaderAnalytics.AdaptiveClient.EntityFramework.AutofacModule());
+            builder.RegisterModule(new LeaderAnalytics.AdaptiveClient.EntityFrameworkCore.AutofacModule());
             RegistrationHelper registrationHelper = new RegistrationHelper(builder);
 
             registrationHelper
@@ -55,19 +55,12 @@ namespace Zamagon.Web
 
             
             var container = builder.Build();
-
+            IDatabaseUtilities databaseUtilities = container.Resolve<IDatabaseUtilities>();
+            
             // Create all databases or apply migrations
             foreach (IEndPointConfiguration ep in endPoints.Where(x => x.EndPointType == EndPointType.DBMS))
-            {
-                //
-                // Always resolve a new instance of databaseUtilities for each endPoint!
-                //
-                using (ILifetimeScope scope = container.BeginLifetimeScope())
-                {
-                    IDatabaseUtilities databaseUtilities = scope.Resolve<IDatabaseUtilities>();
-                    databaseUtilities.CreateOrUpdateDatabase(ep).Wait();
-                }
-            }
+                databaseUtilities.CreateOrUpdateDatabase(ep).Wait();
+
             return container.Resolve<IServiceProvider>();
         }
 

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Zamagon.Domain.StoreFront;
-using LeaderAnalytics.AdaptiveClient.EntityFramework;
+using LeaderAnalytics.AdaptiveClient.EntityFrameworkCore;
 
 namespace Zamagon.Services.StoreFront
 {

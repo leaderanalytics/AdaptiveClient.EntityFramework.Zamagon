@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using Autofac;
 using LeaderAnalytics.AdaptiveClient;
-using LeaderAnalytics.AdaptiveClient.EntityFramework;
+using LeaderAnalytics.AdaptiveClient.EntityFrameworkCore;
 using Zamagon.Domain;
 
 namespace Zamagon.WPF
@@ -21,19 +21,11 @@ namespace Zamagon.WPF
         {
             IEnumerable<IEndPointConfiguration> endPoints = ReadEndPointsFromDisk();
             IContainer container = App.CreateContainer(endPoints);
+            IDatabaseUtilities databaseUtilities = container.Resolve<IDatabaseUtilities>();
 
             // Create all databases or apply migrations
             foreach (IEndPointConfiguration ep in endPoints.Where(x => x.EndPointType == EndPointType.DBMS))
-            {
-                //
-                // Always resolve a new instance of databaseUtilities for each endPoint!
-                //
-                using (ILifetimeScope scope = container.BeginLifetimeScope())
-                {
-                    IDatabaseUtilities databaseUtilities = scope.Resolve<IDatabaseUtilities>();
-                    Task.Run(() => databaseUtilities.CreateOrUpdateDatabase(ep)).Wait();
-                }
-            }
+                Task.Run(() => databaseUtilities.CreateOrUpdateDatabase(ep)).Wait();
 
             MainWindow mainWindow = container.Resolve<MainWindow>();
             this.MainWindow = mainWindow;
@@ -52,7 +44,7 @@ namespace Zamagon.WPF
         {
             ContainerBuilder builder = new ContainerBuilder();
             builder.RegisterModule(new AutofacModule());
-            builder.RegisterModule(new LeaderAnalytics.AdaptiveClient.EntityFramework.AutofacModule());
+            builder.RegisterModule(new LeaderAnalytics.AdaptiveClient.EntityFrameworkCore.AutofacModule());
             RegistrationHelper registrationHelper = new RegistrationHelper(builder);
 
 

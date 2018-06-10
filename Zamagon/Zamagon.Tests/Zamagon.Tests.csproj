@@ -13,8 +13,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="AdaptiveClient" Version="0.31.0" />
-    <PackageReference Include="AdaptiveClient.EntityFramework" Version="0.30.3" />
+    <PackageReference Include="AdaptiveClient" Version="0.31.1" />
     <PackageReference Include="Autofac" Version="4.8.1" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.7.2" />
     <PackageReference Include="NUnit" Version="3.10.1" />

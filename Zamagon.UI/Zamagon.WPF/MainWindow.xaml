@@ -30,6 +30,7 @@
                 <TabItem.Header>
                     <local:TabHeader IconName="Home" Text="Home" IsSelected="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=TabItem}, Path=IsSelected, Mode=TwoWay}"></local:TabHeader>
                 </TabItem.Header>
+                <dataPresenters:HomeDataPresenter IsSelected="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=TabItem}, Path=IsSelected}" EndPoints="{Binding EndPoints}" ></dataPresenters:HomeDataPresenter>
             </TabItem>
 
             <TabItem  Style="{StaticResource TabItemStyle}">

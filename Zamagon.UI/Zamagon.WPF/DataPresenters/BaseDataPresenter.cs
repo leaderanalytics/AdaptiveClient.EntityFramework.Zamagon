@@ -7,6 +7,7 @@ using System.Windows.Controls;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
+using Autofac;
 using LeaderAnalytics.AdaptiveClient;
 using Zamagon.Domain.BackOffice;
 using Zamagon.Domain.StoreFront;
@@ -43,17 +44,16 @@ namespace Zamagon.WPF.DataPresenters
                 control.CreateUI();
         }
 
-        public IAdaptiveClient<IBOServiceManifest> BackOfficeServiceClient { get; set; }
-        public IAdaptiveClient<ISFServiceManifest> StoreFrontServiceClient { get; set; }
+        protected IAdaptiveClient<IBOServiceManifest> BackOfficeServiceClient { get; set; }
+        protected IAdaptiveClient<ISFServiceManifest> StoreFrontServiceClient { get; set; }
+        protected Autofac.IContainer Container { get; set; }
+
 
         public virtual void CreateUI()
         {
-            Autofac.IContainer container = App.CreateContainer(EndPoints);
-
-            using (var scope = container.BeginLifetimeScope())
-            {
-                
-            }
+            Container = App.CreateContainer(EndPoints);
+            BackOfficeServiceClient = Container.Resolve<IAdaptiveClient<IBOServiceManifest>>();
+            StoreFrontServiceClient = Container.Resolve<IAdaptiveClient<ISFServiceManifest>>();
         }
 
         
