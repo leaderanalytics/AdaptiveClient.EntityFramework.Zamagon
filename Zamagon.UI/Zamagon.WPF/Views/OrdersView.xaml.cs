@@ -14,23 +14,26 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Autofac;
+using LeaderAnalytics.AdaptiveClient;
 using Zamagon.Model;
 
 namespace Zamagon.WPF.Views
 {
     public partial class OrdersView : BaseView
     {
+        public OrdersViewModel OrdersViewModel { get; set; }
+
         public OrdersView()
         {
             InitializeComponent();
-            DataContext = ((App)Application.Current).Container.Resolve<OrdersViewModel>();
+            OrdersViewModel = ((App)Application.Current).Container.Resolve<OrdersViewModel>();
         }
 
 
-        public override void CreateUI()
+        public override void IsSelected_Changed(IEnumerable<IEndPointConfiguration> endPoints)
         {
-            base.CreateUI();
-            Dispatcher.InvokeAsync(() => ((OrdersViewModel)DataContext).CreateUI()).Wait();
+            base.IsSelected_Changed(endPoints);
+            Dispatcher.InvokeAsync(() => OrdersViewModel.CreateUI(endPoints)).Wait();
         }
     }
 }

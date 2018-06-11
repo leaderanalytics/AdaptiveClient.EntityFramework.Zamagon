@@ -30,14 +30,14 @@
                 <TabItem.Header>
                     <local:TabHeader IconName="Home" Text="Home" IsSelected="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=TabItem}, Path=IsSelected, Mode=TwoWay}"></local:TabHeader>
                 </TabItem.Header>
-                <views:HomeView IsSelected="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=TabItem}, Path=IsSelected}" EndPoints="{Binding EndPoints}" ></views:HomeView>
+                <views:HomeView IsSelected="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=TabItem}, Path=IsSelected}" EndPoints="{Binding Entities}" ></views:HomeView>
             </TabItem>
 
             <TabItem  Style="{StaticResource TabItemStyle}">
                 <TabItem.Header >
                     <local:TabHeader IconName="ShoppingCart" Text="Orders" IsSelected="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=TabItem}, Path=IsSelected, Mode=TwoWay}"></local:TabHeader>
                 </TabItem.Header>
-                <views:OrdersView IsSelected="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=TabItem}, Path=IsSelected}" EndPoints="{Binding EndPoints}" > </views:OrdersView>
+                <views:OrdersView IsSelected="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=TabItem}, Path=IsSelected}" EndPoints="{Binding Entities}" > </views:OrdersView>
             </TabItem>
 
             <TabItem Style="{StaticResource TabItemStyle}">

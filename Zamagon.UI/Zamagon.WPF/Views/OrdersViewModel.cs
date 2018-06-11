@@ -15,11 +15,11 @@ namespace Zamagon.WPF.Views
     {
         public OrdersViewModel(IAdaptiveClient<ISFServiceManifest> storeFrontClient, IAdaptiveClient<IBOServiceManifest> backOfficeClient) :base(storeFrontClient, backOfficeClient)
         {
-
         }
 
-        public async Task CreateUI()
+        public async Task CreateUI(IEnumerable<IEndPointConfiguration> endPoints)
         {
+            CreateContainer(endPoints);
             List<Order> orders = await StoreFrontServiceClient.TryAsync(async x => await x.OrdersService.GetOrders());
             Entities.Clear();
             orders.ForEach(x => Entities.Add(x));

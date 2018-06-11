@@ -37,7 +37,7 @@ namespace Zamagon.WPF
         public MainWindowViewModel(IAdaptiveClient<ISFServiceManifest> storeFrontClient, IAdaptiveClient<IBOServiceManifest> backOfficeClient): base(storeFrontClient, backOfficeClient)
         {
             Initalization = Initalize();
-            EndPoints = new ObservableCollection<IEndPointConfiguration>(App.ReadEndPointsFromDisk());
+            Entities = new ObservableCollection<IEndPointConfiguration>(App.ReadEndPointsFromDisk());
         }
 
         public async Task Initalize()

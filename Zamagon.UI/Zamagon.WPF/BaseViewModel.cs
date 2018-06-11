@@ -44,19 +44,7 @@ namespace Zamagon.WPF
             }
         }
 
-        private ObservableCollection<IEndPointConfiguration> _EndPoints;
-        public ObservableCollection<IEndPointConfiguration> EndPoints
-        {
-            get => _EndPoints;
-            set
-            {
-                if (_EndPoints != value)
-                {
-                    _EndPoints = value;
-                    RaisePropertyChanged();
-                }
-            }
-        }
+        
 
 
         protected Autofac.IContainer Container;
@@ -70,9 +58,9 @@ namespace Zamagon.WPF
             Entities = new ObservableCollection<T>();
         }
 
-        public virtual void CreateUI()
+        protected void CreateContainer(IEnumerable<IEndPointConfiguration> endPoints)
         {
-            Container = App.CreateContainer(EndPoints);
+            Container = App.CreateContainer(endPoints);
             BackOfficeServiceClient = Container.Resolve<IAdaptiveClient<IBOServiceManifest>>();
             StoreFrontServiceClient = Container.Resolve<IAdaptiveClient<ISFServiceManifest>>();
         }

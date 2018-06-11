@@ -6,7 +6,7 @@
              xmlns:views="clr-namespace:Zamagon.WPF.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-        <DataGrid Margin="25" ItemsSource="{Binding Entities}" AutoGenerateColumns="True"></DataGrid>
+    <Grid DataContext="{Binding RelativeSource={RelativeSource AncestorType=views:OrdersView}, Path=OrdersViewModel}">
+        <DataGrid Margin="25" ItemsSource="{Binding Entities}" AutoGenerateColumns="True" IsReadOnly="True"></DataGrid>
     </Grid>
 </views:BaseView>

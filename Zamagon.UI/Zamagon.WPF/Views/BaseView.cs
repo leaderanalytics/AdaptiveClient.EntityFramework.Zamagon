@@ -41,10 +41,10 @@ namespace Zamagon.WPF.Views
             BaseView control = sender as BaseView;
 
             if (control.IsSelected)
-                control.CreateUI();
+                control.IsSelected_Changed(control.EndPoints);
         }
 
-        public virtual void CreateUI()
+        public virtual void IsSelected_Changed(IEnumerable<IEndPointConfiguration> endPoints)
         {
         
         }

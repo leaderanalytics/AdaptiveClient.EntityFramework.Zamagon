@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using LeaderAnalytics.AdaptiveClient;
 using Zamagon.Model;
 
 namespace Zamagon.WPF.Views
@@ -24,9 +25,9 @@ namespace Zamagon.WPF.Views
             InitializeComponent();
         }
 
-        public override void CreateUI()
+        public override void IsSelected_Changed(IEnumerable<IEndPointConfiguration> endPoints)
         {
-            base.CreateUI();
+            base.IsSelected_Changed(endPoints);
         }
     }
 }
