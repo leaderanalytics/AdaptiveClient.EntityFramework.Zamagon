@@ -7,13 +7,22 @@
              xmlns:localWPF="clr-namespace:Zamagon.WPF"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid DataContext="{Binding RelativeSource={RelativeSource AncestorType=views:HomeView}}">
-        <localWPF:DragAndDropListBox Margin="25" ItemsSource="{Binding EndPoints}">
+    <Grid DataContext="{Binding RelativeSource={RelativeSource AncestorType=views:HomeView}}" Margin="25">
+        <StackPanel Orientation="Vertical">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="EndPoint Name" Width="200"></TextBlock>
+                <TextBlock Text="Enabled" Width="80"></TextBlock>
+            </StackPanel>
+        <localWPF:DragAndDropListBox ItemsSource="{Binding EndPoints}">
             <localWPF:DragAndDropListBox.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock Text="{Binding Name}"></TextBlock>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding Name}" Width="200"></TextBlock>
+                        <CheckBox IsChecked="{Binding IsActive}" Tag="{Binding Name}" Width="80" Checked="CheckBox_Checked" ></CheckBox>
+                    </StackPanel>
                 </DataTemplate>
             </localWPF:DragAndDropListBox.ItemTemplate>
         </localWPF:DragAndDropListBox>
+        </StackPanel>
     </Grid>
 </views:BaseView>

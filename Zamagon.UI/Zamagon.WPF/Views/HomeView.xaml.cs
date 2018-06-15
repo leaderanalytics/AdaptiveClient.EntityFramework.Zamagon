@@ -29,5 +29,10 @@ namespace Zamagon.WPF.Views
         {
             base.IsSelected_Changed(endPoints);
         }
+
+        private void CheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            string name = ((CheckBox)sender).Tag.ToString();
+        }
     }
 }
