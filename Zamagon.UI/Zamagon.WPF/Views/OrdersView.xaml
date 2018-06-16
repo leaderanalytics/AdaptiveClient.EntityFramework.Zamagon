@@ -4,9 +4,19 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:views="clr-namespace:Zamagon.WPF.Views"
+             xmlns:localWPF="clr-namespace:Zamagon.WPF"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid DataContext="{Binding RelativeSource={RelativeSource AncestorType=views:OrdersView}, Path=OrdersViewModel}">
-        <DataGrid Margin="25" ItemsSource="{Binding Entities}" AutoGenerateColumns="True" IsReadOnly="True"></DataGrid>
+    <Grid DataContext="{Binding RelativeSource={RelativeSource AncestorType=views:OrdersView}, Path=ViewModel}">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal">
+            <localWPF:EndPointListBox EndPoints="{Binding EndPoints}" SelectedEndPointName="{Binding SelectedEndPointName}" Width="300"/>
+            <Button Command="{Binding GetDataCommand}" Style="{StaticResource GetDataButton}" />
+        </StackPanel>
+        <DataGrid Grid.Row="2" Margin="25" ItemsSource="{Binding Entities}" AutoGenerateColumns="True" IsReadOnly="True"></DataGrid>
     </Grid>
 </views:BaseView>

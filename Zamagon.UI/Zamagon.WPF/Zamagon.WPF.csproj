@@ -69,6 +69,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="CommandHandler.cs" />
+    <Compile Include="EndPointListBox.xaml.cs">
+      <DependentUpon>EndPointListBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationEndPoint.cs" />
     <Compile Include="Views\BaseView.cs" />
     <Compile Include="Views\HomeView.xaml.cs">
       <DependentUpon>HomeView.xaml</DependentUpon>
@@ -80,6 +85,10 @@
     <Compile Include="TabHeader.cs" />
     <Compile Include="Views\HomeViewModel.cs" />
     <Compile Include="Views\OrdersViewModel.cs" />
+    <Page Include="EndPointListBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\HomeView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

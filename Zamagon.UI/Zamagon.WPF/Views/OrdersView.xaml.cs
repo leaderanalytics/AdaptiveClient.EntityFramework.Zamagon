@@ -32,8 +32,6 @@ namespace Zamagon.WPF.Views
 
         public override void IsSelected_Changed(IEnumerable<IEndPointConfiguration> endPoints)
         {
-            base.IsSelected_Changed(endPoints);
-            Dispatcher.InvokeAsync(() => ViewModel.CreateUI(endPoints)).Wait();
         }
     }
 }

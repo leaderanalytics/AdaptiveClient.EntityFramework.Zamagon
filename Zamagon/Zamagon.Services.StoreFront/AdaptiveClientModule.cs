@@ -29,18 +29,13 @@ namespace Zamagon.Services.StoreFront
             // DbContexts
             .RegisterDbContext<Database.Db>(API_Name.StoreFront)
 
-            
-
             // Migration Contexts
             .RegisterMigrationContext<Database.Db_MSSQL>(API_Name.StoreFront, DataBaseProviderName.MSSQL)
             .RegisterMigrationContext<Database.Db_MySQL>(API_Name.StoreFront, DataBaseProviderName.MySQL)
 
-
             // Database Initializers
-            
             .RegisterDatabaseInitializer<SFDatabaseInitializer>(API_Name.StoreFront, DataBaseProviderName.MSSQL)
             .RegisterDatabaseInitializer<SFDatabaseInitializer>(API_Name.StoreFront, DataBaseProviderName.MySQL) 
-
 
             // Service Manifests
             .RegisterServiceManifest<SFServiceManifest, ISFServiceManifest>(EndPointType.DBMS, API_Name.StoreFront, DataBaseProviderName.MSSQL)

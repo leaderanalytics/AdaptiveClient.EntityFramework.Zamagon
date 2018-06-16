@@ -25,7 +25,7 @@ namespace Zamagon.WPF
         private void Application_Startup(object sender, StartupEventArgs e)
         {
             IEnumerable<IEndPointConfiguration> endPoints = ReadEndPointsFromDisk();
-            Container = App.CreateContainer(endPoints);
+            Container = App.CreateContainer(endPoints, null);
             IDatabaseUtilities databaseUtilities = Container.Resolve<IDatabaseUtilities>();
 
             // Create all databases or apply migrations
@@ -45,20 +45,22 @@ namespace Zamagon.WPF
             return endPoints;
         }
 
-        public static IContainer CreateContainer(IEnumerable<IEndPointConfiguration> endPoints)
+        public static IContainer CreateContainer(IEnumerable<IEndPointConfiguration> endPoints, string apiName)
         {
             ContainerBuilder builder = new ContainerBuilder();
             builder.RegisterModule(new AutofacModule());
             builder.RegisterModule(new LeaderAnalytics.AdaptiveClient.EntityFrameworkCore.AutofacModule());
             RegistrationHelper registrationHelper = new RegistrationHelper(builder);
 
-
             registrationHelper
                 .RegisterEndPoints(endPoints)
-                .RegisterModule(new Zamagon.Services.Common.AdaptiveClientModule())
-                .RegisterModule(new Zamagon.Services.BackOffice.AdaptiveClientModule())
-                .RegisterModule(new Zamagon.Services.StoreFront.AdaptiveClientModule());
+                .RegisterModule(new Zamagon.Services.Common.AdaptiveClientModule());
 
+            if (apiName == API_Name.BackOffice || apiName == null)
+                registrationHelper.RegisterModule(new Zamagon.Services.BackOffice.AdaptiveClientModule());
+
+            if (apiName == API_Name.StoreFront || apiName == null)
+                registrationHelper.RegisterModule(new Zamagon.Services.StoreFront.AdaptiveClientModule());
 
             return builder.Build();
         }

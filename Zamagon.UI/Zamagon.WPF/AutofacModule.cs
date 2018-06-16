@@ -15,6 +15,7 @@ namespace Zamagon.WPF
             builder.RegisterType<MainWindow>();
             builder.RegisterType<MainWindowViewModel>();
             builder.RegisterType<Views.OrdersViewModel>();
+            builder.RegisterType<Views.HomeViewModel>();
             //builder.RegisterType<Views.OrdersView>().UsingConstructor(typeof(Views.OrdersViewModel));
         }
     }

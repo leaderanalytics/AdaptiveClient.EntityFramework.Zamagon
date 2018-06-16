@@ -14,7 +14,7 @@ using Zamagon.Domain.BackOffice;
 
 namespace Zamagon.WPF
 {
-    public class MainWindowViewModel : BaseViewModel<IEndPointConfiguration>
+    public class MainWindowViewModel : BaseViewModel<object>
     {
         private int _SelectedTabIndex;
         public int SelectedTabIndex
@@ -29,7 +29,6 @@ namespace Zamagon.WPF
                 }
             }
         }
-
         
 
         public Task Initalization;
@@ -37,7 +36,6 @@ namespace Zamagon.WPF
         public MainWindowViewModel(IAdaptiveClient<ISFServiceManifest> storeFrontClient, IAdaptiveClient<IBOServiceManifest> backOfficeClient): base(storeFrontClient, backOfficeClient)
         {
             Initalization = Initalize();
-            Entities = new ObservableCollection<IEndPointConfiguration>(App.ReadEndPointsFromDisk());
         }
 
         public async Task Initalize()

@@ -34,16 +34,6 @@ namespace Zamagon.WPF.Views
             base.IsSelected_Changed(endPoints);
         }
 
-        private void CheckBox_Checked(object sender, RoutedEventArgs e)
-        {
-            CheckBox checkBox = (CheckBox)sender;
-
-            if (!checkBox.IsChecked.HasValue || !checkBox.IsChecked.Value)
-            {
-                checkBox.IsChecked = true;
-                return;
-            }
-            string name = checkBox.Tag.ToString();
-        }
+        
     }
 }
