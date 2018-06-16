@@ -78,6 +78,7 @@
     </Compile>
     <Compile Include="DragDropListBox.cs" />
     <Compile Include="TabHeader.cs" />
+    <Compile Include="Views\HomeViewModel.cs" />
     <Compile Include="Views\OrdersViewModel.cs" />
     <Page Include="Views\HomeView.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -161,5 +162,4 @@
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  
 </Project>

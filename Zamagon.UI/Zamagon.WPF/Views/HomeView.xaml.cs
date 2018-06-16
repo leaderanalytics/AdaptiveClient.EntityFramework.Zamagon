@@ -14,15 +14,19 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using LeaderAnalytics.AdaptiveClient;
+using Autofac;
 using Zamagon.Model;
 
 namespace Zamagon.WPF.Views
 {
     public partial class HomeView : BaseView
     {
+        public HomeViewModel ViewModel { get; set; }
+
         public HomeView()
         {
             InitializeComponent();
+            ViewModel = ((App)Application.Current).Container.Resolve<HomeViewModel>();
         }
 
         public override void IsSelected_Changed(IEnumerable<IEndPointConfiguration> endPoints)
@@ -32,7 +36,14 @@ namespace Zamagon.WPF.Views
 
         private void CheckBox_Checked(object sender, RoutedEventArgs e)
         {
-            string name = ((CheckBox)sender).Tag.ToString();
+            CheckBox checkBox = (CheckBox)sender;
+
+            if (!checkBox.IsChecked.HasValue || !checkBox.IsChecked.Value)
+            {
+                checkBox.IsChecked = true;
+                return;
+            }
+            string name = checkBox.Tag.ToString();
         }
     }
 }

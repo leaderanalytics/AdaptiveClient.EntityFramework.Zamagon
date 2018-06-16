@@ -18,7 +18,7 @@
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="{Binding Name}" Width="200"></TextBlock>
-                        <CheckBox IsChecked="{Binding IsActive}" Tag="{Binding Name}" Width="80" Checked="CheckBox_Checked" ></CheckBox>
+                        <CheckBox IsChecked="{Binding IsActive}" Tag="{Binding Name}" Width="80" Checked="CheckBox_Checked" Unchecked="CheckBox_Checked" ></CheckBox>
                     </StackPanel>
                 </DataTemplate>
             </localWPF:DragAndDropListBox.ItemTemplate>

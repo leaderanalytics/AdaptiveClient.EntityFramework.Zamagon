@@ -21,19 +21,19 @@ namespace Zamagon.WPF.Views
 {
     public partial class OrdersView : BaseView
     {
-        public OrdersViewModel OrdersViewModel { get; set; }
+        public OrdersViewModel ViewModel { get; set; }
 
         public OrdersView()
         {
             InitializeComponent();
-            OrdersViewModel = ((App)Application.Current).Container.Resolve<OrdersViewModel>();
+            ViewModel = ((App)Application.Current).Container.Resolve<OrdersViewModel>();
         }
 
 
         public override void IsSelected_Changed(IEnumerable<IEndPointConfiguration> endPoints)
         {
             base.IsSelected_Changed(endPoints);
-            Dispatcher.InvokeAsync(() => OrdersViewModel.CreateUI(endPoints)).Wait();
+            Dispatcher.InvokeAsync(() => ViewModel.CreateUI(endPoints)).Wait();
         }
     }
 }
