@@ -5,26 +5,72 @@
              xmlns:fa="http://schemas.fontawesome.io/icons/"
              Startup="Application_Startup">
     <Application.Resources>
-        <Style TargetType="Grid" x:Key="OrangeBackground">
-            <Setter Property="Background" Value="#FFF8C8"></Setter>
+        <SolidColorBrush x:Key="Color1" Color="#C4C3D0" />
+        <SolidColorBrush x:Key="Color2" Color="#CFD0C3" />
+        <SolidColorBrush x:Key="Color3" Color="#A7AA86" />
+        <SolidColorBrush x:Key="Color4" Color="#808454" />
+        <SolidColorBrush x:Key="Color5" Color="#555555" />
+
+
+        <Style TargetType="Grid" x:Key="GridColors">
+            <Setter Property="Background" Value="{StaticResource Color5}"></Setter>
         </Style>
-        
+
+        <Style TargetType="DataGrid">
+            <Setter Property="ColumnHeaderStyle">
+                <Setter.Value>
+                    <Style TargetType="DataGridColumnHeader">
+                        <Setter Property="Background" Value="{StaticResource Color2}"/>
+                        <Setter Property="Foreground" Value="{StaticResource Color5}"/>
+                        <Setter Property="Padding" Value="4"/>
+                    </Style>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Background" Value="{StaticResource Color3}"/>
+            <Setter Property="Foreground" Value="{StaticResource Color5}"/>
+            <Setter Property="RowBackground" Value="{StaticResource Color1}"/>
+            <Setter Property="AlternatingRowBackground" Value="{StaticResource Color1}"/>
+        </Style>
+
+        <Style TargetType="local:EndPointListBox">
+            <Setter Property="Background" Value="{StaticResource Color2}"/>
+            <Setter Property="Foreground" Value="{StaticResource Color5}"/>
+        </Style>
+
+        <Style TargetType="local:DragAndDropListBox">
+            <Setter Property="Background" Value="{StaticResource Color3}"/>
+            <Setter Property="Foreground" Value="{StaticResource Color5}"/>
+            <Setter Property="ItemContainerStyle">
+                <Setter.Value>
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="Background" Value="{StaticResource Color1}"></Setter>
+                        <Setter Property="BorderBrush" Value="{StaticResource Color5}"></Setter>
+                        <Setter Property="BorderThickness" Value=".8"></Setter>
+                        <Setter Property="Margin" Value="2"></Setter>
+                        <Setter Property="Padding" Value="2,4,2,4"></Setter>
+                    </Style>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
         <Style TargetType="TextBlock" x:Key="Logo">
-            <Setter Property="Foreground" Value="Gray"></Setter>
+            <Setter Property="Foreground" Value="#F2F2EE"></Setter>
             <Setter Property="FontSize" Value="30"></Setter>
+            <Setter Property="HorizontalAlignment" Value="Right"/>
+            <Setter Property="Margin" Value="0,3,15,0"/>
         </Style>
         
         <Style TargetType="TextBlock" x:Key="Header">
             <Setter Property="FontSize" Value="18"></Setter>
         </Style>
-        
-        <Style TargetType="fa:ImageAwesome">
+
+        <Style TargetType="{x:Type fa:ImageAwesome}">
             <Setter Property="Width" Value="40"/>
             <Setter Property="Margin" Value="8" />
         </Style>
 
         <Style TargetType="TabControl">
-            <Setter Property="Background" Value="#696969"></Setter>
+            <Setter Property="Background" Value="{StaticResource Color4}"></Setter>
         </Style>
         
         
@@ -33,7 +79,7 @@
             <Setter Property="Height" Value="70" />
             <Setter Property="Margin" Value="0" />
             <Setter Property="HighlightedBackground" Value="#EEEEEE" />
-            <Setter Property="SelectedBackground" Value="#696969" />
+            <Setter Property="SelectedBackground" Value="{StaticResource Color4}" />
             <Setter Property="Background" Value="LightGray" />
             <Setter Property="BorderThickness" Value="0"/>
         </Style>
@@ -66,11 +112,15 @@
         </Style>
 
         <Style TargetType="{x:Type Button}" x:Key="GetDataButton">
-            <Setter Property="Height" Value="90"></Setter>
-            <Setter Property="Width" Value="180"></Setter>
+            <Setter Property="Height" Value="80"></Setter>
+            <Setter Property="Width" Value="120"></Setter>
             <Setter Property="Content">
                 <Setter.Value>
-                    <TextBlock Text="Get Data"></TextBlock>
+                    <StackPanel Orientation="Vertical">
+                        <fa:ImageAwesome Icon="Truck"/>
+                        <TextBlock Text="Get Data"></TextBlock>
+                    </StackPanel>
+                    
                 </Setter.Value>
             </Setter>
         </Style>

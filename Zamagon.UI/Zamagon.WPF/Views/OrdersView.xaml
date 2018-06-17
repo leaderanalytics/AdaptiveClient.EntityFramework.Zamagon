@@ -7,21 +7,27 @@
              xmlns:localWPF="clr-namespace:Zamagon.WPF"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid DataContext="{Binding RelativeSource={RelativeSource AncestorType=views:OrdersView}, Path=ViewModel}" Margin="25">
+    <Grid DataContext="{Binding RelativeSource={RelativeSource AncestorType=views:OrdersView}, Path=ViewModel}" Margin="15">
         <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <StackPanel Orientation="Horizontal">
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
             <localWPF:EndPointListBox EndPoints="{Binding EndPoints}" SelectedEndPointName="{Binding SelectedEndPointName}" Width="300"/>
-            <Button Command="{Binding GetDataCommand}" Style="{StaticResource GetDataButton}" />
+            <Button Command="{Binding GetDataCommand}" Style="{StaticResource GetDataButton}" Margin="50,0,0,0" />
         </StackPanel>
-        <DataGrid Grid.Row="1" ItemsSource="{Binding LogMessages}" AutoGenerateColumns="False" IsReadOnly="True">
+        <DataGrid Grid.Row="1" ItemsSource="{Binding LogMessages}" AutoGenerateColumns="False" IsReadOnly="True" Margin="0,15,0,0">
             <DataGrid.Columns>
-                <DataGridTextColumn Width="*" Binding="{Binding}" Header="Log Message" />
+                <DataGridTemplateColumn Header="Log Message" Width="*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding}" TextWrapping="Wrap" Padding="4"></TextBlock>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <DataGrid Grid.Row="2" ItemsSource="{Binding Entities}" AutoGenerateColumns="True" IsReadOnly="True"></DataGrid>
+        <DataGrid Grid.Row="2" ItemsSource="{Binding Entities}" AutoGenerateColumns="True" IsReadOnly="True"  Margin="0,15,0,0"></DataGrid>
     </Grid>
 </views:BaseView>

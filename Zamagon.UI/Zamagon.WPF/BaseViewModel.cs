@@ -13,6 +13,7 @@ using System.Runtime.CompilerServices;
 using Microsoft.Extensions.Configuration;
 using Autofac;
 using LeaderAnalytics.AdaptiveClient;
+using Zamagon.Domain;
 using Zamagon.Domain.StoreFront;
 using Zamagon.Domain.BackOffice;
 
@@ -110,12 +111,13 @@ namespace Zamagon.WPF
         protected void CreateContainer(IEnumerable<IEndPointConfiguration> endPoints, string apiName)
         {
             Container = App.CreateContainer(endPoints, apiName, x => LogMessages.Add(x));
-            
         }
 
         public virtual async Task GetData(object arg)
         {
-
+            Entities.Clear();
+            LogMessages.Clear();
+            CreateContainer(EndPoints, API_Name.StoreFront);
         }
 
         protected IEnumerable<IEndPointConfiguration> LoadEndPoints(string apiName)

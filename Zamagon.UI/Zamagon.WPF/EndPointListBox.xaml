@@ -8,7 +8,7 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <Border>
         <StackPanel Orientation="Vertical">
-            <StackPanel Orientation="Horizontal">
+            <StackPanel Orientation="Horizontal" Margin="6,2,2,2">
                 <TextBlock Text="EndPoint Name" Width="200"></TextBlock>
                 <TextBlock Text="Enabled" Width="80"></TextBlock>
             </StackPanel>
@@ -16,7 +16,7 @@
                 <local:DragAndDropListBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="{Binding Name}" Width="200"></TextBlock>
+                            <TextBlock Text="{Binding Name}" TextWrapping="Wrap" Width="200"></TextBlock>
                             <CheckBox IsChecked="{Binding IsActive}" Tag="{Binding Name}" Width="80" Checked="CheckBox_Checked" Unchecked="CheckBox_Checked" ></CheckBox>
                         </StackPanel>
                     </DataTemplate>

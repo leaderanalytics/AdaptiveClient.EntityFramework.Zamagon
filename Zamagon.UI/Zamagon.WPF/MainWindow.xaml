@@ -7,23 +7,14 @@
         xmlns:views="clr-namespace:Zamagon.WPF.Views"
         xmlns:fa="http://schemas.fontawesome.io/icons/"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid Style="{StaticResource OrangeBackground}">
+        Title="MainWindow" Height="800" Width="1000">
+    <Grid Style="{StaticResource GridColors}">
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-            <TextBlock Style="{StaticResource Logo}" >Leader Analytics</TextBlock>
-            <StackPanel Orientation="Horizontal" Grid.Column="1" VerticalAlignment="Center">
-                <TextBlock Style="{StaticResource Header}">Data Source:</TextBlock>
-                <TextBlock Style="{StaticResource Header}" Text="{Binding SelectedDataSource}"></TextBlock>
-            </StackPanel>
-        </Grid>
+        <TextBlock Style="{StaticResource Logo}" >Leader Analytics</TextBlock>
+        
         <TabControl Grid.Row="1" SelectedIndex="{Binding SelectedTabIndex}" >
 
             <TabItem Style="{StaticResource TabItemStyle}" >

@@ -39,7 +39,15 @@ namespace Zamagon.WPF
 
         private P FindVisualParent<P>(DependencyObject child)  where P : DependencyObject
         {
-            var parentObject = VisualTreeHelper.GetParent(child);
+            DependencyObject parentObject = null;
+
+            try
+            {
+                parentObject = VisualTreeHelper.GetParent(child);
+            }
+            catch (Exception)
+            {
+            }
 
             if (parentObject == null)
                 return null;
