@@ -1,4 +1,8 @@
 ﻿using System;
+using System.Windows;
+using System.Windows.Input;
+using System.IO;
+using System.Reflection;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -6,11 +10,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using Microsoft.Extensions.Configuration;
 using Autofac;
 using LeaderAnalytics.AdaptiveClient;
 using Zamagon.Domain.StoreFront;
 using Zamagon.Domain.BackOffice;
-using System.Windows.Input;
+
+
 
 namespace Zamagon.WPF
 {
@@ -72,6 +78,20 @@ namespace Zamagon.WPF
             }
         }
 
+        private ObservableCollection<string> _LogMessages;
+        public ObservableCollection<string> LogMessages
+        {
+            get => _LogMessages;
+            set
+            {
+                if (_LogMessages != value)
+                {
+                    _LogMessages = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+
         public ICommand GetDataCommand { get; set; }
         protected Autofac.IContainer Container;
         protected IAdaptiveClient<ISFServiceManifest>  StoreFrontServiceClient { get;  set; }
@@ -83,12 +103,13 @@ namespace Zamagon.WPF
             BackOfficeServiceClient = backOfficeClient;
             Entities = new ObservableCollection<T>();
             EndPoints = new ObservableCollection<IEndPointConfiguration>();
+            LogMessages = new ObservableCollection<string>();
             GetDataCommand = new CommandHandler(GetData, x => true);
         }
 
         protected void CreateContainer(IEnumerable<IEndPointConfiguration> endPoints, string apiName)
         {
-            Container = App.CreateContainer(endPoints, apiName);
+            Container = App.CreateContainer(endPoints, apiName, x => LogMessages.Add(x));
             
         }
 

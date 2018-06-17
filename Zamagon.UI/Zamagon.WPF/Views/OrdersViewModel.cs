@@ -22,10 +22,12 @@ namespace Zamagon.WPF.Views
 
         public override async Task GetData(object arg)
         {
+            Entities.Clear();
+            LogMessages.Clear();
             CreateContainer(EndPoints, API_Name.StoreFront);
             StoreFrontServiceClient = Container.Resolve<IAdaptiveClient<ISFServiceManifest>>();
             List<Order> orders = await StoreFrontServiceClient.TryAsync(async x => await x.OrdersService.GetOrders());
-            Entities.Clear();
+            
             orders.ForEach(x => Entities.Add(x));
         }
     }

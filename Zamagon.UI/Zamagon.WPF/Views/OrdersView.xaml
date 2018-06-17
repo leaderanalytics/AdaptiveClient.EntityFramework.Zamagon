@@ -7,16 +7,21 @@
              xmlns:localWPF="clr-namespace:Zamagon.WPF"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid DataContext="{Binding RelativeSource={RelativeSource AncestorType=views:OrdersView}, Path=ViewModel}">
+    <Grid DataContext="{Binding RelativeSource={RelativeSource AncestorType=views:OrdersView}, Path=ViewModel}" Margin="25">
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition/>
-            <RowDefinition/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal">
             <localWPF:EndPointListBox EndPoints="{Binding EndPoints}" SelectedEndPointName="{Binding SelectedEndPointName}" Width="300"/>
             <Button Command="{Binding GetDataCommand}" Style="{StaticResource GetDataButton}" />
         </StackPanel>
-        <DataGrid Grid.Row="2" Margin="25" ItemsSource="{Binding Entities}" AutoGenerateColumns="True" IsReadOnly="True"></DataGrid>
+        <DataGrid Grid.Row="1" ItemsSource="{Binding LogMessages}" AutoGenerateColumns="False" IsReadOnly="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn Width="*" Binding="{Binding}" Header="Log Message" />
+            </DataGrid.Columns>
+        </DataGrid>
+        <DataGrid Grid.Row="2" ItemsSource="{Binding Entities}" AutoGenerateColumns="True" IsReadOnly="True"></DataGrid>
     </Grid>
 </views:BaseView>

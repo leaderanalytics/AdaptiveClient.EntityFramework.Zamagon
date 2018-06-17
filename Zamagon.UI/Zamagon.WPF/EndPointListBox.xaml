@@ -12,7 +12,7 @@
                 <TextBlock Text="EndPoint Name" Width="200"></TextBlock>
                 <TextBlock Text="Enabled" Width="80"></TextBlock>
             </StackPanel>
-            <local:DragAndDropListBox ItemsSource="{Binding EndPoints}" >
+            <local:DragAndDropListBox ItemsSource="{Binding EndPoints}" Drop="DragAndDropListBox_Drop" >
                 <local:DragAndDropListBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">

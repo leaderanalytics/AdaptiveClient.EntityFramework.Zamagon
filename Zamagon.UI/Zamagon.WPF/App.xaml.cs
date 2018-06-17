@@ -6,9 +6,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using Autofac;
+using Moq;
 using LeaderAnalytics.AdaptiveClient;
 using LeaderAnalytics.AdaptiveClient.EntityFrameworkCore;
 using Zamagon.Domain;
+using Zamagon.Domain.StoreFront;
+using Zamagon.Domain.BackOffice;
 
 namespace Zamagon.WPF
 {
@@ -20,12 +23,13 @@ namespace Zamagon.WPF
         // This container is used to resolve ViewModels since WPF does not allow them to be injected into views using normal
         // constructor injection.  AdaptiveClient uses constructor injection and does not require access to the container to be 
         // used properly.  Please don't write me an email about service locator anti-pattern. Thank you!! :)
-        public IContainer Container { get; private set; } 
+        public IContainer Container { get; private set; }
+
 
         private void Application_Startup(object sender, StartupEventArgs e)
         {
             IEnumerable<IEndPointConfiguration> endPoints = ReadEndPointsFromDisk();
-            Container = App.CreateContainer(endPoints, null);
+            Container = App.CreateContainer(endPoints, null, null);
             IDatabaseUtilities databaseUtilities = Container.Resolve<IDatabaseUtilities>();
 
             // Create all databases or apply migrations
@@ -45,15 +49,23 @@ namespace Zamagon.WPF
             return endPoints;
         }
 
-        public static IContainer CreateContainer(IEnumerable<IEndPointConfiguration> endPoints, string apiName)
+        public static IContainer CreateContainer(IEnumerable<IEndPointConfiguration> endPoints, string apiName, Action<string> logger)
         {
+
+            List<IEndPointConfiguration> fakeEndPoints = new List<IEndPointConfiguration>();
+
+            foreach (IEndPointConfiguration ep in endPoints)
+                fakeEndPoints.Add(new PresentationEndPoint(ep));
+
+            fakeEndPoints.ForEach(x => x.IsActive = true);
+
             ContainerBuilder builder = new ContainerBuilder();
             builder.RegisterModule(new AutofacModule());
             builder.RegisterModule(new LeaderAnalytics.AdaptiveClient.EntityFrameworkCore.AutofacModule());
             RegistrationHelper registrationHelper = new RegistrationHelper(builder);
 
             registrationHelper
-                .RegisterEndPoints(endPoints)
+                .RegisterEndPoints(fakeEndPoints)
                 .RegisterModule(new Zamagon.Services.Common.AdaptiveClientModule());
 
             if (apiName == API_Name.BackOffice || apiName == null)
@@ -61,6 +73,18 @@ namespace Zamagon.WPF
 
             if (apiName == API_Name.StoreFront || apiName == null)
                 registrationHelper.RegisterModule(new Zamagon.Services.StoreFront.AdaptiveClientModule());
+
+
+            if (logger != null)
+                registrationHelper.RegisterLogger(logger);
+
+
+            Mock<IOrdersService> ordersServiceMock = new Mock<IOrdersService>();
+            ordersServiceMock.Setup(x => x.GetOrders()).Throws(new Exception("Mock failure"));
+            IOrdersService ordersSerice = ordersServiceMock.Object;
+
+            foreach (IEndPointConfiguration ep in endPoints.Where(x => !x.IsActive))
+                builder.RegisterInstance(ordersSerice).Keyed<IOrdersService>(ep.EndPointType + ep.ProviderName);
 
             return builder.Build();
         }

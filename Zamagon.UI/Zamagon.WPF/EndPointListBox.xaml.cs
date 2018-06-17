@@ -68,6 +68,13 @@ namespace Zamagon.WPF
             }
             isProcessing = false;
         }
-       
+
+        private void DragAndDropListBox_Drop(object sender, DragEventArgs e)
+        {
+            int pref = 0;
+
+            foreach (IEndPointConfiguration ep in EndPoints)
+                ep.Preference = pref++;
+        }
     }
 }
