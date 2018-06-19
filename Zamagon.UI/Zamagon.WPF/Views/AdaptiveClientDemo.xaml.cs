@@ -13,18 +13,17 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using LeaderAnalytics.AdaptiveClient;
 using Autofac;
+using LeaderAnalytics.AdaptiveClient;
 using Zamagon.Model;
 
 namespace Zamagon.WPF.Views
 {
-    public partial class HomeView : UserControl
+    public partial class AdaptiveClientDemo : UserControl
     {
-        public HomeView()
+        public AdaptiveClientDemo()
         {
             InitializeComponent();
-            DataContext = ((App)Application.Current).Container.Resolve<HomeViewModel>();
         }
     }
 }

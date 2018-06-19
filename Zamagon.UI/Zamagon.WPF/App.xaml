@@ -117,10 +117,9 @@
             <Setter Property="Content">
                 <Setter.Value>
                     <StackPanel Orientation="Vertical">
-                        <fa:ImageAwesome Icon="Truck"/>
+                        <fa:ImageAwesome Icon="Truck" />
                         <TextBlock Text="Get Data"></TextBlock>
                     </StackPanel>
-                    
                 </Setter.Value>
             </Setter>
         </Style>

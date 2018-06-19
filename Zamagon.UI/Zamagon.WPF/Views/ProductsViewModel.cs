@@ -13,20 +13,20 @@ using Zamagon.Model;
 
 namespace Zamagon.WPF.Views
 {
-    public class OrdersViewModel : BaseViewModel<Order>
+    public class ProductsViewModel : BaseViewModel<Product>
     {
-        public OrdersViewModel(IAdaptiveClient<ISFServiceManifest> storeFrontClient, IAdaptiveClient<IBOServiceManifest> backOfficeClient) :base(storeFrontClient, backOfficeClient)
+        public ProductsViewModel(IAdaptiveClient<ISFServiceManifest> storeFrontClient, IAdaptiveClient<IBOServiceManifest> backOfficeClient) :base(storeFrontClient, backOfficeClient)
         {
             EndPoints = new ObservableCollection<IEndPointConfiguration>(LoadEndPoints(API_Name.StoreFront));
         }
 
         public override async Task GetData(object arg)
         {
-            await base.GetData(API_Name.StoreFront);
+            await base.GetData(API_Name.BackOffice);
             StoreFrontServiceClient = Container.Resolve<IAdaptiveClient<ISFServiceManifest>>();
-            List<Order> orders = await StoreFrontServiceClient.TryAsync(async x => await x.OrdersService.GetOrders());
-            orders.ForEach(x => Entities.Add(x));
-            LogMessages.Add($"{orders.Count} rows retrieved from {StoreFrontServiceClient.CurrentEndPoint.Name}.");
+            List<Product> products = await StoreFrontServiceClient.TryAsync(async x => await x.ProductsService.GetProducts());
+            products.ForEach(x => Entities.Add(x));
+            LogMessages.Add($"{products.Count} rows retrieved from {StoreFrontServiceClient.CurrentEndPoint.Name}.");
         }
     }
 }

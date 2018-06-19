@@ -77,9 +77,23 @@
       <DependentUpon>EndPointListBox.xaml</DependentUpon>
     </Compile>
     <Compile Include="PresentationEndPoint.cs" />
-    <Compile Include="Views\BaseView.cs" />
+    <Compile Include="Views\AdaptiveClientDemo.xaml.cs">
+      <DependentUpon>AdaptiveClientDemo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TimecardsViewModel.cs" />
+    <Compile Include="Views\TimecardsView.xaml.cs">
+      <DependentUpon>TimecardsView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\HomeView.xaml.cs">
       <DependentUpon>HomeView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\EmployeesView.xaml.cs">
+      <DependentUpon>EmployeesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\EmployeesViewModel.cs" />
+    <Compile Include="Views\ProductsViewModel.cs" />
+    <Compile Include="Views\ProductsView.xaml.cs">
+      <DependentUpon>ProductsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\OrdersView.xaml.cs">
       <DependentUpon>OrdersView.xaml</DependentUpon>
@@ -92,7 +106,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\TimecardsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\HomeView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\AdaptiveClientDemo.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\EmployeesView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\ProductsView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

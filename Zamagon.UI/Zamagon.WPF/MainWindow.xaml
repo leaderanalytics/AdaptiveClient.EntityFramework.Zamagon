@@ -21,35 +21,35 @@
                 <TabItem.Header>
                     <local:TabHeader IconName="Home" Text="Home" IsSelected="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=TabItem}, Path=IsSelected, Mode=TwoWay}"></local:TabHeader>
                 </TabItem.Header>
-                <views:HomeView IsSelected="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=TabItem}, Path=IsSelected}" EndPoints="{Binding Entities}" ></views:HomeView>
+                <views:HomeView></views:HomeView>
             </TabItem>
 
             <TabItem  Style="{StaticResource TabItemStyle}">
                 <TabItem.Header >
                     <local:TabHeader IconName="ShoppingCart" Text="Orders" IsSelected="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=TabItem}, Path=IsSelected, Mode=TwoWay}"></local:TabHeader>
                 </TabItem.Header>
-                <views:OrdersView IsSelected="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=TabItem}, Path=IsSelected}" EndPoints="{Binding Entities}" > </views:OrdersView>
+                <views:OrdersView/>
             </TabItem>
 
             <TabItem Style="{StaticResource TabItemStyle}">
                 <TabItem.Header>
                     <local:TabHeader IconName="Barcode" Text="Products" IsSelected="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=TabItem}, Path=IsSelected, Mode=TwoWay}" ></local:TabHeader>
                 </TabItem.Header>
-                <TextBlock>Products</TextBlock>
+                <views:ProductsView/>
             </TabItem>
 
             <TabItem Style="{StaticResource TabItemStyle}">
                 <TabItem.Header>
                     <local:TabHeader IconName="Group" Text="Employees" IsSelected="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=TabItem}, Path=IsSelected, Mode=TwoWay}" ></local:TabHeader>
                 </TabItem.Header>
-                <TextBlock>Employees</TextBlock>
+                <views:EmployeesView/>
             </TabItem>
 
             <TabItem Style="{StaticResource TabItemStyle}">
                 <TabItem.Header>
                     <local:TabHeader IconName="ClockOutline" Text="TimeCards" IsSelected="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=TabItem}, Path=IsSelected, Mode=TwoWay}" ></local:TabHeader>
                 </TabItem.Header>
-                <TextBlock>TimeCards</TextBlock>
+                <views:TimecardsView/>
             </TabItem>
         </TabControl>
     </Grid>

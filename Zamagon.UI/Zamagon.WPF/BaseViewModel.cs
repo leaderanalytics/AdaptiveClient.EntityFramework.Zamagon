@@ -117,7 +117,7 @@ namespace Zamagon.WPF
         {
             Entities.Clear();
             LogMessages.Clear();
-            CreateContainer(EndPoints, API_Name.StoreFront);
+            CreateContainer(EndPoints, arg.ToString());
         }
 
         protected IEnumerable<IEndPointConfiguration> LoadEndPoints(string apiName)

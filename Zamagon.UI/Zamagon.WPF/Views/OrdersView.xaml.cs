@@ -19,19 +19,12 @@ using Zamagon.Model;
 
 namespace Zamagon.WPF.Views
 {
-    public partial class OrdersView : BaseView
+    public partial class OrdersView : UserControl
     {
-        public OrdersViewModel ViewModel { get; set; }
-
         public OrdersView()
         {
             InitializeComponent();
-            ViewModel = ((App)Application.Current).Container.Resolve<OrdersViewModel>();
-        }
-
-
-        public override void IsSelected_Changed(IEnumerable<IEndPointConfiguration> endPoints)
-        {
+            DataContext = ((App)Application.Current).Container.Resolve<OrdersViewModel>();
         }
     }
 }
