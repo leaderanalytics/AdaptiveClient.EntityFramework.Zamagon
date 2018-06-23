@@ -28,6 +28,10 @@ namespace Zamagon.WPF
 
         private void Application_Startup(object sender, StartupEventArgs e)
         {
+            DispatcherUnhandledException += App_DispatcherUnhandledException;
+            AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
+            Application.Current.DispatcherUnhandledException += Current_DispatcherUnhandledException;
+            System.Threading.Tasks.TaskScheduler.UnobservedTaskException += TaskScheduler_UnobservedTaskException;
             IEnumerable<IEndPointConfiguration> endPoints = ReadEndPointsFromDisk();
             Container = App.CreateContainer(endPoints, null, null);
             IDatabaseUtilities databaseUtilities = Container.Resolve<IDatabaseUtilities>();
@@ -39,6 +43,26 @@ namespace Zamagon.WPF
             MainWindow mainWindow = Container.Resolve<MainWindow>();
             this.MainWindow = mainWindow;
             mainWindow.Show();
+        }
+
+        private void TaskScheduler_UnobservedTaskException(object sender, UnobservedTaskExceptionEventArgs e)
+        {
+            
+        }
+
+        private void App_DispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
+        {
+            
+        }
+
+        private void Current_DispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
+        {
+           
+        }
+
+        private void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
+        {
+            
         }
 
         public static IEnumerable<IEndPointConfiguration> ReadEndPointsFromDisk()

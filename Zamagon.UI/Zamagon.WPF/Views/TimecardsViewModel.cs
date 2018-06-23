@@ -17,6 +17,7 @@ namespace Zamagon.WPF.Views
     {
         public TimecardsViewModel(IAdaptiveClient<ISFServiceManifest> storeFrontClient, IAdaptiveClient<IBOServiceManifest> backOfficeClient) :base(storeFrontClient, backOfficeClient)
         {
+            Banner = "TimeCards";
             EndPoints = new ObservableCollection<IEndPointConfiguration>(LoadEndPoints(API_Name.BackOffice));
         }
 

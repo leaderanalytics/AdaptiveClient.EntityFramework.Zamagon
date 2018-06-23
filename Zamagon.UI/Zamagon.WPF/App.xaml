@@ -114,15 +114,23 @@
         <Style TargetType="{x:Type Button}" x:Key="GetDataButton">
             <Setter Property="Height" Value="80"></Setter>
             <Setter Property="Width" Value="120"></Setter>
-            <Setter Property="Content">
+            <Setter Property="ContentTemplate">
                 <Setter.Value>
-                    <StackPanel Orientation="Vertical">
-                        <fa:ImageAwesome Icon="Truck" />
-                        <TextBlock Text="Get Data"></TextBlock>
-                    </StackPanel>
+                    <DataTemplate>
+                        <StackPanel Orientation="Vertical">
+                            <fa:ImageAwesome Icon="Truck" />
+                            <TextBlock Text="Get Data"></TextBlock>
+                        </StackPanel>
+                    </DataTemplate>
                 </Setter.Value>
             </Setter>
         </Style>
 
+        <Style TargetType="{x:Type TextBlock}" x:Key="BannerStyle">
+            <Setter Property="FontSize" Value="31"/>
+            <Setter Property="FontFamily" Value="Trebuchet"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+        </Style>
     </Application.Resources>
 </Application>

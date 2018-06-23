@@ -4,16 +4,13 @@
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp2.0</TargetFramework>
   </PropertyGroup>
-
-<ItemGroup>
+  <ItemGroup>
     <PackageReference Include="AdaptiveClient" Version="0.31.1" />
     <PackageReference Include="Autofac" Version="4.8.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.0.3" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="2.0.3" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="2.0.3" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.0.3" />
-    <PackageReference Include="Microsoft.Extensions.Configuration" Version="2.0.2" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="2.0.2" />
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="2.0.1" />
   </ItemGroup>
 
@@ -26,6 +23,7 @@
     <ProjectReference Include="..\Zamagon.Services.BackOffice\Zamagon.Services.BackOffice.csproj" />
     <ProjectReference Include="..\Zamagon.Services.StoreFront\Zamagon.Services.StoreFront.csproj" />
   </ItemGroup>
+
 
   <ItemGroup>
     <None Update="EndPoints.json">

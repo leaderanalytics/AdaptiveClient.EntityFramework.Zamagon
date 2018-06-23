@@ -17,6 +17,7 @@ namespace Zamagon.WPF.Views
     {
         public EmployeesViewModel(IAdaptiveClient<ISFServiceManifest> storeFrontClient, IAdaptiveClient<IBOServiceManifest> backOfficeClient) :base(storeFrontClient, backOfficeClient)
         {
+            Banner = "Employees";
             EndPoints = new ObservableCollection<IEndPointConfiguration>(LoadEndPoints(API_Name.BackOffice));
         }
 

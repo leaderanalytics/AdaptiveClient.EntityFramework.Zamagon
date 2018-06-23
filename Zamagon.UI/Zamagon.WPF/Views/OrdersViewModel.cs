@@ -17,6 +17,7 @@ namespace Zamagon.WPF.Views
     {
         public OrdersViewModel(IAdaptiveClient<ISFServiceManifest> storeFrontClient, IAdaptiveClient<IBOServiceManifest> backOfficeClient) :base(storeFrontClient, backOfficeClient)
         {
+            Banner = "Orders";
             EndPoints = new ObservableCollection<IEndPointConfiguration>(LoadEndPoints(API_Name.StoreFront));
         }
 

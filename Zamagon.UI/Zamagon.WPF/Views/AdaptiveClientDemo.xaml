@@ -12,10 +12,16 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+        <Grid VerticalAlignment="Center" HorizontalAlignment="Stretch">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
             <localWPF:EndPointListBox EndPoints="{Binding EndPoints}" SelectedEndPointName="{Binding SelectedEndPointName}" Width="300"/>
-            <Button Command="{Binding GetDataCommand}" Style="{StaticResource GetDataButton}" Margin="50,0,0,0" />
-        </StackPanel>
+            <Button Grid.Column="1" Command="{Binding GetDataCommand}" Style="{StaticResource GetDataButton}" Margin="30,0,0,0" />
+            <TextBlock Grid.Column="2" Text="{Binding Banner}" Style="{StaticResource BannerStyle}" ></TextBlock>
+        </Grid>
         <DataGrid Grid.Row="1" ItemsSource="{Binding LogMessages}" AutoGenerateColumns="False" IsReadOnly="True" Margin="0,15,0,0">
             <DataGrid.Columns>
                 <DataGridTemplateColumn Header="Log Message" Width="*">

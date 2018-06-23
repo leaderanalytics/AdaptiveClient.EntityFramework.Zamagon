@@ -12,7 +12,7 @@ using Microsoft.Extensions.Options;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using LeaderAnalytics.AdaptiveClient;
-using LeaderAnalytics.AdaptiveClient.EntityFramework;
+using LeaderAnalytics.AdaptiveClient.EntityFrameworkCore;
 using Zamagon.Domain;
 
 namespace Zamagon.API
@@ -38,7 +38,7 @@ namespace Zamagon.API
 
             ContainerBuilder builder = new ContainerBuilder();
             builder.Populate(services);
-            builder.RegisterModule(new LeaderAnalytics.AdaptiveClient.EntityFramework.AutofacModule());
+            builder.RegisterModule(new LeaderAnalytics.AdaptiveClient.EntityFrameworkCore.AutofacModule());
             RegistrationHelper registrationHelper = new RegistrationHelper(builder);
 
             registrationHelper

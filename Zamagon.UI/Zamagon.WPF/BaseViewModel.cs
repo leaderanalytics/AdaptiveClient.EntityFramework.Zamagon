@@ -93,6 +93,20 @@ namespace Zamagon.WPF
             }
         }
 
+        private string _Banner;
+        public string Banner
+        {
+            get => _Banner;
+            set
+            {
+                if (_Banner != value)
+                {
+                    _Banner = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+
         public ICommand GetDataCommand { get; set; }
         protected Autofac.IContainer Container;
         protected IAdaptiveClient<ISFServiceManifest>  StoreFrontServiceClient { get;  set; }
