@@ -8,7 +8,7 @@
         <SolidColorBrush x:Key="Color1" Color="#C4C3D0" />
         <SolidColorBrush x:Key="Color2" Color="#CFD0C3" />
         <SolidColorBrush x:Key="Color3" Color="#A7AA86" />
-        <SolidColorBrush x:Key="Color4" Color="#808454" />
+        <SolidColorBrush x:Key="Color4" Color="#7C7D6F" />
         <SolidColorBrush x:Key="Color5" Color="#555555" />
 
 

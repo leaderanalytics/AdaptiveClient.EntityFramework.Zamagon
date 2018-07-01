@@ -10,10 +10,11 @@ namespace Zamagon.Services.BackOffice
     {
         public void Register(RegistrationHelper registrationHelper)
         {
-            registrationHelper
-            
             // --- BackOffice Services ---
-            
+
+
+            registrationHelper
+
             // MSSQL
             .RegisterService<MSSQL.EmployeesService, IEmployeesService>(EndPointType.DBMS, API_Name.BackOffice, DataBaseProviderName.MSSQL)
             .RegisterService<MSSQL.TimeCardsService, ITimeCardsService>(EndPointType.DBMS, API_Name.BackOffice, DataBaseProviderName.MSSQL)

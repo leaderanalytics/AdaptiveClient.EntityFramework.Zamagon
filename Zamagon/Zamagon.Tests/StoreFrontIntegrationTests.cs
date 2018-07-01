@@ -9,9 +9,9 @@ using Zamagon.Domain;
 
 namespace Zamagon.Tests
 {
-    //[TestFixture("MSSQL")]
-    //[TestFixture("MySQL")]
-    [TestFixture("WebAPI")]
+    [TestFixture("MSSQL")]
+    [TestFixture("MySQL")]
+    //[TestFixture("WebAPI")]
     public class StoreFrontIntegratonTests : BaseTest
     {
         public StoreFrontIntegratonTests(string databaseProviderName) : base(databaseProviderName)

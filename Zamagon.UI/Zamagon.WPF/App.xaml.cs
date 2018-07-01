@@ -47,7 +47,7 @@ namespace Zamagon.WPF
 
         private void TaskScheduler_UnobservedTaskException(object sender, UnobservedTaskExceptionEventArgs e)
         {
-            
+            // We get here if AdaptiveClient is unable to make a connection and runs out of EndPoints.
         }
 
         private void App_DispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
@@ -126,6 +126,8 @@ namespace Zamagon.WPF
             tcServiceMock.Setup(x => x.GetTimeCards()).Throws(new Exception("Mock failure"));
             ITimeCardsService tcService = tcServiceMock.Object;
 
+            // look at the list of endPoints that was passed to us and register a mock for each
+            // one that is not marked active
 
             foreach (IEndPointConfiguration ep in endPoints.Where(x => !x.IsActive))
             {
@@ -140,7 +142,7 @@ namespace Zamagon.WPF
 
 
         //    This is an example of how a container might be built in a real application.
-        //    This method should be called once only from Application_Startup().
+        //    This method should be called once only from Application_Startup.
         
         //public static IContainer CreateContainer(IEnumerable<IEndPointConfiguration> endPoints, Action<string> logger)
         //{

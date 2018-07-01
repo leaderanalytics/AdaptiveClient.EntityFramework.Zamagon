@@ -10,9 +10,9 @@ namespace Zamagon.Services.StoreFront
     {
         public void Register(RegistrationHelper registrationHelper)
         {
-            registrationHelper
-
             // --- StoreFront Services ---
+
+            registrationHelper
 
             // MSSQL
             .RegisterService<StoreFront.MSSQL.OrdersService, IOrdersService>(EndPointType.DBMS, API_Name.StoreFront, DataBaseProviderName.MSSQL)
