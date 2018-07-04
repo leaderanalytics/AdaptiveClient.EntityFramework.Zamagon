@@ -1,7 +1,7 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
     <ApplicationIcon />
     <OutputType>Exe</OutputType>
     <StartupObject />
@@ -13,12 +13,12 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="AdaptiveClient" Version="0.31.1" />
+    <PackageReference Include="AdaptiveClient" Version="0.31.2" />
     <PackageReference Include="Autofac" Version="4.8.1" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.7.2" />
     <PackageReference Include="NUnit" Version="3.10.1" />
     <PackageReference Include="NUnit3TestAdapter" Version="3.10.0" />
-    <PackageReference Include="Moq" Version="4.8.2" />
+    <PackageReference Include="Moq" Version="4.8.3" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Zamagon.Domain\Zamagon.Domain.csproj" />

@@ -4,6 +4,7 @@
     "anonymousAuthentication": true,
     "iisExpress": {
       "applicationUrl": "http://localhost:59260/",
+      "launchUrl": "http://localhost:59260/api/default/index/",
       "sslPort": 0
     }
   },
@@ -21,7 +22,8 @@
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
-      "applicationUrl": "http://localhost:53163/"
+      "applicationUrl": "http://localhost:59260/",
+      "launchUrl": "http://localhost:59260/api/default/index/"
     }
   }
 }

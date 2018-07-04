@@ -14,6 +14,8 @@ using Autofac.Extensions.DependencyInjection;
 using LeaderAnalytics.AdaptiveClient;
 using LeaderAnalytics.AdaptiveClient.EntityFrameworkCore;
 using Zamagon.Domain;
+using Microsoft.AspNetCore.Mvc.Formatters;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Zamagon.API
 {
@@ -30,9 +32,18 @@ namespace Zamagon.API
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
-            
+            var formatterSettings = JsonSerializerSettingsProvider.CreateSerializerSettings();
+            formatterSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+            formatterSettings.ContractResolver = new Newtonsoft.Json.Serialization.DefaultContractResolver();
+            JsonOutputFormatter formatter = new JsonOutputFormatter(formatterSettings, System.Buffers.ArrayPool<char>.Shared);
+
+            services.Configure<MvcOptions>(options =>
+            {
+                options.OutputFormatters.RemoveType<JsonOutputFormatter>();
+                options.OutputFormatters.Insert(0, formatter);
+            });
             // Autofac & AdaptiveClient
-            IEnumerable<IEndPointConfiguration> EndPoints = EndPointUtilities.LoadEndPoints("bin\\debug\\netcoreapp2.0\\EndPoints.json");
+            IEnumerable<IEndPointConfiguration> EndPoints = EndPointUtilities.LoadEndPoints("bin\\debug\\netcoreapp2.1\\EndPoints.json");
             EndPoints.First(x => x.API_Name == API_Name.BackOffice && x.ProviderName == DataBaseProviderName.MySQL).ConnectionString = ConnectionstringUtility.BuildConnectionString(EndPoints.First(x => x.API_Name == API_Name.BackOffice && x.ProviderName == DataBaseProviderName.MySQL).ConnectionString);
             EndPoints.First(x => x.API_Name == API_Name.StoreFront && x.ProviderName == DataBaseProviderName.MySQL).ConnectionString = ConnectionstringUtility.BuildConnectionString(EndPoints.First(x => x.API_Name == API_Name.StoreFront && x.ProviderName == DataBaseProviderName.MySQL).ConnectionString);
 

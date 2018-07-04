@@ -26,7 +26,7 @@ namespace Zamagon.Tests
             CurrentDatabaseProviderName = databaseProviderName;  // passed in by NUnit based on TestFixture attribute
         }
 
-        protected async Task DropAndRecreate(IEndPointConfiguration ep)
+        protected async Task DropAndRecreateDatabase(IEndPointConfiguration ep)
         {
             if (ep.EndPointType != EndPointType.DBMS)
                 return;

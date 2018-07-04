@@ -11,7 +11,7 @@ namespace Zamagon.Tests
 {
     [TestFixture("MSSQL")]
     [TestFixture("MySQL")]
-    //[TestFixture("WebAPI")]
+    [TestFixture("WebAPI")]
     public class StoreFrontIntegratonTests : BaseTest
     {
         public StoreFrontIntegratonTests(string databaseProviderName) : base(databaseProviderName)
@@ -28,7 +28,7 @@ namespace Zamagon.Tests
         public async Task Order_count_equals_two()
         {
             IEndPointConfiguration ep = EndPoints.First(x => x.ProviderName == CurrentDatabaseProviderName && x.API_Name == API_Name.StoreFront);
-            await DropAndRecreate(ep);
+            await DropAndRecreateDatabase(ep);
             List<Order> orders = await SFServiceClient.CallAsync(async x => await x.OrdersService.GetOrders(), ep.Name);
             Assert.AreEqual(2, orders.Count);
         }
@@ -37,7 +37,7 @@ namespace Zamagon.Tests
         public async Task Product_count_equals_two()
         {
             IEndPointConfiguration ep = EndPoints.First(x => x.ProviderName == CurrentDatabaseProviderName && x.API_Name == API_Name.StoreFront);
-            await DropAndRecreate(ep);
+            await DropAndRecreateDatabase(ep);
             List<Product> products = await SFServiceClient.CallAsync(async x => await x.ProductsService.GetProducts(), ep.Name);
             Assert.AreEqual(2, products.Count);
         }

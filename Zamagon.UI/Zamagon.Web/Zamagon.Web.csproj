@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
     <Content Include="..\..\EndPoints\EndPoints.json" Link="EndPoints.json">
@@ -8,17 +8,17 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="AdaptiveClient" Version="0.31.1" />
-    <PackageReference Include="AdaptiveClient.EntityFrameworkCore" Version="0.30.4" />
+    <PackageReference Include="AdaptiveClient" Version="0.31.2" />
+    <PackageReference Include="AdaptiveClient.EntityFrameworkCore" Version="0.31.0" />
     <PackageReference Include="Autofac" Version="4.8.1" />
     <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="4.2.2" />
     <PackageReference Include="LeaderAnalytics.Caching" Version="0.0.28" />
     <PackageReference Include="Microsoft.AspNetCore.Session" Version="2.1.1" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.4" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.1" />
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.8" />
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.1.1" />
   </ItemGroup>
   <ItemGroup>
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.4" />

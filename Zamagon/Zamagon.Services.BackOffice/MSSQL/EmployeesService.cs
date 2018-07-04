@@ -19,6 +19,10 @@ namespace Zamagon.Services.BackOffice.MSSQL
 
         public virtual async Task<List<Employee>> GetEmployees()
         {
+            // We can access any service that is defined on the Manifest here also:
+            List<TimeCard> dummyList = await ServiceManifest.TimeCardsService.GetTimeCards();
+
+
             return await db.Employees.ToListAsync();
         }
     }

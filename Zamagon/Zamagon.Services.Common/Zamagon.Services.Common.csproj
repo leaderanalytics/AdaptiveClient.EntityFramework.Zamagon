@@ -4,17 +4,17 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="AdaptiveClient" Version="0.31.1" />
-    <PackageReference Include="AdaptiveClient.EntityFrameworkCore" Version="0.30.4" />
+    <PackageReference Include="AdaptiveClient" Version="0.31.2" />
+    <PackageReference Include="AdaptiveClient.EntityFrameworkCore" Version="0.31.0" />
     <PackageReference Include="AdaptiveClient.Utilities" Version="0.1.6" />
     <PackageReference Include="Autofac" Version="4.8.1" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.0.3" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="2.0.3" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="2.0.3" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.0.3" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.1.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="2.1.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="2.1.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.1.1" />
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="2.1.1" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="2.1.1" />
-    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="2.0.1" />
+    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="2.1.0-rc2-final" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Zamagon.Domain\Zamagon.Domain.csproj" />
