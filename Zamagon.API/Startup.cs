@@ -60,20 +60,11 @@ namespace Zamagon.API
 
             var container = builder.Build();
 
-
             // Create all databases or apply migrations
-            foreach (IEndPointConfiguration ep in EndPoints.Where(x => x.EndPointType == EndPointType.DBMS))
-            {
-                //
-                // Always resolve a new instance of databaseUtilties for each endPoint!
-                //
-                using (ILifetimeScope scope = container.BeginLifetimeScope())
-                {
-                    IDatabaseUtilities databaseUtilities = scope.Resolve<IDatabaseUtilities>();
-                    databaseUtilities.CreateOrUpdateDatabase(ep).Wait();
-                }
-            }
+            IDatabaseUtilities databaseUtilities = container.Resolve<IDatabaseUtilities>();
 
+            foreach (IEndPointConfiguration ep in EndPoints.Where(x => x.EndPointType == EndPointType.DBMS))
+                Task.Run(() => databaseUtilities.CreateOrUpdateDatabase(ep)).Wait();
 
             return container.Resolve<IServiceProvider>();
         }
