@@ -17,16 +17,23 @@ namespace Zamagon.Domain
 
         public static string BuildConnectionString(string connectionString)
         {
-            ConfigurationBuilder configBuilder = new ConfigurationBuilder();
-            configBuilder.AddJsonFile("C:\\Users\\sam\\AppData\\Roaming\\Blog\\appsettings.Development.json");
-            IConfigurationRoot config = configBuilder.Build();
-            connectionString = connectionString.Replace("{MySQL_UserName}", config["Data:MySQLUserName"]);
-            connectionString = connectionString.Replace("{MySQL_Password}", config["Data:MySQLPassword"]);
+            bool usePasswordFile = false; // change this value to true if you use secrets file that is not checked into source control.
 
-            //comment above two lines and uncomment two lines below if you wish.... .
+            if (usePasswordFile)
+            {
+                ConfigurationBuilder configBuilder = new ConfigurationBuilder();
+                configBuilder.AddJsonFile("C:\\Users\\sam\\AppData\\Roaming\\Blog\\appsettings.Development.json");  // path to your password file here
+                IConfigurationRoot config = configBuilder.Build();
+                connectionString = connectionString.Replace("{MySQL_UserName}", config["Data:MySQLUserName"]);
+                connectionString = connectionString.Replace("{MySQL_Password}", config["Data:MySQLPassword"]);
+            }
+            else
+            {
+                connectionString = connectionString.Replace("{MySQL_UserName}", "yourUsername");        // your credentionals here. 
+                connectionString = connectionString.Replace("{MySQL_Password}", "yourPassword");
+            }
 
-            //connectionString = connectionString.Replace("{MySQL_UserName}", "yourUsername");
-            //connectionString = connectionString.Replace("{MySQL_Password}", "yourPassword");
+
 
             return connectionString;
         }

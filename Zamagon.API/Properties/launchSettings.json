@@ -14,7 +14,9 @@
       "launchBrowser": true,
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
-      }
+      },
+      "applicationUrl": "http://localhost:59260/",
+      "launchUrl": "http://localhost:59260/api/default/index/"
     },
     "Zamagon.API": {
       "commandName": "Project",

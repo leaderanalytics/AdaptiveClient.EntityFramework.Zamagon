@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -15,6 +16,8 @@ namespace Zamagon.Web
         public static void Main(string[] args)
         {
             BuildWebHost(args).Run();
+            
+            
         }
 
         public static IWebHost BuildWebHost(string[] args) =>

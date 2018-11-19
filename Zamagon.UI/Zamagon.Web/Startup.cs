@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Diagnostics;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -18,10 +19,12 @@ namespace Zamagon.Web
     public class Startup
     {
         public IConfiguration Configuration { get; }
+        private Process WebAPIProcess;
 
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            StartWebAPI();
         }
 
         
@@ -39,6 +42,7 @@ namespace Zamagon.Web
                 //options.IdleTimeout = TimeSpan.FromSeconds(10);
                 //options.Cookie.HttpOnly = true;
             });
+            
 
             // Autofac & AdaptiveClient
             IEnumerable<IEndPointConfiguration> endPoints = ReadEndPointsFromDisk();
@@ -65,7 +69,7 @@ namespace Zamagon.Web
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IApplicationLifetime appLifetime)
         {
             if (env.IsDevelopment())
             {
@@ -79,18 +83,44 @@ namespace Zamagon.Web
             }
 
             app.UseStaticFiles();
-
             app.UseMvc();
+            appLifetime.ApplicationStopping.Register(OnShutdown);
         }
 
         public static IEnumerable<IEndPointConfiguration> ReadEndPointsFromDisk()
         {
             // Please see ConnectionstringUtility class to add your login credentials for MySQL
 
-            IEnumerable<IEndPointConfiguration> endPoints = EndPointUtilities.LoadEndPoints("bin\\debug\\netcoreapp2.0\\EndPoints.json");
-            endPoints.First(x => x.API_Name == API_Name.BackOffice && x.ProviderName == DataBaseProviderName.MySQL).ConnectionString = ConnectionstringUtility.BuildConnectionString(endPoints.First(x => x.API_Name == API_Name.BackOffice && x.ProviderName == DataBaseProviderName.MySQL).ConnectionString);
-            endPoints.First(x => x.API_Name == API_Name.StoreFront && x.ProviderName == DataBaseProviderName.MySQL).ConnectionString = ConnectionstringUtility.BuildConnectionString(endPoints.First(x => x.API_Name == API_Name.StoreFront && x.ProviderName == DataBaseProviderName.MySQL).ConnectionString);
+            IEnumerable<IEndPointConfiguration> endPoints = EndPointUtilities.LoadEndPoints("bin\\debug\\netcoreapp2.1\\EndPoints.json");
+            IEndPointConfiguration backOffice = endPoints.FirstOrDefault(x => x.API_Name == API_Name.BackOffice && x.ProviderName == DataBaseProviderName.MySQL);
+            IEndPointConfiguration frontOffice = endPoints.FirstOrDefault(x => x.API_Name == API_Name.StoreFront && x.ProviderName == DataBaseProviderName.MySQL);
+
+            if (backOffice != null)
+                backOffice.ConnectionString = ConnectionstringUtility.BuildConnectionString(endPoints.First(x => x.API_Name == API_Name.BackOffice && x.ProviderName == DataBaseProviderName.MySQL).ConnectionString);
+
+            if (frontOffice != null)
+                frontOffice.ConnectionString = ConnectionstringUtility.BuildConnectionString(endPoints.First(x => x.API_Name == API_Name.StoreFront && x.ProviderName == DataBaseProviderName.MySQL).ConnectionString);
+
             return endPoints;
+        }
+
+        private void StartWebAPI()
+        {
+            System.IO.DirectoryInfo currentDir = new System.IO.DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory).Parent.Parent.Parent.Parent.Parent;
+            string apiDir = System.IO.Path.Combine(currentDir.FullName, "Zamagon.API");
+            Process p = new Process();
+            p.StartInfo.FileName = "dotnet";
+            p.StartInfo.Arguments = $"run -p {apiDir} --launch - profile Zamagon.API";
+            p.StartInfo.UseShellExecute = false;
+            p.StartInfo.CreateNoWindow = false;
+            p.Start();
+            WebAPIProcess = p;
+        }
+
+
+        private void OnShutdown()
+        {
+            WebAPIProcess?.Kill();
         }
     }
 }

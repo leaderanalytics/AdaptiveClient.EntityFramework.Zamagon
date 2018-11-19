@@ -43,9 +43,15 @@ namespace Zamagon.API
                 options.OutputFormatters.Insert(0, formatter);
             });
             // Autofac & AdaptiveClient
-            IEnumerable<IEndPointConfiguration> EndPoints = EndPointUtilities.LoadEndPoints("bin\\debug\\netcoreapp2.1\\EndPoints.json");
-            EndPoints.First(x => x.API_Name == API_Name.BackOffice && x.ProviderName == DataBaseProviderName.MySQL).ConnectionString = ConnectionstringUtility.BuildConnectionString(EndPoints.First(x => x.API_Name == API_Name.BackOffice && x.ProviderName == DataBaseProviderName.MySQL).ConnectionString);
-            EndPoints.First(x => x.API_Name == API_Name.StoreFront && x.ProviderName == DataBaseProviderName.MySQL).ConnectionString = ConnectionstringUtility.BuildConnectionString(EndPoints.First(x => x.API_Name == API_Name.StoreFront && x.ProviderName == DataBaseProviderName.MySQL).ConnectionString);
+            IEnumerable<IEndPointConfiguration> endPoints = EndPointUtilities.LoadEndPoints("bin\\debug\\netcoreapp2.1\\EndPoints.json");
+            IEndPointConfiguration backOffice = endPoints.FirstOrDefault(x => x.API_Name == API_Name.BackOffice && x.ProviderName == DataBaseProviderName.MySQL);
+            IEndPointConfiguration frontOffice = endPoints.FirstOrDefault(x => x.API_Name == API_Name.StoreFront && x.ProviderName == DataBaseProviderName.MySQL);
+
+            if (backOffice!=null)
+                backOffice.ConnectionString = ConnectionstringUtility.BuildConnectionString(endPoints.First(x => x.API_Name == API_Name.BackOffice && x.ProviderName == DataBaseProviderName.MySQL).ConnectionString);
+
+            if (frontOffice != null)
+                frontOffice.ConnectionString = ConnectionstringUtility.BuildConnectionString(endPoints.First(x => x.API_Name == API_Name.StoreFront && x.ProviderName == DataBaseProviderName.MySQL).ConnectionString);
 
             ContainerBuilder builder = new ContainerBuilder();
             builder.Populate(services);
@@ -53,7 +59,7 @@ namespace Zamagon.API
             RegistrationHelper registrationHelper = new RegistrationHelper(builder);
 
             registrationHelper
-                .RegisterEndPoints(EndPoints)
+                .RegisterEndPoints(endPoints)
                 .RegisterModule(new Zamagon.Services.Common.AdaptiveClientModule())
                 .RegisterModule(new Zamagon.Services.BackOffice.AdaptiveClientModule())
                 .RegisterModule(new Zamagon.Services.StoreFront.AdaptiveClientModule());
@@ -63,7 +69,7 @@ namespace Zamagon.API
             // Create all databases or apply migrations
             IDatabaseUtilities databaseUtilities = container.Resolve<IDatabaseUtilities>();
 
-            foreach (IEndPointConfiguration ep in EndPoints.Where(x => x.EndPointType == EndPointType.DBMS))
+            foreach (IEndPointConfiguration ep in endPoints.Where(x => x.EndPointType == EndPointType.DBMS))
                 Task.Run(() => databaseUtilities.CreateOrUpdateDatabase(ep)).Wait();
 
             return container.Resolve<IServiceProvider>();
