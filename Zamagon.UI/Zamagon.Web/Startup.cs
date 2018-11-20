@@ -19,12 +19,10 @@ namespace Zamagon.Web
     public class Startup
     {
         public IConfiguration Configuration { get; }
-        private Process WebAPIProcess;
 
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
-            StartWebAPI();
         }
 
         
@@ -84,7 +82,6 @@ namespace Zamagon.Web
 
             app.UseStaticFiles();
             app.UseMvc();
-            appLifetime.ApplicationStopping.Register(OnShutdown);
         }
 
         public static IEnumerable<IEndPointConfiguration> ReadEndPointsFromDisk()
@@ -102,25 +99,6 @@ namespace Zamagon.Web
                 frontOffice.ConnectionString = ConnectionstringUtility.BuildConnectionString(endPoints.First(x => x.API_Name == API_Name.StoreFront && x.ProviderName == DataBaseProviderName.MySQL).ConnectionString);
 
             return endPoints;
-        }
-
-        private void StartWebAPI()
-        {
-            System.IO.DirectoryInfo currentDir = new System.IO.DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory).Parent.Parent.Parent.Parent.Parent;
-            string apiDir = System.IO.Path.Combine(currentDir.FullName, "Zamagon.API");
-            Process p = new Process();
-            p.StartInfo.FileName = "dotnet";
-            p.StartInfo.Arguments = $"run -p {apiDir} --launch - profile Zamagon.API";
-            p.StartInfo.UseShellExecute = false;
-            p.StartInfo.CreateNoWindow = false;
-            p.Start();
-            WebAPIProcess = p;
-        }
-
-
-        private void OnShutdown()
-        {
-            WebAPIProcess?.Kill();
         }
     }
 }

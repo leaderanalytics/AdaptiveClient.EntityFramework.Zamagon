@@ -22,7 +22,7 @@
 
     {
       "Name": "StoreFront_MySQL",
-      "IsActive": "false",
+      "IsActive": "true",
       "API_Name": "StoreFront",
       "Preference": "20",
       "EndPointType": "DBMS",
@@ -32,7 +32,7 @@
 
     {
       "Name": "BackOffice_MySQL",
-      "IsActive": "false",
+      "IsActive": "true",
       "API_Name": "BackOffice",
       "Preference": "20",
       "EndPointType": "DBMS",
