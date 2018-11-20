@@ -34,8 +34,8 @@
             When the Get Data button is clicked the application builds the Autofac Container - however mocks are registered 
             for the EndPoints that are not marked as Enabled.  After the Container is built, AdaptiveClient attempts to 
             contact each EndPoint, always starting with the one at top of the list.  If the connection is not marked as Enabled
-            AdaptiveClient will encounter a mock, which throws an exception.  If the connection fails as it will in the case of 
-            a mock, AdaptiveClient will log the error and try the next EndPoint.  If all connections fail AdaptiveClient will throw
+            AdaptiveClient will encounter a mock, which throws an exception.  If the connection fails <Run FontWeight="Bold">as it will in the case of 
+            a mock</Run>, AdaptiveClient will log the error and try the next EndPoint.  If all connections fail AdaptiveClient will throw
             an exception.
         </TextBlock>
 

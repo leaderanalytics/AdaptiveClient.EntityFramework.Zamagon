@@ -27,13 +27,6 @@ namespace Zamagon.Domain
                 connectionString = connectionString.Replace("{MySQL_UserName}", config["Data:MySQLUserName"]);
                 connectionString = connectionString.Replace("{MySQL_Password}", config["Data:MySQLPassword"]);
             }
-            else
-            {
-                connectionString = connectionString.Replace("{MySQL_UserName}", "yourUsername");        // your credentionals here. 
-                connectionString = connectionString.Replace("{MySQL_Password}", "yourPassword");
-            }
-
-
 
             return connectionString;
         }
