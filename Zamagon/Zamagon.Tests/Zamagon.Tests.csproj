@@ -13,12 +13,12 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="AdaptiveClient" Version="0.31.2" />
+    <PackageReference Include="AdaptiveClient" Version="0.31.3" />
     <PackageReference Include="Autofac" Version="4.8.1" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.7.2" />
-    <PackageReference Include="NUnit" Version="3.10.1" />
-    <PackageReference Include="NUnit3TestAdapter" Version="3.10.0" />
-    <PackageReference Include="Moq" Version="4.8.3" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.9.0" />
+    <PackageReference Include="NUnit" Version="3.11.0" />
+    <PackageReference Include="NUnit3TestAdapter" Version="3.11.2" />
+    <PackageReference Include="Moq" Version="4.10.0" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Zamagon.Domain\Zamagon.Domain.csproj" />

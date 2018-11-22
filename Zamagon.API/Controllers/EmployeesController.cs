@@ -11,8 +11,6 @@ using Zamagon.Model;
 namespace Zamagon.API.Controllers
 {
     [Produces("application/json")]
-    [Route("api/BackOffice")]
-    [Route("api/BackOffice/Employees")]
     public class EmployeesController : Controller
     {
         private IAdaptiveClient<IEmployeesService> serviceClient;
@@ -23,9 +21,18 @@ namespace Zamagon.API.Controllers
         }
 
         [HttpGet]
+        [Route("api/BackOffice/Employees")]
         public async Task<List<Employee>> GetEmployees()
         {
             return await serviceClient.CallAsync(async x => await x.GetEmployees());
+        }
+
+
+        [HttpGet]
+        [Route("api/BackOffice")]
+        public async Task Get()
+        {
+
         }
     }
 }

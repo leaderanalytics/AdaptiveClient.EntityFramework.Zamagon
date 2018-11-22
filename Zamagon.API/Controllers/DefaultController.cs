@@ -17,5 +17,13 @@ namespace Zamagon.API.Controllers
         {
             return View("~/index.html");
         }
+
+
+        [HttpGet]
+        [Route("api")]
+        public async Task Get()
+        {
+
+        }
     }
 }

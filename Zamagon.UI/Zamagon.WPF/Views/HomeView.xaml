@@ -18,7 +18,7 @@
             </Style>
         </StackPanel.Resources>
         <TextBlock>
-            <Run FontWeight="Bold">What does this application demonstrate?</Run><LineBreak/>
+            <Run FontWeight="Bold">What this application demonstrates:</Run><LineBreak/>
             This application demonstrates AdaptiveClient's ability to attempt 
             to connect to a server and fall back to another server if the connection fails.  The servers may be of any type of transport or 
             technology provider.  For example, in the default configuration AdaptiveClient will attempt to connect to a MSSQL server. 
@@ -27,20 +27,20 @@
         </TextBlock>
         
         <TextBlock>
-            <Run FontWeight="Bold">How is this application used?</Run><LineBreak/>
-            Each tab contains a list of EndPoints (connection strings) that point to database servers or API servers that AdaptiveClient 
-            will attempt to reach.  The EndPoints can be re-ordered using drag-and-drop.  Only one EndPoint can be marked as Enabled.  
-            <LineBreak/>
-            When the Get Data button is clicked the application builds the Autofac Container - however mocks are registered 
-            for the EndPoints that are not marked as Enabled.  After the Container is built, AdaptiveClient attempts to 
-            contact each EndPoint, always starting with the one at top of the list.  If the connection is not marked as Enabled
-            AdaptiveClient will encounter a mock, which throws an exception.  If the connection fails <Run FontWeight="Bold">as it will in the case of 
-            a mock</Run>, AdaptiveClient will log the error and try the next EndPoint.  If all connections fail AdaptiveClient will throw
-            an exception.
+            <Run FontWeight="Bold">How this application is used:</Run><LineBreak/>
+            &#x2726; Each tab contains a list of EndPoints (connection strings) that point to database servers or API servers that AdaptiveClient 
+            will attempt to reach.<LineBreak/>
+            &#x2726; The EndPoints can be re-ordered using drag-and-drop.  Only one EndPoint can be marked as Enabled.<LineBreak/>
+            &#x2726; When the Get Data button is clicked the application builds the Autofac Container - however mocks are registered 
+            for the EndPoints that are not marked as Enabled.<LineBreak/>
+            &#x2726; After the Container is built, AdaptiveClient attempts to  contact each EndPoint (including those not marked as Enabled), always starting with the one at top of the list.<LineBreak/>
+            &#x2726; If the connection is not marked as Enabled AdaptiveClient will encounter a mock, which throws an exception.<LineBreak/>
+            &#x2726; If the connection fails <Run FontWeight="Bold">as it will in the case of  a mock</Run>, AdaptiveClient will log the error and try the next EndPoint.<LineBreak/>
+            &#x2726; If all connections fail AdaptiveClient will throw an exception.
         </TextBlock>
 
         <TextBlock>
-            <Run FontWeight="Bold">How is this application different from a normal application?</Run><LineBreak/>
+            <Run FontWeight="Bold">How this application is different from a normal application:</Run><LineBreak/>
             This application is designed to introduce errors into normal program flow.  In order to do this it 
             uses mocks, which require the Autofac Container to be created when database requests are made.  Normal programs
             that use AdaptiveClient build the Autofac Container once during application startup as is the recommended practice.

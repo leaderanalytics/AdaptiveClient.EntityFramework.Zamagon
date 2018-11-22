@@ -17,7 +17,7 @@ namespace Zamagon.Domain
 
         public static string BuildConnectionString(string connectionString)
         {
-            bool usePasswordFile = false; // change this value to true if you use secrets file that is not checked into source control.
+            bool usePasswordFile = false; // change this value to true if you use a secrets file that is not checked into source control.
 
             if (usePasswordFile)
             {

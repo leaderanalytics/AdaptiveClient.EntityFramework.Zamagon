@@ -11,11 +11,6 @@ using Zamagon.Model;
 namespace Zamagon.API.Controllers
 {
     [Produces("application/json")]
-
-
-    [Route("api")]
-    [Route("api/StoreFront")]
-    [Route("api/StoreFront/Orders")]
     public class OrdersController : Controller
     {
         private IAdaptiveClient<IOrdersService> serviceClient;
@@ -26,9 +21,18 @@ namespace Zamagon.API.Controllers
         }
 
         [HttpGet]
+        [Route("api/StoreFront/Orders")]
         public async Task<List<Order>> GetOrders()
         {
             return await serviceClient.CallAsync(async x => await x.GetOrders());
+        }
+
+
+        [HttpGet]
+        [Route("api/StoreFront")]
+        public async Task Get()
+        {
+
         }
     }
 }

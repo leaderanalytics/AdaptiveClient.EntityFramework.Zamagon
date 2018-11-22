@@ -16,5 +16,15 @@ namespace Zamagon.Services.StoreFront.MySQL
         {
 
         }
+
+        public override async Task<List<Order>> GetOrders()
+        {
+            // Derive from MSSQL.OrdersService because much of the code for MSSQL is the
+            // same for MySQL.
+
+            // MySQL specific code here...
+            return await db.Orders.ToListAsync();
+        }
+
     }
 }

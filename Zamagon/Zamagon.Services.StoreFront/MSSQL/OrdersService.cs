@@ -19,6 +19,7 @@ namespace Zamagon.Services.StoreFront.MSSQL
 
         public virtual async Task<List<Order>> GetOrders()
         {
+            // MSSQL specific code here...
             return await db.Orders.ToListAsync();
         }
     }
