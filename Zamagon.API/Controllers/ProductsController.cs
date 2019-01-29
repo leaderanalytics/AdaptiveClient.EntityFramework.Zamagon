@@ -24,7 +24,7 @@ namespace Zamagon.API.Controllers
         [HttpGet]
         public async Task<List<Product>> GetProducts()
         {
-            return await serviceClient.CallAsync(async x => await x.GetProducts());
+            return await serviceClient.CallAsync(x => x.GetProducts());
         }
     }
 }

@@ -5,11 +5,23 @@
              xmlns:fa="http://schemas.fontawesome.io/icons/"
              Startup="Application_Startup">
     <Application.Resources>
-        <SolidColorBrush x:Key="Color1" Color="#C4C3D0" />
+        <!--<SolidColorBrush x:Key="Color1" Color="#C4C3D0" />
         <SolidColorBrush x:Key="Color2" Color="#CFD0C3" />
         <SolidColorBrush x:Key="Color3" Color="#A7AA86" />
         <SolidColorBrush x:Key="Color4" Color="#7C7D6F" />
-        <SolidColorBrush x:Key="Color5" Color="#555555" />
+        <SolidColorBrush x:Key="Color5" Color="#555555" />-->
+        
+        <!--<SolidColorBrush x:Key="Color1" Color="#A1A0A0" />
+        <SolidColorBrush x:Key="Color2" Color="#727272" />
+        <SolidColorBrush x:Key="Color3" Color="#494848" />
+        <SolidColorBrush x:Key="Color4" Color="#222222" />
+        <SolidColorBrush x:Key="Color5" Color="#060606" />-->
+
+        <SolidColorBrush x:Key="Color1" Color="#CEE5DD" />
+        <SolidColorBrush x:Key="Color2" Color="#DCE3BF" />
+        <SolidColorBrush x:Key="Color3" Color="#D0C69D" />
+        <SolidColorBrush x:Key="Color4" Color="#827C78" />
+        <SolidColorBrush x:Key="Color5" Color="#6A6D6A" />
 
 
         <Style TargetType="Grid" x:Key="GridColors">
@@ -20,16 +32,16 @@
             <Setter Property="ColumnHeaderStyle">
                 <Setter.Value>
                     <Style TargetType="DataGridColumnHeader">
-                        <Setter Property="Background" Value="{StaticResource Color2}"/>
-                        <Setter Property="Foreground" Value="{StaticResource Color5}"/>
+                        <Setter Property="Background" Value="{StaticResource Color5}"/>
+                        <Setter Property="Foreground" Value="Black"/>
                         <Setter Property="Padding" Value="4"/>
                     </Style>
                 </Setter.Value>
             </Setter>
-            <Setter Property="Background" Value="{StaticResource Color3}"/>
-            <Setter Property="Foreground" Value="{StaticResource Color5}"/>
-            <Setter Property="RowBackground" Value="{StaticResource Color1}"/>
-            <Setter Property="AlternatingRowBackground" Value="{StaticResource Color1}"/>
+            <Setter Property="Background" Value="{StaticResource Color1}"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="RowBackground" Value="{StaticResource Color2}"/>
+            <Setter Property="AlternatingRowBackground" Value="{StaticResource Color3}"/>
         </Style>
 
         <Style TargetType="local:EndPointListBox">

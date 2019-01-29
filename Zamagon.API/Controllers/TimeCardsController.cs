@@ -24,7 +24,7 @@ namespace Zamagon.API.Controllers
         [Route("api/BackOffice/TimeCards")]
         public async Task<List<TimeCard>> GetTimeCards()
         {
-            return await serviceClient.CallAsync(async x => await x.GetTimeCards());
+            return await serviceClient.CallAsync(x => x.GetTimeCards());
         }
     }
 }

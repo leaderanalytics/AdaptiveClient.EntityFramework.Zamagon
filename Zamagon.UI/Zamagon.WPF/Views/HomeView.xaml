@@ -9,7 +9,7 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <ScrollViewer VerticalScrollBarVisibility="Auto">
         
-    <StackPanel Orientation="Vertical" Margin="25" Background="#FFB2B2B0" >
+    <StackPanel Orientation="Vertical" Margin="25" Background="WhiteSmoke" >
         <StackPanel.Resources>
             <Style TargetType="{x:Type TextBlock}">
                 <Setter Property="FontSize" Value="16"/>

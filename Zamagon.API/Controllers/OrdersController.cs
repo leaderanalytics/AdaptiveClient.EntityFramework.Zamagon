@@ -24,7 +24,7 @@ namespace Zamagon.API.Controllers
         [Route("api/StoreFront/Orders")]
         public async Task<List<Order>> GetOrders()
         {
-            return await serviceClient.CallAsync(async x => await x.GetOrders());
+            return await serviceClient.CallAsync(x => x.GetOrders());
         }
 
 

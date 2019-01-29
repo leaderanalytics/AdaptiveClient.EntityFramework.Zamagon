@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -25,9 +26,12 @@ namespace Zamagon.WPF.Views
         {
             await base.GetData(API_Name.StoreFront);
             StoreFrontServiceClient = Container.Resolve<IAdaptiveClient<ISFServiceManifest>>();
-            List<Product> products = await StoreFrontServiceClient.TryAsync(async x => await x.ProductsService.GetProducts());
+            Stopwatch sw = Stopwatch.StartNew();
+            List<Product> products = await StoreFrontServiceClient.TryAsync(x => x.ProductsService.GetProducts());
+            sw.Stop();
             products.ForEach(x => Entities.Add(x));
             LogMessages.Add($"{products.Count} rows retrieved from {StoreFrontServiceClient.CurrentEndPoint.Name}.");
+            LogMessages.Add($"Data acquistion time was {sw.ElapsedMilliseconds} miliseconds.");
         }
     }
 }

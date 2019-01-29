@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -25,10 +26,13 @@ namespace Zamagon.WPF.Views
         {
             await base.GetData(API_Name.BackOffice);
             BackOfficeServiceClient = Container.Resolve<IAdaptiveClient<IBOServiceManifest>>();
-            List<Employee> emps = await BackOfficeServiceClient.TryAsync(async x => await x.EmployeesService.GetEmployees());
+            Stopwatch sw = Stopwatch.StartNew();
+            List<Employee> emps = await BackOfficeServiceClient.TryAsync(x => x.EmployeesService.GetEmployees());
+            sw.Stop();
             emps.ForEach(x => Entities.Add(x));
             LogMessages.Add($"{emps.Count} rows retrieved from {BackOfficeServiceClient.CurrentEndPoint.Name}.");
-            
+            LogMessages.Add($"Data acquistion time was {sw.ElapsedMilliseconds} miliseconds.");
+
         }
     }
 }

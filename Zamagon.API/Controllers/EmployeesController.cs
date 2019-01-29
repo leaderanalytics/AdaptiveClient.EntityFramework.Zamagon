@@ -24,7 +24,7 @@ namespace Zamagon.API.Controllers
         [Route("api/BackOffice/Employees")]
         public async Task<List<Employee>> GetEmployees()
         {
-            return await serviceClient.CallAsync(async x => await x.GetEmployees());
+            return await serviceClient.CallAsync(x => x.GetEmployees());
         }
 
 

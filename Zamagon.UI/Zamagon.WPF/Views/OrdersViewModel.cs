@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -24,10 +25,13 @@ namespace Zamagon.WPF.Views
         public override async Task GetData(object arg)
         {
             await base.GetData(API_Name.StoreFront);
+            Stopwatch sw = Stopwatch.StartNew();
             StoreFrontServiceClient = Container.Resolve<IAdaptiveClient<ISFServiceManifest>>();
-            List<Order> orders = await StoreFrontServiceClient.TryAsync(async x => await x.OrdersService.GetOrders());
+            List<Order> orders = await StoreFrontServiceClient.TryAsync(x => x.OrdersService.GetOrders());
+            sw.Stop();
             orders.ForEach(x => Entities.Add(x));
             LogMessages.Add($"{orders.Count} rows retrieved from {StoreFrontServiceClient.CurrentEndPoint.Name}.");
+            LogMessages.Add($"Data acquistion time was {sw.ElapsedMilliseconds} miliseconds.");
         }
     }
 }
