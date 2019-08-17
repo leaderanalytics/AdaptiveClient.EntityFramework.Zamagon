@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using LeaderAnalytics.AdaptiveClient.EntityFrameworkCore;
+using LeaderAnalytics.AdaptiveClient.Utilities;
 using Zamagon.Domain.BackOffice;
 
 namespace Zamagon.Services.BackOffice

@@ -5,6 +5,7 @@
   </PropertyGroup>
   <PropertyGroup>
     <RunWorkingDirectory>$(MSBuildThisFileDirectory)</RunWorkingDirectory>
+    <StartupObject></StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Content Include="..\EndPoints\EndPoints.json" Link="EndPoints.json">
@@ -14,11 +15,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="AdaptiveClient" Version="0.32.0" />
-    <PackageReference Include="AdaptiveClient.EntityFrameworkCore" Version="0.31.2" />
-    <PackageReference Include="Autofac" Version="4.9.2" />
+    <PackageReference Include="AdaptiveClient" Version="1.0.0" />
+    <PackageReference Include="AdaptiveClient.EntityFrameworkCore" Version="1.0.0" />
+    <PackageReference Include="Autofac" Version="4.9.4" />
     <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="4.4.0" />
-    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.2.4" />
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.2.6" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.3" />
   </ItemGroup>
 

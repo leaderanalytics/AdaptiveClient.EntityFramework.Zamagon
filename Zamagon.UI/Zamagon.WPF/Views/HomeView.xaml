@@ -19,9 +19,11 @@
         </StackPanel.Resources>
         <TextBlock>
             <Run FontWeight="Bold">What this application demonstrates:</Run><LineBreak/>
-            This application demonstrates AdaptiveClient's ability to attempt 
-            to connect to a server and fall back to another server if the connection fails.  The servers may be of any type of transport or 
-            technology provider.  For example, in the default configuration AdaptiveClient will attempt to connect to a MSSQL server. 
+            This demo illustrates a simple application architecture that is transport and database platform agnostic.
+            To demonstrate this, the app allows you to choose a connection string and make an API call.  This application 
+            will retrieve data from the selected database server using the selected transport.
+            The demo also illustrates AdaptiveClient's ability to fall back across providers and transports if an API call fails.
+            In the default configuration AdaptiveClient will attempt to connect to a MSSQL server. 
             It will fall back to a MySQL server if the connection fails, than fall back to a Web API server if the connection 
             fails a second time.
         </TextBlock>
@@ -33,8 +35,8 @@
             &#x2726; The EndPoints can be re-ordered using drag-and-drop.  Only one EndPoint can be marked as Enabled.<LineBreak/>
             &#x2726; When the Get Data button is clicked the application builds the Autofac Container - however mocks are registered 
             for the EndPoints that are not marked as Enabled.<LineBreak/>
-            &#x2726; After the Container is built, AdaptiveClient attempts to  contact each EndPoint (including those not marked as Enabled), always starting with the one at top of the list.<LineBreak/>
-            &#x2726; If the connection is not marked as Enabled AdaptiveClient will encounter a mock, which throws an exception.<LineBreak/>
+            &#x2726; After the Container is built, AdaptiveClient attempts to  contact each EndPoint (<Run FontWeight="Bold">including</Run> those not marked as Enabled), <Run FontWeight="Bold">always</Run> starting with the EndPoint at the <Run FontWeight="Bold">top</Run> of the list.<LineBreak/>
+            &#x2726; If the connection is not marked as Enabled AdaptiveClient will encounter a <Run FontWeight="Bold">mock</Run>, which throws an exception.<LineBreak/>
             &#x2726; If the connection fails <Run FontWeight="Bold">as it will in the case of  a mock</Run>, AdaptiveClient will log the error and try the next EndPoint.<LineBreak/>
             &#x2726; If all connections fail AdaptiveClient will throw an exception.
         </TextBlock>
