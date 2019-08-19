@@ -45,7 +45,7 @@
             <Run FontWeight="Bold">How this application is different from a normal application:</Run><LineBreak/>
             This application is designed to introduce errors into normal program flow.  In order to do this it 
             uses mocks, which require the Autofac Container to be created when database requests are made.  Normal programs
-            that use AdaptiveClient build the Autofac Container once during application startup as is the recommended practice.
+            that use AdaptiveClient build the Autofac Container <Run FontWeight="Bold">once</Run> during application startup as is the recommended practice.
         </TextBlock>
 
     </StackPanel>

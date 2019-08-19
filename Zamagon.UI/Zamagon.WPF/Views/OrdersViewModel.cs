@@ -31,7 +31,7 @@ namespace Zamagon.WPF.Views
             sw.Stop();
             orders.ForEach(x => Entities.Add(x));
             LogMessages.Add($"{orders.Count} rows retrieved from {StoreFrontServiceClient.CurrentEndPoint.Name}.");
-            LogMessages.Add($"Data acquistion time was {sw.ElapsedMilliseconds} miliseconds.");
+            LogMessages.Add($"Data acquisition time was {sw.ElapsedMilliseconds} milliseconds.");
         }
     }
 }
