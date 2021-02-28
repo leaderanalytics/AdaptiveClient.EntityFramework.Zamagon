@@ -11,34 +11,10 @@ using Zamagon.Model;
 
 namespace Zamagon.Web.Pages
 {
-    public class ProductsModel : BasePageModel
+    public class ProductsModel : BasePageModel<Product, ISFServiceManifest>
     {
-        public List<Product> Products { get; set; }
-        private IAdaptiveClient<ISFServiceManifest> serviceClient;
+        public ProductsModel(IAdaptiveClient<ISFServiceManifest> serviceClient) : base(serviceClient, API_Name.StoreFront) { }
 
-        public ProductsModel(IAdaptiveClient<ISFServiceManifest> serviceClient)
-        {
-            this.serviceClient = serviceClient;
-        }
-
-        public override async Task OnGetAsync()
-        {
-            await base.OnGetAsync();
-            await GetProducts();
-        }
-
-        public override async Task OnPostAsync()
-        {
-            await base.OnPostAsync();
-            await GetProducts();
-        }
-
-        private async Task GetProducts()
-        {
-            CurrentEndPoint = GetEndPoints().FirstOrDefault(x => x.API_Name == API_Name.StoreFront && x.ProviderName == DataSource);
-
-            if (CurrentEndPoint != null)
-                Products = await serviceClient.CallAsync(async x => await x.ProductsService.GetProducts(), CurrentEndPoint.Name);
-        }
+        protected override async Task GetData() => Data = await ServiceClient.CallAsync(async x => await x.ProductsService.GetProducts(), CurrentEndPoint.Name);
     }
 }

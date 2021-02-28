@@ -87,6 +87,9 @@ namespace Zamagon.WPF
 
         private void Move(int sourceIndex, int targetIndex)
         {
+            if (sourceIndex < 0 || targetIndex < 0)
+                return;
+
             var items = this.ItemsSource as IList;
             object tmp = items[sourceIndex];
             items.RemoveAt(sourceIndex);

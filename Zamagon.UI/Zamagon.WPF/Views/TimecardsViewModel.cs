@@ -14,24 +14,13 @@ using Zamagon.Model;
 
 namespace Zamagon.WPF.Views
 {
-    public class TimecardsViewModel : BaseViewModel<TimeCard>
+    public class TimecardsViewModel : BaseViewModel<TimeCard, IBOServiceManifest>
     {
-        public TimecardsViewModel(IAdaptiveClient<ISFServiceManifest> storeFrontClient, IAdaptiveClient<IBOServiceManifest> backOfficeClient) :base(storeFrontClient, backOfficeClient)
+        public TimecardsViewModel(IAdaptiveClient<IBOServiceManifest> serviceClient) :base(API_Name.BackOffice)
         {
             Banner = "TimeCards";
-            EndPoints = new ObservableCollection<IEndPointConfiguration>(LoadEndPoints(API_Name.BackOffice));
         }
 
-        public override async Task GetData(object arg)
-        {
-            await base.GetData(API_Name.BackOffice);
-            BackOfficeServiceClient = Container.Resolve<IAdaptiveClient<IBOServiceManifest>>();
-            Stopwatch sw = Stopwatch.StartNew();
-            List<TimeCard> cards = await BackOfficeServiceClient.TryAsync(x => x.TimeCardsService.GetTimeCards());
-            sw.Stop();
-            cards.ForEach(x => Entities.Add(x));
-            LogMessages.Add($"{cards.Count} rows retrieved from {BackOfficeServiceClient.CurrentEndPoint.Name}.");
-            LogMessages.Add($"Data acquistion time was {sw.ElapsedMilliseconds} miliseconds.");
-        }
+        protected override async Task<List<TimeCard>> FetchData() => await ServiceClient.TryAsync(x => x.TimeCardsService.GetTimeCards());
     }
 }

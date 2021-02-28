@@ -14,7 +14,7 @@ using Zamagon.Domain.BackOffice;
 
 namespace Zamagon.WPF
 {
-    public class MainWindowViewModel : BaseViewModel<object>
+    public class MainWindowViewModel : PropertyChangedBase
     {
         private int _SelectedTabIndex;
         public int SelectedTabIndex
@@ -33,7 +33,7 @@ namespace Zamagon.WPF
 
         public Task Initalization;
 
-        public MainWindowViewModel(IAdaptiveClient<ISFServiceManifest> storeFrontClient, IAdaptiveClient<IBOServiceManifest> backOfficeClient): base(storeFrontClient, backOfficeClient)
+        public MainWindowViewModel()
         {
             Initalization = Initalize();
         }

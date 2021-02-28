@@ -1,15 +1,77 @@
 # AdaptiveClient.EntityFramework.Zamagon
 Demo application for AdaptiveClient.EntityFrameworkCore
 
-To use the full functionality of this demo you need access to both Microsoft SQL Server and My SQL.  However you can still use the demo if you have only only one of those.  
+To use the full functionality of this demo you need access to both Microsoft SQL Server and MySQL.  If you have only one of those you can still use the demo for the database you have.  
+
 Scroll to the end of this document for instructions on how to run this demo.
 
 
 ![WPF UI](https://raw.githubusercontent.com/leaderanalytics/AdaptiveClient.EntityFramework.Zamagon/master/WPF_UI.png)
 ![WEB UI](https://raw.githubusercontent.com/leaderanalytics/AdaptiveClient.EntityFramework.Zamagon/master/Web_UI.png)
 
+
+## Basic concepts
+
+Zamagon illustrates how to organize services into APIs.  These APIs can be used as a single unit, greatly simplifying how services are injected and used by the objects that depend on them.
+
+Services are classes that contain methods that are common to a specific entity.  These are commonly CRUD operations but just as often contain methods for reporting, data warehousing, etc.  Services may also be organized by task such as shipping, order processing, etc.
+
+APIs are collections of services.  APIs may be common to an entire organization, an application within an organization, a department, or a specific function such as banking or purchasing.
+
+The Zamagon demo illustrates four services:  `OrdersService`, `ProductsService`, `EmployeesService`, and `TimeCardsSerice`.
+
+Services are organized into two APIs:  `BackOffice` (Orders and Products services) and `StoreFront` (Employee and TimeCards services).
+
+The demo illustrates how each service can be written for a specific database (MSSQL/MySQL) or transport (LAN/HTTP).  At runtime, the user can select a specific database or transport and AdaptiveClient will resolve the components that are necessary to perform the requested call.
+
+
+## Understanding the code
+
+#### Zamagon.Model project
+
+Data Transfer Object (DTO) classes.  Note that the classes exactly match the structure of the database table they represent and contain no code.
+
+#### Zamagon.Domain project
+
+Application interfaces and utility classes.  
+
+#### Zamagon.Services.Common project
+
+Classes that common to both `BackOffice` and `StoreFront` services.
+
+
+#### Zamagon.Services.BackOffice project
+
+`BOServiceManifest` class is a manifest (i.e. list) of services that comprise the BackOffice API.
+
+`Db` is intended to be an in-memory representation of the BackOffice database.
+
+Services, with platform-specific implementations.
+
+`BODatabaseInitializer` seeds the database after creation or a migration.
+
+`BaseService` contains a property that references the parent ServiceManifest.  From this property the service can access any other service listed on the manifest.
+
+
+#### Zamagon.Services.StoreFront project
+
+Same as BackOffice project.
+
+#### Zamagon.Web project
+
+A simple website to illustrate how calls are made to the API using AdapitveClient.
+
+`BasePageModel` in the Web project contains a property of type `IAdaptiveClient<TManifest>`.  Because of this, all derived pages have immediate, statically typed access to every service exposed by the API the page built for:
+
+    await ServiceClient.TryAsync(x => x.EmployeesService.GetEmployees());
+
+#### Zamagon.WPF project
+
+
+Conceptually the same as the web project.  Note how `BasePageModel<TModel, TManifest>` allows common view properties to be defined on the base class.
+
 ## How to run the Zamagon Demo
-### Understand the solution files
+
 There are three solution files included with the demo.
 Each solution file contains five projects that are common to all solutions:
 
@@ -19,7 +81,7 @@ Each solution file contains five projects that are common to all solutions:
 *Zamagon.Services.StoreFront* - Platform and transport specific services that support the StoreFront API.  
 *Zamagon.Services.Common* - Platform and transport specific services that support both APIs.  
 
-Each solution contains additonal projects as specified:
+Each solution contains additional projects as specified:
 
 *Zamagon* - Utility and Test.  
 *Zamagon.API* - WebAPI host.  
@@ -60,6 +122,4 @@ Open the Zamagon.UI solution.
 Make sure Zamagon.WPF is the startup project.  
 Start debugging.   
 The Home tab describes the functionality demonstrated by the application.
-
-
 

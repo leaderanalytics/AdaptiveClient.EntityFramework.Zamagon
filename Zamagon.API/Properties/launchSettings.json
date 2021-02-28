@@ -4,7 +4,7 @@
     "anonymousAuthentication": true,
     "iisExpress": {
       "applicationUrl": "http://localhost:59260/",
-      "launchUrl": "http://localhost:59260/api/default/index/",
+      "launchUrl": "swagger",
       "sslPort": 0
     }
   },
@@ -16,7 +16,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
       "applicationUrl": "http://localhost:59260/",
-      "launchUrl": "http://localhost:59260/api/default/index/"
+      "launchUrl": "swagger"
     },
     "Zamagon.API": {
       "commandName": "Project",
@@ -25,7 +25,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
       "applicationUrl": "http://localhost:59260/",
-      "launchUrl": "http://localhost:59260/api/default/index/"
+      "launchUrl": "swagger"
     }
   }
 }

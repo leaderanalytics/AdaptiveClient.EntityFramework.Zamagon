@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using LeaderAnalytics.AdaptiveClient;
 using Zamagon.Domain.StoreFront;
@@ -12,7 +11,7 @@ namespace Zamagon.API.Controllers
 {
     [Produces("application/json")]
     [Route("api/StoreFront/Products")]
-    public class ProductsController : Controller
+    public class ProductsController : ControllerBase
     {
         private IAdaptiveClient<IProductsService> serviceClient;
 

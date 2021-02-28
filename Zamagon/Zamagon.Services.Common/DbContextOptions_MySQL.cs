@@ -14,7 +14,7 @@ namespace Zamagon.Services.Common
         public DbContextOptions_MySQL(string connectionString)
         {
             DbContextOptionsBuilder builder = new DbContextOptionsBuilder();
-            builder.UseMySql(connectionString);
+            builder.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
             Options = builder.Options;
         }
     }

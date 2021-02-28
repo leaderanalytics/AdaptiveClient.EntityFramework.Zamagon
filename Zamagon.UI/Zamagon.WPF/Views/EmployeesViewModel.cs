@@ -14,25 +14,13 @@ using Zamagon.Model;
 
 namespace Zamagon.WPF.Views
 {
-    public class EmployeesViewModel : BaseViewModel<Employee>
+    public class EmployeesViewModel : BaseViewModel<Employee, IBOServiceManifest>
     {
-        public EmployeesViewModel(IAdaptiveClient<ISFServiceManifest> storeFrontClient, IAdaptiveClient<IBOServiceManifest> backOfficeClient) :base(storeFrontClient, backOfficeClient)
+        public EmployeesViewModel(IAdaptiveClient<IBOServiceManifest> serviceClient) :base(API_Name.BackOffice)
         {
             Banner = "Employees";
-            EndPoints = new ObservableCollection<IEndPointConfiguration>(LoadEndPoints(API_Name.BackOffice));
         }
 
-        public override async Task GetData(object arg)
-        {
-            await base.GetData(API_Name.BackOffice);
-            BackOfficeServiceClient = Container.Resolve<IAdaptiveClient<IBOServiceManifest>>();
-            Stopwatch sw = Stopwatch.StartNew();
-            List<Employee> emps = await BackOfficeServiceClient.TryAsync(x => x.EmployeesService.GetEmployees());
-            sw.Stop();
-            emps.ForEach(x => Entities.Add(x));
-            LogMessages.Add($"{emps.Count} rows retrieved from {BackOfficeServiceClient.CurrentEndPoint.Name}.");
-            LogMessages.Add($"Data acquistion time was {sw.ElapsedMilliseconds} miliseconds.");
-
-        }
+        protected override async Task<List<Employee>> FetchData() => await ServiceClient.TryAsync(x => x.EmployeesService.GetEmployees());
     }
 }

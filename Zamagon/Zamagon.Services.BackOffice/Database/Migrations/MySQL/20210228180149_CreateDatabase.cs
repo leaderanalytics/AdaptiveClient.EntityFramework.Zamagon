@@ -1,7 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
-using System;
-using System.Collections.Generic;
 
 namespace Zamagon.Services.BackOffice.Database.Migrations.MySQL
 {
@@ -13,9 +12,9 @@ namespace Zamagon.Services.BackOffice.Database.Migrations.MySQL
                 name: "Employees",
                 columns: table => new
                 {
-                    ID = table.Column<int>(nullable: false)
+                    ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(nullable: true)
+                    Name = table.Column<string>(type: "longtext CHARACTER SET utf8mb4", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -26,11 +25,11 @@ namespace Zamagon.Services.BackOffice.Database.Migrations.MySQL
                 name: "TimeCards",
                 columns: table => new
                 {
-                    ID = table.Column<int>(nullable: false)
+                    ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    EmployeeID = table.Column<int>(nullable: false),
-                    HoursWorked = table.Column<decimal>(nullable: false),
-                    WorkDate = table.Column<DateTime>(nullable: false)
+                    EmployeeID = table.Column<int>(type: "int", nullable: false),
+                    WorkDate = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    HoursWorked = table.Column<decimal>(type: "decimal(65,30)", nullable: false)
                 },
                 constraints: table =>
                 {

@@ -1,210 +1,31 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\..\packages\Microsoft.EntityFrameworkCore.Design.2.1.0-rc1-final\build\net461\Microsoft.EntityFrameworkCore.Design.props" Condition="Exists('..\..\packages\Microsoft.EntityFrameworkCore.Design.2.1.0-rc1-final\build\net461\Microsoft.EntityFrameworkCore.Design.props')" />
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{66723D55-0336-47AD-9460-D45661D5BB02}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>Zamagon.WPF</RootNamespace>
-    <AssemblyName>Zamagon.WPF</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <WarningLevel>4</WarningLevel>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
-    <TargetFrameworkProfile />
+    <TargetFramework>net5.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
+
   <ItemGroup>
-    <Reference Include="System" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Net.Http" />
-    <Reference Include="System.Xaml">
-      <RequiredTargetFramework>4.0</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="WindowsBase" />
-    <Reference Include="PresentationCore" />
-    <Reference Include="PresentationFramework" />
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="AdaptiveClient" Version="1.0.0" />
-    <PackageReference Include="AdaptiveClient.EntityFrameworkCore">
-      <Version>1.0.0</Version>
-    </PackageReference>
-    <PackageReference Include="Autofac" Version="4.9.4" />
-    <PackageReference Include="FontAwesome.WPF">
-      <Version>4.7.0.9</Version>
-    </PackageReference>
-    <PackageReference Include="LeaderAnalytics.Caching" Version="0.0.29" />
-    <PackageReference Include="Moq">
-      <Version>4.12.0</Version>
-    </PackageReference>
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
-  </ItemGroup>
-  <ItemGroup>
-    <ApplicationDefinition Include="App.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </ApplicationDefinition>
-    <Compile Include="CommandHandler.cs" />
-    <Compile Include="EndPointListBox.xaml.cs">
-      <DependentUpon>EndPointListBox.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="PresentationEndPoint.cs" />
-    <Compile Include="Views\AdaptiveClientDemo.xaml.cs">
-      <DependentUpon>AdaptiveClientDemo.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\TimecardsViewModel.cs" />
-    <Compile Include="Views\TimecardsView.xaml.cs">
-      <DependentUpon>TimecardsView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\HomeView.xaml.cs">
-      <DependentUpon>HomeView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\EmployeesView.xaml.cs">
-      <DependentUpon>EmployeesView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\EmployeesViewModel.cs" />
-    <Compile Include="Views\ProductsViewModel.cs" />
-    <Compile Include="Views\ProductsView.xaml.cs">
-      <DependentUpon>ProductsView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\OrdersView.xaml.cs">
-      <DependentUpon>OrdersView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="DragDropListBox.cs" />
-    <Compile Include="TabHeader.cs" />
-    <Compile Include="Views\HomeViewModel.cs" />
-    <Compile Include="Views\OrdersViewModel.cs" />
-    <Page Include="EndPointListBox.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\TimecardsView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\HomeView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\AdaptiveClientDemo.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\EmployeesView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\ProductsView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\OrdersView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="MainWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Compile Include="App.xaml.cs">
-      <DependentUpon>App.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="AutofacModule.cs" />
-    <Compile Include="BaseViewModel.cs" />
-    <Compile Include="MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
-    <Page Include="Themes\Generic.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="MainWindowViewModel.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Properties\Settings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Settings.settings</DependentUpon>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <None Include="..\..\EndPoints\EndPoints.json">
-      <Link>EndPoints.json</Link>
+    <Content Include="..\..\EndPoints\appsettings.json" Link="appsettings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="packages.config" />
-    <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
+    </Content>
   </ItemGroup>
+
   <ItemGroup>
-    <None Include="App.config">
-      <SubType>Designer</SubType>
-    </None>
+    <PackageReference Include="AdaptiveClient" Version="2.0.0" />
+    <PackageReference Include="AdaptiveClient.EntityFrameworkCore" Version="2.0.0" />
+    <PackageReference Include="Autofac" Version="6.1.0" />
+    <PackageReference Include="FontAwesome.WPF" Version="4.7.0.9" />
+    <PackageReference Include="LeaderAnalytics.Caching" Version="1.0.15" />
+    <PackageReference Include="Moq" Version="4.16.0" />
   </ItemGroup>
+
   <ItemGroup>
-    <ProjectReference Include="..\..\Zamagon\Zamagon.Domain\Zamagon.Domain.csproj">
-      <Project>{4c291394-23c3-4163-b525-c5bcc5284533}</Project>
-      <Name>Zamagon.Domain</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Zamagon\Zamagon.Model\Zamagon.Model.csproj">
-      <Project>{eb1b9dd4-8010-4fc3-9a36-20b0c57d20e2}</Project>
-      <Name>Zamagon.Model</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Zamagon\Zamagon.Services.BackOffice\Zamagon.Services.BackOffice.csproj">
-      <Project>{35eccc21-c46a-4d13-af83-8c8fed8c7050}</Project>
-      <Name>Zamagon.Services.BackOffice</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Zamagon\Zamagon.Services.Common\Zamagon.Services.Common.csproj">
-      <Project>{82a48a89-7cb5-4e42-b008-9eb08933836a}</Project>
-      <Name>Zamagon.Services.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Zamagon\Zamagon.Services.StoreFront\Zamagon.Services.StoreFront.csproj">
-      <Project>{af5a69d3-52a6-4e32-96c2-954d68a0ec9b}</Project>
-      <Name>Zamagon.Services.StoreFront</Name>
-    </ProjectReference>
+    <ProjectReference Include="..\..\Zamagon\Zamagon.Domain\Zamagon.Domain.csproj" />
+    <ProjectReference Include="..\..\Zamagon\Zamagon.Model\Zamagon.Model.csproj" />
+    <ProjectReference Include="..\..\Zamagon\Zamagon.Services.BackOffice\Zamagon.Services.BackOffice.csproj" />
+    <ProjectReference Include="..\..\Zamagon\Zamagon.Services.StoreFront\Zamagon.Services.StoreFront.csproj" />
   </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+
 </Project>

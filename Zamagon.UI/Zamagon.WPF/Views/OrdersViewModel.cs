@@ -14,24 +14,13 @@ using Zamagon.Model;
 
 namespace Zamagon.WPF.Views
 {
-    public class OrdersViewModel : BaseViewModel<Order>
+    public class OrdersViewModel : BaseViewModel<Order, ISFServiceManifest>
     {
-        public OrdersViewModel(IAdaptiveClient<ISFServiceManifest> storeFrontClient, IAdaptiveClient<IBOServiceManifest> backOfficeClient) :base(storeFrontClient, backOfficeClient)
+        public OrdersViewModel(IAdaptiveClient<ISFServiceManifest> serviceClient) :base(API_Name.StoreFront)
         {
             Banner = "Orders";
-            EndPoints = new ObservableCollection<IEndPointConfiguration>(LoadEndPoints(API_Name.StoreFront));
         }
 
-        public override async Task GetData(object arg)
-        {
-            await base.GetData(API_Name.StoreFront);
-            Stopwatch sw = Stopwatch.StartNew();
-            StoreFrontServiceClient = Container.Resolve<IAdaptiveClient<ISFServiceManifest>>();
-            List<Order> orders = await StoreFrontServiceClient.TryAsync(x => x.OrdersService.GetOrders());
-            sw.Stop();
-            orders.ForEach(x => Entities.Add(x));
-            LogMessages.Add($"{orders.Count} rows retrieved from {StoreFrontServiceClient.CurrentEndPoint.Name}.");
-            LogMessages.Add($"Data acquisition time was {sw.ElapsedMilliseconds} milliseconds.");
-        }
+        protected override async Task<List<Order>> FetchData() => await ServiceClient.TryAsync(x => x.OrdersService.GetOrders());
     }
 }

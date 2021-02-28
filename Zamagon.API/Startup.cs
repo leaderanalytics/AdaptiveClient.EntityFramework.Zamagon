@@ -4,86 +4,70 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using Autofac;
-using Autofac.Extensions.DependencyInjection;
 using LeaderAnalytics.AdaptiveClient;
 using LeaderAnalytics.AdaptiveClient.EntityFrameworkCore;
 using Zamagon.Domain;
-using Microsoft.AspNetCore.Mvc.Formatters;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.OpenApi.Models;
+using System.Text.Json.Serialization;
 
 namespace Zamagon.API
 {
     public class Startup
     {
+        public IConfiguration Configuration { get; }
+
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
 
-        public IConfiguration Configuration { get; }
-
         // This method gets called by the runtime. Use this method to add services to the container.
-        public IServiceProvider ConfigureServices(IServiceCollection services)
+        public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc();
-            var formatterSettings = JsonSerializerSettingsProvider.CreateSerializerSettings();
-            formatterSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
-            formatterSettings.ContractResolver = new Newtonsoft.Json.Serialization.DefaultContractResolver();
-            JsonOutputFormatter formatter = new JsonOutputFormatter(formatterSettings, System.Buffers.ArrayPool<char>.Shared);
-
-            services.Configure<MvcOptions>(options =>
+            services.AddControllers().AddJsonOptions(x => x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve);
+            services.AddSwaggerGen(c =>
             {
-                options.OutputFormatters.RemoveType<JsonOutputFormatter>();
-                options.OutputFormatters.Insert(0, formatter);
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Zamagon.API", Version = "v1" });
             });
-            // Autofac & AdaptiveClient
-            IEnumerable<IEndPointConfiguration> endPoints = EndPointUtilities.LoadEndPoints("bin\\debug\\netcoreapp2.2\\EndPoints.json");
-            IEndPointConfiguration backOffice = endPoints.FirstOrDefault(x => x.API_Name == API_Name.BackOffice && x.ProviderName == DataBaseProviderName.MySQL);
-            IEndPointConfiguration frontOffice = endPoints.FirstOrDefault(x => x.API_Name == API_Name.StoreFront && x.ProviderName == DataBaseProviderName.MySQL);
 
-            if (backOffice!=null)
-                backOffice.ConnectionString = ConnectionstringUtility.BuildConnectionString(endPoints.First(x => x.API_Name == API_Name.BackOffice && x.ProviderName == DataBaseProviderName.MySQL).ConnectionString);
+        }
 
-            if (frontOffice != null)
-                frontOffice.ConnectionString = ConnectionstringUtility.BuildConnectionString(endPoints.First(x => x.API_Name == API_Name.StoreFront && x.ProviderName == DataBaseProviderName.MySQL).ConnectionString);
+        // https://autofaccn.readthedocs.io/en/latest/integration/aspnetcore.html
+        // ConfigureContainer is where you can register things directly
+        // with Autofac. This runs after ConfigureServices so the things
+        // here will override registrations made in ConfigureServices.
+        // Don't build the container; that gets done for you by the factory.
+        public void ConfigureContainer(ContainerBuilder builder)
+        {
+            // Register your own things directly with Autofac here. Don't
+            // call builder.Populate(), that happens in AutofacServiceProviderFactory
+            // for you.
+            builder.RegisterModule(new AutofacModule());
+        }
 
-            ContainerBuilder builder = new ContainerBuilder();
-            builder.Populate(services);
-            builder.RegisterModule(new LeaderAnalytics.AdaptiveClient.EntityFrameworkCore.AutofacModule());
-            RegistrationHelper registrationHelper = new RegistrationHelper(builder);
 
-            registrationHelper
-                .RegisterEndPoints(endPoints)
-                .RegisterModule(new Zamagon.Services.Common.AdaptiveClientModule())
-                .RegisterModule(new Zamagon.Services.BackOffice.AdaptiveClientModule())
-                .RegisterModule(new Zamagon.Services.StoreFront.AdaptiveClientModule());
-
-            var container = builder.Build();
-
-            // Create all databases or apply migrations
-            IDatabaseUtilities databaseUtilities = container.Resolve<IDatabaseUtilities>();
-
+        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, List<IEndPointConfiguration> endPoints, IDatabaseUtilities databaseUtilities)
+        {
             foreach (IEndPointConfiguration ep in endPoints.Where(x => x.EndPointType == EndPointType.DBMS))
                 Task.Run(() => databaseUtilities.CreateOrUpdateDatabase(ep)).Wait();
 
-            return container.Resolve<IServiceProvider>();
-        }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
-        {
-            if (env.IsDevelopment())
+            if (env.EnvironmentName == "Development")
             {
                 app.UseDeveloperExceptionPage();
+                app.UseSwagger();
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Zamagon.API v1"));
             }
-            
-            app.UseMvc();
+
+            app.UseHttpsRedirection();
+            app.UseRouting();
+            app.UseAuthorization();
+            app.UseEndpoints(endpoints => endpoints.MapControllers());
         }
     }
 }

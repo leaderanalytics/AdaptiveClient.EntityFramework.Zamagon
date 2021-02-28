@@ -24,81 +24,47 @@ namespace Zamagon.Web
         {
             Configuration = configuration;
         }
-
         
 
         // This method gets called by the runtime. Use this method to add services to the container.
-        public IServiceProvider ConfigureServices(IServiceCollection services)
+        public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc();
-
+            services.AddRazorPages();
             services.AddDistributedMemoryCache();
-
-            services.AddSession(options =>
-            {
-                // Set a short timeout for easy testing.
-                //options.IdleTimeout = TimeSpan.FromSeconds(10);
-                //options.Cookie.HttpOnly = true;
-            });
-            
-
-            // Autofac & AdaptiveClient
-            IEnumerable<IEndPointConfiguration> endPoints = ReadEndPointsFromDisk();
-            ContainerBuilder builder = new ContainerBuilder();
-            builder.Populate(services);
-            builder.RegisterModule(new LeaderAnalytics.AdaptiveClient.EntityFrameworkCore.AutofacModule());
-            RegistrationHelper registrationHelper = new RegistrationHelper(builder);
-
-            registrationHelper
-                .RegisterEndPoints(endPoints)
-                .RegisterModule(new Zamagon.Services.Common.AdaptiveClientModule())
-                .RegisterModule(new Zamagon.Services.BackOffice.AdaptiveClientModule())
-                .RegisterModule(new Zamagon.Services.StoreFront.AdaptiveClientModule());
-
-            
-            var container = builder.Build();
-            IDatabaseUtilities databaseUtilities = container.Resolve<IDatabaseUtilities>();
-            
-            // Create all databases or apply migrations
-            foreach (IEndPointConfiguration ep in endPoints.Where(x => x.EndPointType == EndPointType.DBMS))
-                databaseUtilities.CreateOrUpdateDatabase(ep).Wait();
-
-            return container.Resolve<IServiceProvider>();
+            services.AddSession();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IApplicationLifetime appLifetime)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseSession();
-                app.UseBrowserLink();
+            if (env.EnvironmentName == "Development")
                 app.UseDeveloperExceptionPage();
-            }
             else
             {
                 app.UseExceptionHandler("/Error");
+                app.UseHsts();
             }
 
+            app.UseHttpsRedirection();
             app.UseStaticFiles();
-            app.UseMvc();
+            app.UseRouting();
+            app.UseAuthorization();
+            app.UseSession();
+            app.UseEndpoints(endpoints => endpoints.MapRazorPages());
         }
 
-        public static IEnumerable<IEndPointConfiguration> ReadEndPointsFromDisk()
+
+        // https://autofaccn.readthedocs.io/en/latest/integration/aspnetcore.html
+        // ConfigureContainer is where you can register things directly
+        // with Autofac. This runs after ConfigureServices so the things
+        // here will override registrations made in ConfigureServices.
+        // Don't build the container; that gets done for you by the factory.
+        public void ConfigureContainer(ContainerBuilder builder)
         {
-            // Please see ConnectionstringUtility class to add your login credentials for MySQL
-
-            IEnumerable<IEndPointConfiguration> endPoints = EndPointUtilities.LoadEndPoints("bin\\debug\\netcoreapp2.2\\EndPoints.json");
-            IEndPointConfiguration backOffice = endPoints.FirstOrDefault(x => x.API_Name == API_Name.BackOffice && x.ProviderName == DataBaseProviderName.MySQL);
-            IEndPointConfiguration frontOffice = endPoints.FirstOrDefault(x => x.API_Name == API_Name.StoreFront && x.ProviderName == DataBaseProviderName.MySQL);
-
-            if (backOffice != null)
-                backOffice.ConnectionString = ConnectionstringUtility.BuildConnectionString(endPoints.First(x => x.API_Name == API_Name.BackOffice && x.ProviderName == DataBaseProviderName.MySQL).ConnectionString);
-
-            if (frontOffice != null)
-                frontOffice.ConnectionString = ConnectionstringUtility.BuildConnectionString(endPoints.First(x => x.API_Name == API_Name.StoreFront && x.ProviderName == DataBaseProviderName.MySQL).ConnectionString);
-
-            return endPoints;
+            // Register your own things directly with Autofac here. Don't
+            // call builder.Populate(), that happens in AutofacServiceProviderFactory
+            // for you.
+            builder.RegisterModule(new AutofacModule());
         }
     }
 }

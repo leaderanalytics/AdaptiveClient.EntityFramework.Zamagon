@@ -11,34 +11,10 @@ using Zamagon.Model;
 
 namespace Zamagon.Web.Pages
 {
-    public class TimeCardsModel : BasePageModel
+    public class TimeCardsModel : BasePageModel<TimeCard, IBOServiceManifest>
     {
-        public List<TimeCard> TimeCards { get; set; }
-        private IAdaptiveClient<IBOServiceManifest> serviceClient;
-
-        public TimeCardsModel(IAdaptiveClient<IBOServiceManifest> serviceClient)
-        {
-            this.serviceClient = serviceClient;
-        }
-
-        public override async Task OnGetAsync()
-        {
-            await base.OnGetAsync();
-            await GetTimeCards();
-        }
-
-        public override async Task OnPostAsync()
-        {
-            await base.OnPostAsync();
-            await GetTimeCards();
-        }
-
-        private async Task GetTimeCards()
-        {
-            CurrentEndPoint = GetEndPoints().FirstOrDefault(x => x.API_Name == API_Name.BackOffice && x.ProviderName == DataSource);
-
-            if (CurrentEndPoint != null)
-                TimeCards = await serviceClient.CallAsync(async x => await x.TimeCardsService.GetTimeCards(), CurrentEndPoint.Name);
-        }
+        public TimeCardsModel(IAdaptiveClient<IBOServiceManifest> serviceClient) : base(serviceClient, API_Name.BackOffice) { }
+        
+        protected override async Task GetData() => Data = await ServiceClient.CallAsync(async x => await x.TimeCardsService.GetTimeCards(), CurrentEndPoint.Name);
     }
 }

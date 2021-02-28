@@ -1,21 +1,22 @@
-﻿using System;
-using System.Linq;
-using System.Collections.Generic;
-using System.Text;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
-using Pomelo.EntityFrameworkCore.MySql;
 using Zamagon.Domain;
-using Zamagon.Services.BackOffice.Database;
-using Zamagon.Services.StoreFront.Database;
+using System.Reflection;
+using System.IO;
 
 namespace Zamagon.MigrationContexts
 {
+    public class Constants
+    {
+        public static readonly string EndPointsFile;
+        static Constants() => EndPointsFile = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "appsettings.json");
+    }
+
     public class BackOffice_MSSQLContextFactory : IDesignTimeDbContextFactory<Zamagon.Services.BackOffice.Database.Db_MSSQL>
     {
         public Zamagon.Services.BackOffice.Database.Db_MSSQL CreateDbContext(string[] args)
         {
-            string connectionString = ConnectionstringUtility.GetConnectionString("bin\\debug\\netcoreapp2.0\\EndPoints.json", API_Name.BackOffice, DataBaseProviderName.MSSQL);
+            string connectionString = ConnectionstringUtility.GetConnectionString(Constants.EndPointsFile, API_Name.BackOffice, DataBaseProviderName.MSSQL);
             DbContextOptionsBuilder dbOptions = new DbContextOptionsBuilder();
             dbOptions.UseSqlServer(connectionString);
             Zamagon.Services.BackOffice.Database.Db_MSSQL db = new Zamagon.Services.BackOffice.Database.Db_MSSQL(dbOptions.Options);
@@ -27,9 +28,9 @@ namespace Zamagon.MigrationContexts
     {
         public Zamagon.Services.BackOffice.Database.Db_MySQL CreateDbContext(string[] args)
         {
-            string connectionString = ConnectionstringUtility.BuildConnectionString(ConnectionstringUtility.GetConnectionString("bin\\debug\\netcoreapp2.0\\EndPoints.json", API_Name.BackOffice, DataBaseProviderName.MySQL));
+            string connectionString = ConnectionstringUtility.BuildConnectionString(ConnectionstringUtility.GetConnectionString(Constants.EndPointsFile, API_Name.BackOffice, DataBaseProviderName.MySQL));
             DbContextOptionsBuilder dbOptions = new DbContextOptionsBuilder();
-            dbOptions.UseMySql(connectionString);
+            dbOptions.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
             Zamagon.Services.BackOffice.Database.Db_MySQL db = new Zamagon.Services.BackOffice.Database.Db_MySQL(dbOptions.Options);
             return db;
         }
@@ -39,7 +40,7 @@ namespace Zamagon.MigrationContexts
     {
         public Zamagon.Services.StoreFront.Database.Db_MSSQL CreateDbContext(string[] args)
         {
-            string connectionString = ConnectionstringUtility.GetConnectionString("bin\\debug\\netcoreapp2.0\\EndPoints.json", API_Name.StoreFront, DataBaseProviderName.MSSQL);
+            string connectionString = ConnectionstringUtility.GetConnectionString(Constants.EndPointsFile, API_Name.StoreFront, DataBaseProviderName.MSSQL);
             DbContextOptionsBuilder dbOptions = new DbContextOptionsBuilder();
             dbOptions.UseSqlServer(connectionString);
             Zamagon.Services.StoreFront.Database.Db_MSSQL db = new Zamagon.Services.StoreFront.Database.Db_MSSQL(dbOptions.Options);
@@ -51,9 +52,9 @@ namespace Zamagon.MigrationContexts
     {
         public Zamagon.Services.StoreFront.Database.Db_MySQL CreateDbContext(string[] args)
         {
-            string connectionString = ConnectionstringUtility.BuildConnectionString(ConnectionstringUtility.GetConnectionString("bin\\debug\\netcoreapp2.0\\EndPoints.json", API_Name.StoreFront, DataBaseProviderName.MySQL));
+            string connectionString = ConnectionstringUtility.BuildConnectionString(ConnectionstringUtility.GetConnectionString(Constants.EndPointsFile, API_Name.StoreFront, DataBaseProviderName.MySQL));
             DbContextOptionsBuilder dbOptions = new DbContextOptionsBuilder();
-            dbOptions.UseMySql(connectionString);
+            dbOptions.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
             Zamagon.Services.StoreFront.Database.Db_MySQL db = new Zamagon.Services.StoreFront.Database.Db_MySQL(dbOptions.Options);
             return db;
         }

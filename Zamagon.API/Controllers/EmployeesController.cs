@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using LeaderAnalytics.AdaptiveClient;
 using Zamagon.Domain.BackOffice;
@@ -11,7 +10,7 @@ using Zamagon.Model;
 namespace Zamagon.API.Controllers
 {
     [Produces("application/json")]
-    public class EmployeesController : Controller
+    public class EmployeesController : ControllerBase
     {
         private IAdaptiveClient<IEmployeesService> serviceClient;
 
