@@ -14,7 +14,7 @@ Scroll to the end of this document for instructions on how to run this demo.
 
 Zamagon illustrates how to organize services into APIs.  These APIs can be used as a single unit, greatly simplifying how services are injected and used by the objects that depend on them.
 
-Services are classes that contain methods that are common to a specific entity.  These are commonly CRUD operations but just as often contain methods for reporting, data warehousing, etc.  Services may also be organized by task such as shipping, order processing, etc.
+Services are classes that contain methods that are often common to a specific entity.  These are commonly CRUD operations but just as often contain methods for reporting, data warehousing, etc.  Services may also be organized by task such as shipping, order processing, etc.
 
 APIs are collections of services.  APIs may be common to an entire organization, an application within an organization, a department, or a specific function such as banking or purchasing.
 
@@ -88,8 +88,8 @@ Each solution contains additional projects as specified:
 *Zamagon.UI* - Web UI and WPF UI.  
 
 
-### Modify the connection strings in EndPoints.json
-Open EndPoints.json in the EndPoints directory.  
+### Modify the connection strings in appsettings.json
+Open appsettings.json in the EndPoints directory.  
 Set the IsActive flag to false for *_SQLServer or *_MySQL if you do not run one of those servers.  
 Modify the ConnectionString as necessary.  Be sure to remove the curly braces in the MySQL Uid and Pwd.  
 
