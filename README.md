@@ -20,7 +20,7 @@ APIs are collections of services.  APIs may be common to an entire organization,
 
 The Zamagon demo illustrates four services:  `OrdersService`, `ProductsService`, `EmployeesService`, and `TimeCardsSerice`.
 
-Services are organized into two APIs:  `BackOffice` (Orders and Products services) and `StoreFront` (Employee and TimeCards services).
+Services are organized into two APIs:  `BackOffice` (Employee and TimeCards services) and `StoreFront` (Orders and Products services).
 
 The demo illustrates how each service can be written for a specific database (MSSQL/MySQL) or transport (LAN/HTTP).  At runtime, the user can select a specific database or transport and AdaptiveClient will resolve the components that are necessary to perform the requested call.
 
