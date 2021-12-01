@@ -1,13 +1,6 @@
-﻿using System;
-using System.Threading.Tasks;
-using System.Collections.Generic;
-using System.Text;
-using Zamagon.Model;
+﻿namespace Zamagon.Domain.StoreFront;
 
-namespace Zamagon.Domain.StoreFront
+public interface IProductsService : IDisposable
 {
-    public interface IProductsService : IDisposable
-    {
-        Task<List<Product>> GetProducts();
-    }
+    Task<List<Product>> GetProducts();
 }

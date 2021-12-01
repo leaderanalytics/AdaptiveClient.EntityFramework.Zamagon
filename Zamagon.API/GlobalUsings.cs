@@ -1,0 +1,11 @@
+﻿global using Autofac;
+global using LeaderAnalytics.AdaptiveClient;
+global using LeaderAnalytics.AdaptiveClient.EntityFrameworkCore;
+global using Microsoft.AspNetCore.Mvc;
+global using System.Reflection;
+global using Zamagon.Domain;
+global using Zamagon.Domain.BackOffice;
+global using Zamagon.Domain.StoreFront;
+global using Zamagon.Model;
+global using Autofac.Extensions.DependencyInjection;
+global using Microsoft.OpenApi.Models;

@@ -1,16 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Microsoft.EntityFrameworkCore;
-using LeaderAnalytics.AdaptiveClient.EntityFrameworkCore;
+﻿namespace Zamagon.Services.BackOffice.Database;
 
-namespace Zamagon.Services.BackOffice.Database
+public class Db_MySQL : Db, IMigrationContext
 {
-    public class Db_MySQL : Db, IMigrationContext
+    public Db_MySQL(DbContextOptions options) : base(options)
     {
-        public Db_MySQL(DbContextOptions options) : base(options)
-        {
 
-        }
     }
 }

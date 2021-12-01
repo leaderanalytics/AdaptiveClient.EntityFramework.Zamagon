@@ -1,0 +1,10 @@
+﻿global using LeaderAnalytics.AdaptiveClient;
+global using LeaderAnalytics.AdaptiveClient.EntityFrameworkCore;
+global using LeaderAnalytics.AdaptiveClient.Utilities;
+global using Microsoft.EntityFrameworkCore;
+global using System.Net.Http.Json;
+global using Zamagon.Domain;
+global using Zamagon.Domain.StoreFront;
+global using Zamagon.Model;
+global using Zamagon.Services.StoreFront.Database;
+global using Zamagon.Services.Common;

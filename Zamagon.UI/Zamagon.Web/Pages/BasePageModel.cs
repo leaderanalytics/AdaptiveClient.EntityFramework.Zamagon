@@ -1,74 +1,64 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Http;
-using LeaderAnalytics.AdaptiveClient;
-using Zamagon.Domain;
+﻿namespace Zamagon.Web.Pages;
 
-namespace Zamagon.Web.Pages
+public abstract class BasePageModel<TModel, TManifest> : PageModel where TManifest : class
 {
-    public abstract class BasePageModel<TModel, TManifest> : PageModel where TManifest:class
+    protected IAdaptiveClient<TManifest> ServiceClient;
+    protected readonly string APIName;
+
+
+    protected string DataSource
     {
-        protected IAdaptiveClient<TManifest> ServiceClient;
-        protected readonly string APIName; 
-        
+        get => HttpContext.Session.GetString("dataSource");
 
-        protected string DataSource
+        set
         {
-            get => HttpContext.Session.GetString("dataSource");
-            
-            set 
-            {
-                HttpContext.Session.SetString("dataSource", value);
-                SetCurrentEndPoint();    
-            }
+            HttpContext.Session.SetString("dataSource", value);
+            SetCurrentEndPoint();
         }
+    }
 
-        public List<TModel> Data { get; set; }
-        
-        //public TModel CurrentItem { get; set; } // Not used in this demo but is common
-        
-        public IEndPointConfiguration CurrentEndPoint { get; set; }
+    public List<TModel> Data { get; set; }
 
-        public BasePageModel(IAdaptiveClient<TManifest> serviceClient, string apiName)
+    //public TModel CurrentItem { get; set; } // Not used in this demo but is common
+
+    public IEndPointConfiguration CurrentEndPoint { get; set; }
+
+    public BasePageModel(IAdaptiveClient<TManifest> serviceClient, string apiName)
+    {
+        ServiceClient = serviceClient;
+        APIName = apiName;
+    }
+
+    private void SetCurrentEndPoint() => CurrentEndPoint = GetEndPoints().FirstOrDefault(x => x.API_Name == APIName && x.ProviderName == DataSource);
+
+    protected abstract Task GetData();
+
+    public virtual async Task OnGetAsync()
+    {
+        if (DataSource == null)
+            DataSource = DataBaseProviderName.MSSQL;
+
+        if (CurrentEndPoint == null)
+            SetCurrentEndPoint();
+
+        await GetData();
+    }
+
+    public virtual async Task OnPostAsync()
+    {
+        DataSource = Request.Form["dataSources"];
+        await GetData();
+    }
+
+    protected IEnumerable<IEndPointConfiguration> GetEndPoints()
+    {
+        IEnumerable<IEndPointConfiguration> endPoints = HttpContext.Session.GetObject<IEnumerable<EndPointConfiguration>>("endPoints");
+
+        if (endPoints == null)
         {
-            ServiceClient = serviceClient;
-            APIName = apiName;
+            endPoints = AutofacModule.ReadEndPointsFromDisk();
+            HttpContext.Session.SetObject("endPoints", endPoints);
         }
-
-        private void SetCurrentEndPoint() => CurrentEndPoint = GetEndPoints().FirstOrDefault(x => x.API_Name == APIName && x.ProviderName == DataSource);
-
-        protected abstract Task GetData();
-
-        public virtual async Task OnGetAsync()
-        {
-            if (DataSource == null)
-                DataSource = DataBaseProviderName.MSSQL;
-
-            if (CurrentEndPoint == null)
-                SetCurrentEndPoint();
-
-            await GetData();
-        }
-
-        public virtual async Task OnPostAsync()
-        {
-            DataSource = Request.Form["dataSources"];
-            await GetData();
-        }
-
-        protected IEnumerable<IEndPointConfiguration> GetEndPoints()
-        {
-            IEnumerable<IEndPointConfiguration> endPoints = HttpContext.Session.GetObject<IEnumerable<EndPointConfiguration>>("endPoints");
-
-            if (endPoints == null)
-            {
-                endPoints = AutofacModule.ReadEndPointsFromDisk();
-                HttpContext.Session.SetObject("endPoints", endPoints);
-            }
-            return endPoints;
-        }
+        return endPoints;
     }
 }

@@ -1,0 +1,20 @@
+﻿global using Autofac;
+global using LeaderAnalytics.AdaptiveClient;
+global using LeaderAnalytics.AdaptiveClient.EntityFrameworkCore;
+global using System.Windows;
+global using Zamagon.Domain;
+global using Zamagon.Domain.BackOffice;
+global using Zamagon.Domain.StoreFront;
+global using Zamagon.Model;
+global using Moq;
+global using System.IO;
+global using System.Runtime.CompilerServices;
+global using System.Windows.Media;
+global using System.Windows.Controls;
+global using System.ComponentModel;
+global using System.Windows.Input;
+global using System.Reflection;
+global using System.Collections.ObjectModel;
+global using System.Diagnostics;
+global using System.Collections;
+

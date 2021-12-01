@@ -1,12 +1,10 @@
 ﻿using System;
+namespace Zamagon.MigrationContexts;
 
-namespace Zamagon.MigrationContexts
+class Program
 {
-    class Program
+    static void Main(string[] args)
     {
-        static void Main(string[] args)
-        {
-            Console.WriteLine("Hello World!");
-        }
+        Console.WriteLine("Hello World!");
     }
 }

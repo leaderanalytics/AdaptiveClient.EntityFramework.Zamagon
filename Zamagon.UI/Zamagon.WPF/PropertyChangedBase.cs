@@ -1,14 +1,10 @@
-﻿using System.ComponentModel;
-using System.Runtime.CompilerServices;
+﻿namespace Zamagon.WPF;
 
-namespace Zamagon.WPF
+public abstract class PropertyChangedBase : INotifyPropertyChanged
 {
-    public abstract class PropertyChangedBase : INotifyPropertyChanged
-    {
-        #region ProperyChanged Implementation
-        public event PropertyChangedEventHandler PropertyChanged;
+    #region ProperyChanged Implementation
+    public event PropertyChangedEventHandler PropertyChanged;
 
-        protected void RaisePropertyChanged([CallerMemberName] string propertyName = null) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        #endregion
-    }
+    protected void RaisePropertyChanged([CallerMemberName] string propertyName = null) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+    #endregion
 }
