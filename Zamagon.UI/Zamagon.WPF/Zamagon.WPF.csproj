@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net6.0-windows</TargetFramework>
+    <TargetFramework>net7.0-windows</TargetFramework>
     <UseWPF>true</UseWPF>
 	<ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
@@ -14,12 +14,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="AdaptiveClient" Version="3.0.3" />
-    <PackageReference Include="AdaptiveClient.EntityFrameworkCore" Version="3.0.1" />
-    <PackageReference Include="Autofac" Version="6.3.0" />
+    <PackageReference Include="AdaptiveClient" Version="4.0.7" />
+    <PackageReference Include="AdaptiveClient.EntityFrameworkCore" Version="4.0.4" />
+    <PackageReference Include="Autofac" Version="6.5.0" />
     <PackageReference Include="FontAwesome.WPF" Version="4.7.0.9" />
-    <PackageReference Include="LeaderAnalytics.Caching" Version="3.0.24" />
-    <PackageReference Include="Moq" Version="4.16.1" />
+    <PackageReference Include="LeaderAnalytics.Caching" Version="4.0.27" />
+    <PackageReference Include="Moq" Version="4.18.3" />
   </ItemGroup>
 
   <ItemGroup>

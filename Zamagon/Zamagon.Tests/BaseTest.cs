@@ -25,7 +25,7 @@ public abstract class BaseTest
 
     protected async Task CreateTestArtifacts()
     {
-        EndPoints = EndPointUtilities.LoadEndPoints("EndPoints.json");
+        EndPoints = EndPointUtilities.LoadEndPoints("appsettings.json");
         if (EndPoints.Any(x => x.ProviderName == DataBaseProviderName.MySQL))
         {
             EndPoints.First(x => x.API_Name == API_Name.BackOffice && x.ProviderName == DataBaseProviderName.MySQL).ConnectionString = ConnectionstringUtility.BuildConnectionString(EndPoints.First(x => x.API_Name == API_Name.BackOffice && x.ProviderName == DataBaseProviderName.MySQL).ConnectionString);

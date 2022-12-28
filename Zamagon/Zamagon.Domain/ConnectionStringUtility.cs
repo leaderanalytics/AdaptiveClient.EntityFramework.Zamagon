@@ -15,10 +15,10 @@ public static class ConnectionstringUtility
         if (usePasswordFile)
         {
             ConfigurationBuilder configBuilder = new ConfigurationBuilder();
-            configBuilder.AddJsonFile("C:\\Users\\sam\\AppData\\Roaming\\Blog\\appsettings.Development.json");  // path to your password file here
+            configBuilder.AddJsonFile("O:\\LeaderAnalytics\\secrets.json");  // path to your password file here
             IConfigurationRoot config = configBuilder.Build();
-            connectionString = connectionString.Replace("{MySQL_UserName}", config["Data:MySQLUserName"]);
-            connectionString = connectionString.Replace("{MySQL_Password}", config["Data:MySQLPassword"]);
+            connectionString = connectionString.Replace("{MySQL_UserName}", config["MySQL_UserName"]);
+            connectionString = connectionString.Replace("{MySQL_Password}", config["MySQL_Password"]);
         }
 
         return connectionString;
