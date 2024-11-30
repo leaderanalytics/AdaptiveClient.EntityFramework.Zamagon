@@ -15,7 +15,7 @@ public static class ConnectionstringUtility
         if (usePasswordFile)
         {
             ConfigurationBuilder configBuilder = new ConfigurationBuilder();
-            configBuilder.AddJsonFile("O:\\LeaderAnalytics\\secrets.json");  // path to your password file here
+            configBuilder.AddJsonFile("C:\\users\\sam\\OneDrive\\LeaderAnalytics\\secrets.json");  // path to your password file here
             IConfigurationRoot config = configBuilder.Build();
             connectionString = connectionString.Replace("{MySQL_UserName}", config["MySQL_UserName"]);
             connectionString = connectionString.Replace("{MySQL_Password}", config["MySQL_Password"]);

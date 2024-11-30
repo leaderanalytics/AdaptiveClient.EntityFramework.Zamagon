@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
+    <TargetFramework>net9</TargetFramework>
 	<ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
@@ -12,11 +12,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="AdaptiveClient" Version="4.0.7" />
-    <PackageReference Include="AdaptiveClient.EntityFrameworkCore" Version="4.0.4" />
-    <PackageReference Include="Autofac" Version="6.5.0" />
-    <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="8.0.0" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+    <PackageReference Include="Autofac" Version="8.1.1" />
+    <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="10.0.0" />
+    <PackageReference Include="LeaderAnalytics.AdaptiveClient" Version="5.0.1" />
+    <PackageReference Include="LeaderAnalytics.AdaptiveClient.EntityFrameworkCore" Version="5.0.0" />
+    <PackageReference Include="LeaderAnalytics.AdaptiveClient.Utilities" Version="5.0.3" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="7.1.0" />
   </ItemGroup>
 
   <ItemGroup>
